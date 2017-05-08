@@ -38,7 +38,7 @@
 
     <!--扫描mapper-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.lumr.bbs.dao"/>
+        <property name="basePackage" value="com.lumr.sbeam.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
     <!--开启事务管理器注解方式-->

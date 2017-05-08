@@ -3,19 +3,17 @@ package com.lumr.sbeam.vo;
 import java.util.List;
 
 /**
- * 游戏分类
- * Created by fsweb on 17-5-8.
+ * Created by lumr on 2017/5/8.
  */
-public class Category {
+public class Platform {
     private int id;
-    private String name;//分类名
-    private List<Game> games;//游戏集合
+    private String name;
+    private List<Game> games;
 
-    public Category() {
+    public Platform() {
     }
 
-    public Category(int id, String name) {
-        this.id = id;
+    public Platform(String name) {
         this.name = name;
     }
 

@@ -9,8 +9,8 @@
         <module name="sbeam" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="sbeam" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="sbeam" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

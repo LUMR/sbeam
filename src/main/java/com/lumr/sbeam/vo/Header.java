@@ -1,20 +1,18 @@
 package com.lumr.sbeam.vo;
 
 /**
- * 游戏图片
- * Created by lumr on 2017/5/8.
+ * 用户头像
+ * Created by fsweb on 17-5-8.
  */
-public class Picture {
+public class Header {
     private int id;
-    private Game game;
-    private String fileName;
-    private String src;
+    private String fileName;//文件名
+    private String src;//文件地址
 
-    public Picture() {
+    public Header() {
     }
 
-    public Picture(Game game, String fileName, String src) {
-        this.game = game;
+    public Header(String fileName, String src) {
         this.fileName = fileName;
         this.src = src;
     }
@@ -25,14 +23,6 @@ public class Picture {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     public String getFileName() {

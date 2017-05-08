@@ -6,19 +6,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="banner banner2">
     <div class="container">
         <div class="headr-right">
             <div class="details">
                 <ul>
-                    <li><a href="mailto:@example.com"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>info(at)example.com</a></li>
-                    <li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>(+1)000 123 456789</li>
+                    <c:if test="${sessionScope.user != null}">
+                        <li><a href="/user/details"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>${sessionScope.user.name}</a></li>
+                        <li><a href="/user/logout"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>注销</a></li>
+                    </c:if>
+                    <c:if test="${sessionScope.user == null}">
+                        <li><a href="/user/login"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>登陆</a></li>
+                        <li><a href="/user/register"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>注册</a></li>
+                    </c:if>
                 </ul>
             </div>
         </div>
         <div class="banner_head_top">
             <div class="logo">
-                <h1><a href="index.html">Game<span class="glyphicon glyphicon-knight" aria-hidden="true"></span><span>Spot</span></a></h1>
+                <h1><a href="/">Game<span class="glyphicon glyphicon-knight" aria-hidden="true"></span><span>SBEAM</span></a></h1>
             </div>
             <div class="top-menu">
                 <div class="content white">
@@ -34,7 +41,7 @@
                         <!--/navbar header-->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li><a href="index.html">首页</a></li>
+                                <li><a href="/">首页</a></li>
                                 <li class="active"><a href="about.html">关于</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="scroll dropdown-toggle" data-toggle="dropdown">我的游戏库<b class="caret"></b></a>
