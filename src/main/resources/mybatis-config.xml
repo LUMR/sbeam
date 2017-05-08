@@ -6,10 +6,10 @@
     <properties resource="db.properties"/>
 
     <typeAliases>
-        <typeAlias type="com.lumr.bbs.vo.NewUser" alias="NewUser"/>
+        <typeAlias type="com.lumr.sbeam.vo.User" alias="User"/>
     </typeAliases>
 
     <mappers>
-        <mapper resource="com/lumr/bbs/dao/UserMapper.xml"/>
+        <mapper resource="com/lumr/sbeam/dao/UserMapper.xml"/>
     </mappers>
 </configuration>
