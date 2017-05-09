@@ -20,4 +20,18 @@
         <!--后缀-->
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5000000"/>
+    </bean>
+    <!--全局异常配置，暂时不用
+    <bean class="org.springframework.web.portlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="LoginException">error</prop>
+            </props>
+        </property>
+    </bean>
+    -->
 </beans>

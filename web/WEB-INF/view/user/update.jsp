@@ -22,7 +22,7 @@
     <div class="container">
         <%--分类管理--%>
         <div>
-            <sf:form modelAttribute="user" action="/user/details/update" method="post" cssClass="news-ltr">
+            <sf:form modelAttribute="user" action="/user/details/update" enctype="multipart/form-data" method="post" cssClass="news-ltr">
                 <div class="col-md-5 content-left">
                     <table class="table table-hover">
                         <thead>
@@ -32,7 +32,7 @@
                         </thead>
                     </table>
                     <div class="input-group input-group-lg">
-                        <input type="number" value="${user.id}" hidden/>
+                        <input type="number" name="id" value="${user.id}" hidden/>
                         <span class="input-group-addon" id="sizing-addon1">名字</span>
                         <input type="text" name="name" value="${user.name}" class="form-control" placeholder="Username"
                                aria-describedby="sizing-addon1">
@@ -52,7 +52,7 @@
                             <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
                         </tr>
                     </table>
-                    <input type="file" class="">
+                    <input type="file" name="headerFile" >
                     <div class="clearfix"></div>
                 </div>
 

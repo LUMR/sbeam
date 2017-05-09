@@ -5,8 +5,10 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import com.lumr.sbeam.vo.Header;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface HeaderDao {
     int insert(@Param("pojo") Header pojo);
 

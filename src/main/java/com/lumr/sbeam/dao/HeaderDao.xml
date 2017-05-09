@@ -4,14 +4,14 @@
     <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Header">
         <result column="id" property="id"/>
-        <result column="file_name" property="fileName"/>
+        <result column="filename" property="fileName"/>
         <result column="src" property="src"/>
     </resultMap>
 
     <!--auto generated Code-->
     <sql id="all_column">
         `id`,
-        `file_name`,
+        `filename`,
         `src`
     </sql>
 
@@ -19,7 +19,7 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
         INSERT INTO header (
             `id`,
-            `file_name`,
+            `filename`,
             `src`
         ) VALUES (
             #{pojo.id},
@@ -33,7 +33,7 @@
         INSERT INTO header
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="pojo.id!=null"> `id`,</if>
-            <if test="pojo.fileName!=null"> `file_name`,</if>
+            <if test="pojo.fileName!=null"> `filename`,</if>
             <if test="pojo.src!=null"> `src`,</if>
         </trim>
         VALUES
@@ -63,7 +63,7 @@
         UPDATE header
         <set>
             <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
-            <if test="pojo.fileName != null"> `file_name` = #{pojo.fileName}, </if>
+            <if test="pojo.fileName != null"> `filename` = #{pojo.fileName}, </if>
             <if test="pojo.src != null"> `src` = #{pojo.src} </if>
         </set>
         WHERE id = #{pojo.id}
