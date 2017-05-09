@@ -7,11 +7,11 @@ import java.util.List;
  * Created by fsweb on 17-5-8.
  */
 public class Game {
-    private int id;
+    private Integer id;
     private String name;//游戏名
-    private Category category;//游戏分类
-    private Platform platform;//游戏平台
-    private double price;//游戏价格
+    private Integer categoryId;//游戏分类
+    private Integer platformId;//游戏平台
+    private Double price;//游戏价格
     private String description;//游戏描述
     private List<Picture> pictures;//游戏介绍截图
     private List<Review> reviews;//游戏评论
@@ -19,10 +19,10 @@ public class Game {
     public Game() {
     }
 
-    public Game(String name, Category category, Platform platform, double price, String description) {
+    public Game(String name, int categoryId, int platformId, double price, String description) {
         this.name = name;
-        this.category = category;
-        this.platform = platform;
+        this.categoryId = categoryId;
+        this.platformId = platformId;
         this.price = price;
         this.description = description;
     }
@@ -43,20 +43,20 @@ public class Game {
         this.name = name;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public Platform getPlatform() {
-        return platform;
+    public int getPlatformId() {
+        return platformId;
     }
 
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
+    public void setPlatformId(int platformId) {
+        this.platformId = platformId;
     }
 
     public double getPrice() {

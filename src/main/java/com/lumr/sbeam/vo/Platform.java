@@ -6,7 +6,7 @@ import java.util.List;
  * Created by lumr on 2017/5/8.
  */
 public class Platform {
-    private int id;
+    private Integer id;
     private String name;
     private List<Game> games;
 

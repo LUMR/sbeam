@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lumr.sbeam.dao.ReviewDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Review">
+        <result column="id" property="id"/>
+        <result column="game_id" property="gameId"/>
+        <result column="user_id" property="userId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="pub_date" property="pubDate"/>
+        <result column="up_date" property="upDate"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `game_id`,
+        `user_id`,
+        `title`,
+        `content`,
+        `pubdate`,
+        `updated`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO review (
+            `id`,
+            `game_id`,
+            `user_id`,
+            `title`,
+            `content`,
+            `pubdate`,
+            `updated`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.gameId},
+            #{pojo.userId},
+            #{pojo.title},
+            #{pojo.content},
+            #{pojo.pubDate},
+            #{pojo.upDate}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO review
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.gameId!=null"> `game_id`,</if>
+            <if test="pojo.userId!=null"> `user_id`,</if>
+            <if test="pojo.title!=null"> `title`,</if>
+            <if test="pojo.content!=null"> `content`,</if>
+            <if test="pojo.pubDate!=null"> `pubdate`,</if>
+            <if test="pojo.upDate!=null"> `updated`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.gameId!=null">#{pojo.gameId},</if>
+            <if test="pojo.userId!=null">#{pojo.userId},</if>
+            <if test="pojo.title!=null">#{pojo.title},</if>
+            <if test="pojo.content!=null">#{pojo.content},</if>
+            <if test="pojo.pubDate!=null">#{pojo.pubDate},</if>
+            <if test="pojo.upDate!=null">#{pojo.upDate},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO review (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.gameId},
+            #{pojo.userId},
+            #{pojo.title},
+            #{pojo.content},
+            #{pojo.pubDate},
+            #{pojo.upDate}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE review
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.gameId != null"> `game_id` = #{pojo.gameId}, </if>
+            <if test="pojo.userId != null"> `user_id` = #{pojo.userId}, </if>
+            <if test="pojo.title != null"> `title` = #{pojo.title}, </if>
+            <if test="pojo.content != null"> `content` = #{pojo.content}, </if>
+            <if test="pojo.pubDate != null"> `pubdate` = #{pojo.pubDate}, </if>
+            <if test="pojo.upDate != null"> `updated` = #{pojo.upDate} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+</mapper>
+

@@ -6,9 +6,9 @@ import java.util.Date;
  * Created by fsweb on 17-5-8.
  */
 public class Review {
-    private int id;
-    private Game game;//对应的游戏
-    private User user;//发布人
+    private Integer id;
+    private Integer gameId;//对应的游戏
+    private Integer userId;//发布人
     private String title;//标题
     private String content;//内容
     private Date pubDate;//发表日期
@@ -17,35 +17,36 @@ public class Review {
     public Review() {
     }
 
-    public Review(Game game, User user, String title, String content) {
-        this.game = game;
-        this.user = user;
+    public Review(Integer gameId, Integer userId, String title, String content, Date pubDate) {
+        this.gameId = gameId;
+        this.userId = userId;
         this.title = title;
         this.content = content;
+        this.pubDate = pubDate;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Game getGame() {
-        return game;
+    public Integer getGameId() {
+        return gameId;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {

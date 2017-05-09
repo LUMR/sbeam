@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lumr.sbeam.dao.LibraryDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Library">
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="game_id" property="gameId"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `user_id`,
+        `game_id`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO library (
+            `id`,
+            `user_id`,
+            `game_id`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.userId},
+            #{pojo.gameId}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO library
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.userId!=null"> `user_id`,</if>
+            <if test="pojo.gameId!=null"> `game_id`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.userId!=null">#{pojo.userId},</if>
+            <if test="pojo.gameId!=null">#{pojo.gameId},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO library (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.userId},
+            #{pojo.gameId}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE library
+        <set>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.userId != null"> `user_id` = #{pojo.userId}, </if>
+            <if test="pojo.gameId != null"> `game_id` = #{pojo.gameId} </if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+</mapper>
+

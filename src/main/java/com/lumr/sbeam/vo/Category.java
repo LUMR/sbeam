@@ -7,7 +7,7 @@ import java.util.List;
  * Created by fsweb on 17-5-8.
  */
 public class Category {
-    private int id;
+    private Integer id;
     private String name;//分类名
     private List<Game> games;//游戏集合
 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lumr.sbeam.dao.GameDao">
+    <!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Game">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="platform_id" property="platformId"/>
+        <result column="price" property="price"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="all_column">
+        `id`,
+        `name`,
+        `category_id`,
+        `platform_id`,
+        `price`,
+        `description`
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO game (
+            `id`,
+            `name`,
+            `category_id`,
+            `platform_id`,
+            `price`,
+            `description`
+        ) VALUES (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.categoryId},
+            #{pojo.platformId},
+            #{pojo.price},
+            #{pojo.description}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
+        INSERT INTO game
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.categoryId!=null">`category_id`,</if>
+            <if test="pojo.platformId!=null">`platform_id`,</if>
+            <if test="pojo.price!=null">`price`,</if>
+            <if test="pojo.description!=null">`description`,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id!=null">#{pojo.id},</if>
+            <if test="pojo.name!=null">#{pojo.name},</if>
+            <if test="pojo.categoryId!=null">#{pojo.categoryId},</if>
+            <if test="pojo.platformId!=null">#{pojo.platformId},</if>
+            <if test="pojo.price!=null">#{pojo.price},</if>
+            <if test="pojo.description!=null">#{pojo.description},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO game (
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.categoryId},
+            #{pojo.platformId},
+            #{pojo.price},
+            #{pojo.description}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE game
+        <set>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name},</if>
+            <if test="pojo.categoryId != null">`category_id` = #{pojo.categoryId},</if>
+            <if test="pojo.platformId != null">`platform_id` = #{pojo.platformId},</if>
+            <if test="pojo.price != null">`price` = #{pojo.price},</if>
+            <if test="pojo.description != null">`description` = #{pojo.description}</if>
+        </set>
+        WHERE id = #{pojo.id}
+    </update>
+</mapper>
+

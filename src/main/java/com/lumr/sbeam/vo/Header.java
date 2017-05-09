@@ -5,7 +5,7 @@ package com.lumr.sbeam.vo;
  * Created by fsweb on 17-5-8.
  */
 public class Header {
-    private int id;
+    private Integer id;
     private String fileName;//文件名
     private String src;//文件地址
 

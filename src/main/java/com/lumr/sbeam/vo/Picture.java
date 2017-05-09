@@ -5,16 +5,16 @@ package com.lumr.sbeam.vo;
  * Created by lumr on 2017/5/8.
  */
 public class Picture {
-    private int id;
-    private Game game;
+    private Integer id;
+    private Integer gameId;
     private String fileName;
     private String src;
 
     public Picture() {
     }
 
-    public Picture(Game game, String fileName, String src) {
-        this.game = game;
+    public Picture(int gameId, String fileName, String src) {
+        this.gameId = gameId;
         this.fileName = fileName;
         this.src = src;
     }
@@ -27,12 +27,12 @@ public class Picture {
         this.id = id;
     }
 
-    public Game getGame() {
-        return game;
+    public int getGame() {
+        return gameId;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGame(int gameId) {
+        this.gameId = gameId;
     }
 
     public String getFileName() {

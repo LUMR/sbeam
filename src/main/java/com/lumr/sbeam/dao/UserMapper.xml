@@ -41,12 +41,13 @@
     </update>
 
     <delete id="deleteUser" parameterType="User">
-        DELETE FROM user WHERE id = #{id}
+        DELETE FROM user
+        WHERE id = #{id}
     </delete>
 
-    <update id="recharge" >
-        update user
-        set money = money+#{rmb}
-        where id = #{user.id}
+    <update id="recharge">
+        UPDATE user
+        SET money = money + #{rmb}
+        WHERE id = #{user.id}
     </update>
 </mapper>

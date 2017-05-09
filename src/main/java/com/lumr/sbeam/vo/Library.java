@@ -5,9 +5,9 @@ package com.lumr.sbeam.vo;
  * Created by fsweb on 17-5-8.
  */
 public class Library {
-    private int id;
-    private int userId;
-    private int gameId;
+    private Integer id;
+    private Integer userId;
+    private Integer gameId;
 
     public Library() {
     }

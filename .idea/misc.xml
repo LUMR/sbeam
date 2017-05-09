@@ -13,4 +13,5 @@
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
