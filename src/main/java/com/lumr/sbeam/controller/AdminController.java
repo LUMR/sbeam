@@ -123,12 +123,8 @@ public class AdminController {
     public String updatePlatform(@PathVariable int id, Model model) {
         Platform platform = platformDao.getPlatform(new Platform(id));
         model.addAttribute("platform", platform);
-        return "admin/addPlatform";
+        return "admin/updatePlatform";
     }
-
-    //***********游戏部分***********
-
-
     @RequestMapping(value = "/platform/{id}/update", method = RequestMethod.POST)
     public String updatePlatform(@PathVariable Integer id, Platform platform, HttpSession session, Model model) {
         if (id != null && id == platform.getId()) {
@@ -145,6 +141,11 @@ public class AdminController {
         }
         return "admin/updatePlatform";
     }
+
+    //***********游戏部分***********
+
+
+
 
     @ExceptionHandler(LoginException.class)
     public String handlerException(LoginException e, Model model) {

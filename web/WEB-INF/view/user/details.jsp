@@ -68,7 +68,7 @@
                     <span class="badge badge-success">$&nbsp;${sessionScope.user.money}</span>
                     <i class="ti ti-eye"></i> 充值
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/user/details/update" class="list-group-item">
                     <span class="badge badge-primary">&nbsp;&nbsp;</span>
                     <i class="ti ti-email"></i>修改信息
                 </a>

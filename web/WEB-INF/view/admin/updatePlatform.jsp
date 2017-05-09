@@ -23,7 +23,7 @@
         <%--分类管理--%>
         <h2 class="h2">平台信息</h2>
         <div class="list-group list-group-alternate">
-            <sf:form modelAttribute="platform" action="/admin/category/${platform.id}/update" method="post" cssClass="news-ltr">
+            <sf:form modelAttribute="platform" action="/admin/platform/${platform.id}/update" method="post" cssClass="news-ltr">
                 <h3 class="h3">id:${platform.id}</h3>
                 <div class="input-group input-group-lg">
                     <input type="number" value="${platform.id}" hidden />
