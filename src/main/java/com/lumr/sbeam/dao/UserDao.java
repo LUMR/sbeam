@@ -1,6 +1,7 @@
 package com.lumr.sbeam.dao;
 
 import com.lumr.sbeam.vo.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,4 +17,7 @@ public interface UserDao {
     int updateUser(User user);
 
     int deleteUser(User user);
+
+    int recharge(@Param("user") User user,@Param("rmb") double rmb);
+
 }

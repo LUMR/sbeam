@@ -1,8 +1,7 @@
 package com.lumr.sbeam.vo;
 
-import com.lumr.sbeam.utils.Utils;
-
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,14 +18,15 @@ public class User {
     private List<Game> games;//拥有的游戏
     private List<Review> reviews;//写的评论
     private List<Picture> pictures;//照片
+    private LinkedList<String> messages = new LinkedList<>();//用户消息，不保存在数据库中
 
     public User() {
     }
 
     public User(int id) {
-
         this.id = id;
     }
+
     public User(String name, String password) {
         this.name = name;
         this.password = password;
@@ -102,5 +102,13 @@ public class User {
 
     public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public LinkedList<String> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(LinkedList<String> messages) {
+        this.messages = messages;
     }
 }
