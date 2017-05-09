@@ -29,7 +29,7 @@ public class UserController {
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)
     public String details(HttpSession session) {
-        User user = (User) session.getAttribute("user");
+        User user = getUser(session);
         User newUser = dao.getUser(user);
         newUser.setMessages(user.getMessages());
         session.setAttribute("user",newUser);
@@ -94,7 +94,7 @@ public class UserController {
 
     @RequestMapping(value = "/recharge",method = RequestMethod.POST)
     public String recharge(double money, HttpSession session){
-        User user = (User) session.getAttribute("user");
+        User user = getUser(session);
         dao.recharge(user, money);
         user.getMessages().addFirst("时间："+new Date()+"充值成功！");
         return "redirect:/user/details";
@@ -103,5 +103,12 @@ public class UserController {
     public String handlerException(LoginException e,Model model){
         model.addAttribute("message", e);
         return "user/login";
+    }
+
+    private User getUser(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if (user ==null)
+            throw new LoginException("你还没登陆，没有权限。");
+        return user;
     }
 }

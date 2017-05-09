@@ -9,7 +9,7 @@ import java.util.List;
  * Created by fsweb on 17-5-8.
  */
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String password;
     private Header header;//头像
@@ -32,7 +32,7 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

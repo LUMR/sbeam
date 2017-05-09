@@ -13,6 +13,7 @@
             <div class="details">
                 <ul>
                     <c:if test="${sessionScope.user != null}">
+                        <a href="/admin"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>管理</a></li>
                         <li><a href="/user/details"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>${sessionScope.user.name}</a></li>
                         <li><a href="/user/logout"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>注销</a></li>
                     </c:if>

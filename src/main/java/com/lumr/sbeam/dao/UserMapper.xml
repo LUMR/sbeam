@@ -7,7 +7,7 @@
     <select id="getUser" parameterType="User" resultType="User">
         select * from user
         <where>
-            <if test="id != 0">
+            <if test="id != null">
                 id = #{id}
             </if>
             <if test="name != null">
@@ -28,7 +28,7 @@
         <if test="name != null">
             name = #{name},
         </if>
-        <if test="header != null and header.id != 0">
+        <if test="header != null and header.id != null">
             header_id = #{header.id},
         </if>
         <if test="password != null">

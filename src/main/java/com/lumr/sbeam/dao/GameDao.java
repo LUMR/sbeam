@@ -15,8 +15,6 @@ public interface GameDao {
 
     List<Game> getGames(Game game);
 
-    int addGame(Game game);
-
     int deleteGame(Game game);
 
     int insert(@Param("pojo") Game pojo);

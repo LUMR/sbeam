@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lumr.sbeam.dao.CategoryDao">
+
+
+    <select id="getCategory" resultType="Category">
+        SELECT * FROM category
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="name != null">and name = #{name}</if>
+        </where>
+    </select>
+
+    <select id="getAllCategories" resultType="Category">
+        SELECT *
+        FROM category</select>
+    <delete id="deleteCategory">
+
+        DELETE FROM category
+        WHERE id = #{id}
+    </delete>
+
     <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Category">
         <result column="id" property="id"/>
@@ -28,8 +47,8 @@
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
         INSERT INTO category
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.id!=null"> `id`,</if>
-            <if test="pojo.name!=null"> `name`,</if>
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.name!=null">`name`,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -55,8 +74,8 @@
     <update id="update">
         UPDATE category
         <set>
-            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
-            <if test="pojo.name != null"> `name` = #{pojo.name} </if>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.name != null">`name` = #{pojo.name}</if>
         </set>
         WHERE id = #{pojo.id}
     </update>

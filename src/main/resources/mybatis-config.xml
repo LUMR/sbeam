@@ -7,6 +7,7 @@
 
     <typeAliases>
         <typeAlias type="com.lumr.sbeam.vo.User" alias="User"/>
+        <typeAlias type="com.lumr.sbeam.vo.Category" alias="Category"/>
     </typeAliases>
 
     <mappers>
