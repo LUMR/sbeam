@@ -15,9 +15,9 @@ public class User {
     private Header header;//头像
     private Double money;//拥有的金钱
     private Date registerDate;//注册日期
+    private Integer isadmin;
     private List<Game> games;//拥有的游戏
     private List<Review> reviews;//写的评论
-    private List<Picture> pictures;//照片
     private LinkedList<String> messages = new LinkedList<>();//用户消息，不保存在数据库中
 
     public User() {
@@ -36,7 +36,7 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -96,12 +96,12 @@ public class User {
         this.reviews = reviews;
     }
 
-    public List<Picture> getPictures() {
-        return pictures;
+    public Integer getIsadmin() {
+        return isadmin;
     }
 
-    public void setPictures(List<Picture> pictures) {
-        this.pictures = pictures;
+    public void setIsadmin(Integer isadmin) {
+        this.isadmin = isadmin;
     }
 
     public LinkedList<String> getMessages() {

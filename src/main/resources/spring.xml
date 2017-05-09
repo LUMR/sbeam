@@ -6,11 +6,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--自动扫描Beans-->
-    <context:component-scan base-package="com.lumr.sbeam.dao"/>
+    <context:component-scan base-package="com.lumr.sbeam.dao,com.lumr.sbeam.aop,com.lumr.sbeam.handler"/>
+
     <!--导入参数文件-->
     <context:property-placeholder location="classpath:db.properties"/>
 
-    <aop:aspectj-autoproxy/>
     <!--数据源连接池-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 

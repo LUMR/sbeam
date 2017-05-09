@@ -49,7 +49,7 @@
             </table>
             <div class="clearfix"></div>
         </div>
-        <div class="col-lg-3 content-right">
+        <div class="col-lg-3 colcontent-right">
             <table class="table table-responsive">
                 <thead>
                 <tr>
@@ -57,7 +57,7 @@
                 </tr>
                 </thead>
                 <tr>
-                    <td><img src="${sessionScope.user.header.src}"/></td>
+                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
                 </tr>
             </table>
             <div class="clearfix"></div>
@@ -73,12 +73,8 @@
                     <i class="ti ti-email"></i>修改信息
                 </a>
                 <a href="#" class="list-group-item">
-                    <span class="badge badge-warning">5021</span>
+                    <span class="badge badge-warning">${sessionScope.user.games.size()}</span>
                     <i class="ti ti-eye"></i> 游戏库
-                </a>
-                <a href="#" class="list-group-item">
-                    <span class="badge badge-danger">14</span>
-                    <i class="ti ti-headphone-alt"></i>精彩瞬间
                 </a>
                 <a href="#" class="list-group-item">
                     <span class="badge">20</span>

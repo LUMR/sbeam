@@ -13,11 +13,32 @@ import javax.servlet.http.HttpSession;
  * 登陆检查
  * Created by lumr on 2017/5/9.
  */
+@Controller
 @Aspect
 public class LoginCheck {
+    @Autowired
+    private HttpSession session;
 
-    @Before("execution(public String com.lumr.sbeam.controller.UserController.*(..))")
+    /**
+     * 普通用户权限检测
+     */
+    @Before("execution(public String com.lumr.sbeam.controller.UserController.*(..)) " +
+            "&& !execution(public String com.lumr.sbeam.controller.UserController.*Exception(..))")
     public void checkUser() {
-        System.out.println("aop开始");
+        User user = (User) session.getAttribute("user");
+        if (user == null)
+            throw new LoginException("你还没登陆");
+    }
+
+    /**
+     * 管理员权限检测
+     */
+    @Before("execution(public String com.lumr.sbeam.controller.AdminController.*(..)) " +
+            "&& !execution(public String com.lumr.sbeam.controller.AdminController.*Exception(..))")
+    public void checkAdmin() {
+        User user = (User) session.getAttribute("user");
+        if (user == null || user.getIsadmin() != 1) {
+            throw new LoginException("你不是管理员，没有修改权限。");
+        }
     }
 }

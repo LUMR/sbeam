@@ -21,19 +21,19 @@
 
     <div class="container">
         <%--分类管理--%>
-        <h2 class="h2">分类列表</h2>
+        <h2 class="h2">平台列表</h2>
         <div class="content-left col-md-6">
             <div class="list-group list-group-alternate">
-                <c:forEach items="${categories}" var="categoryMap">
-                    <a href="/admin/category/${categoryMap.id}" class="list-group-item"><span
-                            class="badge">${categoryMap.games.size()}</span>
+                <c:forEach items="${platforms}" var="platform">
+                    <a href="/admin/platform/${platform.id}" class="list-group-item"><span
+                            class="badge">&nbsp;&nbsp;</span>
                         <i class="ti ti-email"></i>
-                            ${categoryMap.name} </a>
+                            ${platform.name} </a>
                 </c:forEach>
             </div>
             <div class="clearfix"></div>
         </div>
-        <a href="/admin/category/add"><button class="btn1 btn-1 btn-1b">增加新的分类</button> </a>
+        <a href="/admin/platform/add"><button class="btn1 btn-1 btn-1b">增加新的平台</button> </a>
     </div>
 </div>
 <%--footer--%>

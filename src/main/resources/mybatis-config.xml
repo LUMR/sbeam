@@ -8,6 +8,11 @@
     <typeAliases>
         <typeAlias type="com.lumr.sbeam.vo.User" alias="User"/>
         <typeAlias type="com.lumr.sbeam.vo.Category" alias="Category"/>
+        <typeAlias type="com.lumr.sbeam.vo.Platform" alias="Platform"/>
+        <typeAlias type="com.lumr.sbeam.vo.Game" alias="Game"/>
+        <typeAlias type="com.lumr.sbeam.vo.Header" alias="Header"/>
+        <typeAlias type="com.lumr.sbeam.vo.Library" alias="Library"/>
+        <typeAlias type="com.lumr.sbeam.vo.Review" alias="Review"/>
     </typeAliases>
 
     <mappers>

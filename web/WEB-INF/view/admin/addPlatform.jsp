@@ -21,14 +21,13 @@
 
     <div class="container">
         <%--分类管理--%>
-        <h2 class="h2">分类信息</h2>
+        <h2 class="h2">平台信息</h2>
         <div class="list-group list-group-alternate">
-            <sf:form modelAttribute="category" action="/admin/category/${category.id}/update" method="post" cssClass="news-ltr">
-                <h3 class="h3">id:${category.id}&nbsp;游戏数量：${category.games.size()}</h3>
+            <sf:form modelAttribute="platform" action="/admin/platform/add" method="post" cssClass="news-ltr">
                 <div class="input-group input-group-lg">
-                    <input type="number" value="${category.id}" hidden />
+                    <input type="number" value="" hidden />
                     <span class="input-group-addon" id="sizing-addon1">名字</span>
-                    <input type="text" name="name" value="${category.name}" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+                    <input type="text" name="name" value="${platform.name}" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
                 </div>
                 <input type="submit" value="保存">
             </sf:form>

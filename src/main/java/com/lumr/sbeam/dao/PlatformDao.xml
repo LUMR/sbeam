@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lumr.sbeam.dao.CategoryDao">
+<mapper namespace="com.lumr.sbeam.dao.PlatformDao">
 
-    <resultMap id="categoryMap" type="Category">
+    <!--集合映射-->
+    <resultMap id="platformMap" type="Platform">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
-        <collection property="games" column="id" ofType="Game" select="selectGames"/>
+        <collection property="games" ofType="Game" column="id" select="selectGames"/>
     </resultMap>
     <select id="selectGames" resultType="Game">
-        SELECT * FROM game WHERE category_id = #{id}
+        SELECT * FROM game WHERE platform_id = #{id}
     </select>
 
-    <select id="getCategory" resultMap="categoryMap">
-        SELECT * FROM category
+    <select id="getPlatform" resultMap="platformMap">
+        SELECT * FROM platform
         <where>
             <if test="id != null">id = #{id}</if>
             <if test="name != null">and name = #{name}</if>
         </where>
     </select>
 
-    <select id="getAllCategories" resultType="Category">
+    <select id="getAllPlatforms" resultType="Platform">
         SELECT *
-        FROM category
+        FROM platform
     </select>
 
-    <delete id="deleteCategory">
-
-        DELETE FROM category
+    <delete id="deletePlatform">
+        DELETE FROM platform
         WHERE id = #{id}
     </delete>
 
+
     <!--auto generated Code-->
-    <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Category">
+    <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Platform">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
     </resultMap>
@@ -44,7 +45,7 @@
 
     <!--auto generated Code-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
-        INSERT INTO category (
+        INSERT INTO platform (
             `name`
         ) VALUES (
             #{pojo.name}
@@ -53,10 +54,10 @@
 
     <!--auto generated Code-->
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
-        INSERT INTO category
+        INSERT INTO platform
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.id!=null">`id`,</if>
-            <if test="pojo.name!=null">`name`,</if>
+            <if test="pojo.id!=null"> `id`,</if>
+            <if test="pojo.name!=null"> `name`,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,7 +68,7 @@
 
     <!--auto generated Code-->
     <insert id="insertList">
-        INSERT INTO category (
+        INSERT INTO platform (
         <include refid="all_column"/>
         )VALUES
         <foreach collection="pojos" item="pojo" index="index" separator=",">
@@ -80,10 +81,10 @@
 
     <!--auto generated Code-->
     <update id="update">
-        UPDATE category
+        UPDATE platform
         <set>
-            <if test="pojo.id != null">`id` = #{pojo.id},</if>
-            <if test="pojo.name != null">`name` = #{pojo.name}</if>
+            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
+            <if test="pojo.name != null"> `name` = #{pojo.name} </if>
         </set>
         WHERE id = #{pojo.id}
     </update>

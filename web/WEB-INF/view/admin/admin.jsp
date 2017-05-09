@@ -55,7 +55,7 @@
                     <span class="badge badge-success">$&nbsp;${sessionScope.user.money}</span>
                     <i class="ti ti-eye"></i> 管理分类
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/admin/platform" class="list-group-item">
                     <span class="badge badge-primary">&nbsp;&nbsp;</span>
                     <i class="ti ti-email"></i>管理平台
                 </a>

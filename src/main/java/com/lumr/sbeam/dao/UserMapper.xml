@@ -3,8 +3,29 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lumr.sbeam.dao.UserDao">
-    <!--<cache flushInterval="5000"/>-->
-    <select id="getUser" parameterType="User" resultType="User">
+
+    <resultMap id="UserMap" type="User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+        <result property="money" column="money"/>
+        <result property="registerDate" column="registerdate"/>
+        <result property="isadmin" column="isadmin"/>
+        <association property="header" column="id" javaType="Header" select="selectHeader"/>
+        <collection property="games" column="id" ofType="Game" select="selectGames"/>
+        <collection property="reviews" column="id" ofType="Review" select="selectReviews"/>
+    </resultMap>
+    <select id="selectHeader" resultType="Header">
+        SELECT * FROM header WHERE id = #{id}
+    </select>
+    <select id="selectGames" resultType="Game">
+        SELECT t1.* FROM game as t1 inner JOIN library as t2 WHERE t2.user_id = #{id} AND t1.id = t2.game_id
+    </select>
+    <select id="selectReviews" resultType="Review">
+        SELECT * FROM review WHERE user_id = #{id}
+    </select>
+
+    <select id="getUser" parameterType="User" resultMap="UserMap">
         select * from user
         <where>
             <if test="id != null">

@@ -10,6 +10,10 @@ public class Platform {
     private String name;
     private List<Game> games;
 
+    public Platform(Integer id) {
+        this.id = id;
+    }
+
     public Platform() {
     }
 
@@ -17,11 +21,11 @@ public class Platform {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
