@@ -26,52 +26,26 @@
         </div>
         <div class="clearfix"></div>
         <%--游戏信息--%>
-
-        <div class="col-lg-3 content-left">
             <sf:form modelAttribute="game" action="/admin/game/add" method="post" enctype="multipart/form-data">
+        <div class="col-lg-3 content-left">
+
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th colspan="2">游戏信息</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>游戏名称:</td>
-                        <td><sf:input path="name"/></td>
-                    </tr>
-                    <tr>
-                        <td>游戏类型</td>
-                        <td>
-                            <sf:input path="categoryId"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>游戏所在平台</td>
-                        <td>
-                            <sf:input path="platformId"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>游戏售价</td>
-                        <td><sf:input path="price"/></td>
-                    </tr>
-                    <tr>
-                        <td>上架时间</td>
-                        <td><sf:input path="pubdate"/></td>
-                    </tr>
-                    <tr>
-                        <td>游戏描述</td>
-                        <td class="contact-form"><sf:textarea path="description"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <button type="submit" class="btn1 btn-1 btn-1b">提交</button>
-                        </td>
-                    </tr>
-                    </tbody>
                 </table>
-            </sf:form>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" >名字</span>
+                    <input type="text" name="name" class="form-control" placeholder="分类名字">
+                </div>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">名字</span>
+                    <input type="text" name="description" class="form-control" placeholder="分类名字">
+                </div>
+                <button type="submit" class="btn1 btn-1 btn-1b">提交</button>
+
             <div class="clearfix"></div>
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
                 <a href="/admin/category/add" class="list-group-item">
@@ -124,7 +98,7 @@
             </table>
             <div class="clearfix"></div>
         </div>
-
+            </sf:form>
 
         <div class="clearfix"></div>
 
