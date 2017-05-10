@@ -3,6 +3,7 @@ package com.lumr.sbeam.dao;
 import com.lumr.sbeam.vo.Game;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * Created by lumr on 2017/5/9.
  */
 @Mapper
+@Repository
 public interface GameDao {
     Game getGame(Game game);
 

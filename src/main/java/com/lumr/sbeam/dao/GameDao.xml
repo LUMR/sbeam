@@ -2,24 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lumr.sbeam.dao.GameDao">
 
-    <select id="getGame">
+    <resultMap id="gameMap" type="Game">
+        <id property="id" column="id"/>
+        <association property="category" column="categoryId" javaType="Category" select="selectCategory"/>
+        <association property="platform" column="platformId" javaType="Platform" select="selectPlatform"/>
+        <collection property="pictures" column="id" ofType="Picture" select="selectPicture"/>
+        <collection property="reviews" column="id" ofType="Review" select="selectViews"/>
+    </resultMap>
+    <resultMap id="simpleGameMap" type="Game">
+        <id property="id" column="id"/>
+        <association property="category" column="category_id" javaType="Category" select="selectCategory"/>
+        <association property="platform" column="platform_id" javaType="Platform" select="selectPlatform"/>
+    </resultMap>
+    <select id="selectPicture" resultType="Picture">
+        SELECT * FROM picture WHERE game_id = #{id}
+    </select>
+    <select id="selectViews" resultType="Review">
+        SELECT * FROM review WHERE game_id = #{id}
+    </select>
+    <select id="selectCategory" resultType="Category">
+        SELECT * FROM category WHERE id = #{category_id}
+    </select>
+    <select id="selectPlatform" resultType="Platform">
+        SELECT * FROM platform WHERE id = #{platform_id}
+    </select>
+
+    <select id="getGame" resultMap="gameMap">
         select *
         from game
         <where>
             <if test="id != null">
                 id = #{id}
             </if>
-            <if test="name != null">
+            <if test="id == null and name != null">
                 and name = #{name}
             </if>
         </where>
     </select>
 
-    <select id="getGames">
+    <select id="getGames" resultMap="simpleGameMap">
         SELECT * FROM game
         <where>
-            <if test="categoryId != null">category_id = #{categoryId}</if>
-            <if test="platformId != null">and platform_id = #{platformId}</if>
+            <if test="categoryId != null or categoryId = 0">category_id = #{categoryId}</if>
+            <if test="platformId != null or platformId = 0">and platform_id = #{platformId}</if>
         </where>
     </select>
 

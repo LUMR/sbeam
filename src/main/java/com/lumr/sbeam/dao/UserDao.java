@@ -1,6 +1,7 @@
 package com.lumr.sbeam.dao;
 
 import com.lumr.sbeam.vo.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
  * Created by fsweb on 17-5-8.
  */
 @Repository
+@Mapper
 public interface UserDao {
     User getUser(User user);
 

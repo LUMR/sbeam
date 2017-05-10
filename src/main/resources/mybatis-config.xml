@@ -13,9 +13,10 @@
         <typeAlias type="com.lumr.sbeam.vo.Header" alias="Header"/>
         <typeAlias type="com.lumr.sbeam.vo.Library" alias="Library"/>
         <typeAlias type="com.lumr.sbeam.vo.Review" alias="Review"/>
+        <typeAlias type="com.lumr.sbeam.vo.Picture" alias="Picture"/>
     </typeAliases>
 
     <mappers>
-        <mapper resource="com/lumr/sbeam/dao/UserMapper.xml"/>
+        <!--<mapper resource="com/lumr/sbeam/UserDao.xml.xml"/>-->
     </mappers>
 </configuration>

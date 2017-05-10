@@ -3,7 +3,7 @@
 <mapper namespace="com.lumr.sbeam.dao.CategoryDao">
 
     <resultMap id="categoryMap" type="Category">
-        <result column="id" property="id"/>
+        <id column="id" property="id"/>
         <result column="name" property="name"/>
         <collection property="games" column="id" ofType="Game" select="selectGames"/>
     </resultMap>

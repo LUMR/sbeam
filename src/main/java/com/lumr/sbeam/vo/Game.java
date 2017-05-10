@@ -13,6 +13,8 @@ public class Game {
     private Integer platformId;//游戏平台
     private Double price;//游戏价格
     private String description;//游戏描述
+    private Category category;
+    private Platform platform;
     private List<Picture> pictures;//游戏介绍截图
     private List<Review> reviews;//游戏评论
 
@@ -21,6 +23,11 @@ public class Game {
 
     public Game(Integer id) {
         this.id = id;
+    }
+
+    public Game(Integer categoryId, Integer platformId) {
+        this.categoryId = categoryId;
+        this.platformId = platformId;
     }
 
     public Game(String name, int categoryId, int platformId, double price, String description) {
@@ -35,7 +42,7 @@ public class Game {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,7 +58,7 @@ public class Game {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -59,7 +66,7 @@ public class Game {
         return platformId;
     }
 
-    public void setPlatformId(int platformId) {
+    public void setPlatformId(Integer platformId) {
         this.platformId = platformId;
     }
 
@@ -85,6 +92,22 @@ public class Game {
 
     public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     public List<Review> getReviews() {

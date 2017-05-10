@@ -44,11 +44,11 @@
                                 <li><a href="/">首页</a></li>
                                 <li class="active"><a href="about.html">关于</a></li>
                                 <li class="dropdown">
-                                    <a href="/user/library" class="scroll dropdown-toggle" data-toggle="dropdown">我的游戏库<b class="caret"></b></a>
+                                    <a href="/user/library" class="scroll dropdown-toggle" data-toggle="dropdown">游戏库<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="review.html">Review 1</a></li>
-                                        <li><a href="review.html">Review 2</a></li>
-                                        <li><a href="review.html">Review 3</a></li>
+                                        <li><a href="/library">游戏商城</a></li>
+                                        <li><a href="/user/library">我的游戏库</a></li>
+
                                     </ul>
                                 </li>
                                 <li><a href="gallery.html">精彩瞬间</a></li>
@@ -61,7 +61,7 @@
                     <!--/navbar-->
                 </div>
                 <div class="clearfix"></div>
-                <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+                <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
             </div>
             <div class="clearfix"></div>
         </div>
