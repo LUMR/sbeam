@@ -34,6 +34,7 @@
             <div class="clearfix"></div>
         </div>
         <a href="/admin/category/add"><button class="btn1 btn-1 btn-1b">增加新的分类</button> </a>
+        <a href="/admin"><button class="btn1 btn-1 btn-1b">返回主管理页面</button> </a>
     </div>
 </div>
 <%--footer--%>

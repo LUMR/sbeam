@@ -32,15 +32,26 @@ public class Game {
         this.platformId = platformId;
     }
 
-    public Game(String name, int categoryId, int platformId, double price, String description) {
+    public Game(String name, Integer categoryId, Integer platformId, Double price, Date pubdate, String description) {
         this.name = name;
         this.categoryId = categoryId;
         this.platformId = platformId;
         this.price = price;
+        this.pubdate = pubdate;
         this.description = description;
     }
 
-    public int getId() {
+    public Game(Integer id, String name, Integer categoryId, Integer platformId, Double price, Date pubdate, String description) {
+        this.id = id;
+        this.name = name;
+        this.categoryId = categoryId;
+        this.platformId = platformId;
+        this.price = price;
+        this.pubdate = pubdate;
+        this.description = description;
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -72,36 +83,12 @@ public class Game {
         this.platformId = platformId;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Picture> getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List<Picture> pictures) {
-        this.pictures = pictures;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Date getPubdate() {
@@ -112,12 +99,36 @@ public class Game {
         this.pubdate = pubdate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Platform getPlatform() {
         return platform;
     }
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 
     public List<Review> getReviews() {

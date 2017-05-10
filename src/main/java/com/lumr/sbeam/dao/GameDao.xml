@@ -51,8 +51,8 @@
     <select id="getGames" resultMap="simpleGameMap">
         SELECT * FROM game
         <where>
-            <if test="categoryId != null or categoryId = 0">category_id = #{categoryId}</if>
-            <if test="platformId != null or platformId = 0">and platform_id = #{platformId}</if>
+            <if test="categoryId != null or categoryId == 0">category_id = #{categoryId}</if>
+            <if test="platformId != null or platformId == 0">and platform_id = #{platformId}</if>
         </where>
     </select>
 

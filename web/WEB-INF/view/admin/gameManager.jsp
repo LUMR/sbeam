@@ -17,8 +17,7 @@
 <%@include file="/WEB-INF/view/model/header.jsp" %>
 
 <%--content--%>
-<div class="content">
-
+<div class="content" style="margin-top: 20px;">
     <div class="container">
         <%--信息--%>
         <div class="col-md-3 content-left" role="alert">
@@ -27,7 +26,14 @@
         <div class="clearfix"></div>
         <%--游戏信息--%>
         <div class="col-md-4 content-left">
-            <h2>按类型分类</h2>
+            <a href="/admin/game/add">
+                <button class="btn1 btn-1 btn-1b">新增游戏</button>
+            </a>
+            <a href="/admin">
+                <button class="btn1 btn-1 btn-1b">返回主管理界面</button>
+            </a>
+
+            <h2 class="h2">按类型分类</h2>
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
                 <c:forEach items="${categories}" var="category">
                     <a href="/admin/game?cid=${category.id}" class="list-group-item">
@@ -37,7 +43,7 @@
                 </c:forEach>
             </div>
             <div class="clearfix"></div>
-            <h2>按平台分类</h2>
+            <h2 class="h2">按平台分类</h2>
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
                 <c:forEach items="${platforms}" var="platform">
                     <a href="/admin/game?pid=${platform.id}" class="list-group-item">
@@ -48,9 +54,10 @@
             </div>
         </div>
 
+        <%--游戏列表--%>
         <div class="col-md-8 colcontent-right">
             <c:forEach items="${games}" var="game" varStatus="status">
-                <c:if test="${status.count%4==0}"><div class="gallery-1"></c:if>
+                <%--<c:if test="${status.count%4==0}"><div class="gallery-1"></c:if>--%>
                 <div class="col-md-4 gallery-grid">
                     <a class="example-image-link" href="/images/g2.jpg" data-lightbox="example-set">
                         <img class="example-image" src="/images/g2.jpg" alt=""/>
@@ -64,7 +71,7 @@
                 </div>
                 <c:if test="${status.count%4==0}">
                     <div class="clearfix"></div>
-                    </div>
+                    <%--</div>--%>
                 </c:if>
             </c:forEach>
             <div class="clearfix"></div>

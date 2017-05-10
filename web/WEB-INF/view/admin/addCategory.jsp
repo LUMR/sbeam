@@ -27,9 +27,9 @@
                 <div class="input-group input-group-lg">
                     <input type="number" value="" hidden />
                     <span class="input-group-addon" id="sizing-addon1">名字</span>
-                    <input type="text" name="name" value="${category.name}" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+                    <input type="text" name="name" value="${category.name}" class="form-control" placeholder="分类名字" aria-describedby="sizing-addon1">
                 </div>
-                <input type="submit" value="保存">
+                <button type="submit" class="btn1 btn-1 btn-1b">提交</button>
             </sf:form>
             <div class="alert alert-warning" role="alert">
                 <strong>${message}</strong>

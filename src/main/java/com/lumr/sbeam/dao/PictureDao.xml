@@ -20,12 +20,10 @@
     <!--auto generated Code-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="pojo.id">
         INSERT INTO picture (
-            `id`,
             `game_id`,
-            `file_name`,
+            `filename`,
             `src`
         ) VALUES (
-            #{pojo.id},
             #{pojo.gameId},
             #{pojo.fileName},
             #{pojo.src}
@@ -71,7 +69,7 @@
         <set>
             <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
             <if test="pojo.gameId != null"> `game_id` = #{pojo.gameId}, </if>
-            <if test="pojo.fileName != null"> `file_name` = #{pojo.fileName}, </if>
+            <if test="pojo.fileName != null"> `filename` = #{pojo.fileName}, </if>
             <if test="pojo.src != null"> `src` = #{pojo.src} </if>
         </set>
         WHERE id = #{pojo.id}

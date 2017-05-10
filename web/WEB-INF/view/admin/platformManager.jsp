@@ -33,7 +33,12 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <a href="/admin/platform/add"><button class="btn1 btn-1 btn-1b">增加新的平台</button> </a>
+        <a href="/admin/platform/add">
+            <button class="btn1 btn-1 btn-1b">增加新的平台</button>
+        </a>
+        <a href="/admin">
+            <button class="btn1 btn-1 btn-1b">返回主管理页面</button>
+        </a>
     </div>
 </div>
 <%--footer--%>
