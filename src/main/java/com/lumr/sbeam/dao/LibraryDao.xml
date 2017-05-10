@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lumr.sbeam.dao.LibraryDao">
+    <select id="check" resultType="Library">
+        SELECT *
+        FROM library
+        WHERE game_id = #{game.id} AND user_id = #{user.id}
+    </select>
+
+    <insert id="add">
+        INSERT INTO library (user_id, game_id) VALUES (#{user.id}, #{game.id})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM library
+        WHERE user_id = #{user.id}
+              AND game_id = #{game.id}
+    </delete>
     <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Library">
         <result column="id" property="id"/>
@@ -32,9 +47,9 @@
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="pojo.id">
         INSERT INTO library
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.id!=null"> `id`,</if>
-            <if test="pojo.userId!=null"> `user_id`,</if>
-            <if test="pojo.gameId!=null"> `game_id`,</if>
+            <if test="pojo.id!=null">`id`,</if>
+            <if test="pojo.userId!=null">`user_id`,</if>
+            <if test="pojo.gameId!=null">`game_id`,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -62,9 +77,9 @@
     <update id="update">
         UPDATE library
         <set>
-            <if test="pojo.id != null"> `id` = #{pojo.id}, </if>
-            <if test="pojo.userId != null"> `user_id` = #{pojo.userId}, </if>
-            <if test="pojo.gameId != null"> `game_id` = #{pojo.gameId} </if>
+            <if test="pojo.id != null">`id` = #{pojo.id},</if>
+            <if test="pojo.userId != null">`user_id` = #{pojo.userId},</if>
+            <if test="pojo.gameId != null">`game_id` = #{pojo.gameId}</if>
         </set>
         WHERE id = #{pojo.id}
     </update>

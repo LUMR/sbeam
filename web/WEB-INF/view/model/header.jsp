@@ -13,7 +13,6 @@
             <div class="details">
                 <ul>
                     <c:if test="${sessionScope.user != null}">
-                        <a href="/admin"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>管理</a></li>
                         <li><a href="/user/details"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>${sessionScope.user.name}</a></li>
                         <li><a href="/user/logout"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>注销</a></li>
                     </c:if>
@@ -45,7 +44,7 @@
                                 <li><a href="/">首页</a></li>
                                 <li class="active"><a href="about.html">关于</a></li>
                                 <li class="dropdown">
-                                    <a href="#" class="scroll dropdown-toggle" data-toggle="dropdown">我的游戏库<b class="caret"></b></a>
+                                    <a href="/user/library" class="scroll dropdown-toggle" data-toggle="dropdown">我的游戏库<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="review.html">Review 1</a></li>
                                         <li><a href="review.html">Review 2</a></li>

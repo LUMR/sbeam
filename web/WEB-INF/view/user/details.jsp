@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>用户信息</title>
@@ -42,6 +43,10 @@
                     <td>${sessionScope.user.name}</td>
                 </tr>
                 <tr>
+                    <td>钱包</td>
+                    <td>$:${sessionScope.user.money}</td>
+                </tr>
+                <tr>
                     <td>注册日期</td>
                     <td>${sessionScope.user.registerDate}</td>
                 </tr>
@@ -72,14 +77,20 @@
                     <span class="badge badge-primary">&nbsp;&nbsp;</span>
                     <i class="ti ti-email"></i>修改信息
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/user/library" class="list-group-item">
                     <span class="badge badge-warning">${sessionScope.user.games.size()}</span>
                     <i class="ti ti-eye"></i> 游戏库
                 </a>
                 <a href="#" class="list-group-item">
-                    <span class="badge">20</span>
+                    <span class="badge">${sessionScope.user.messages.size()}</span>
                     <i class="ti ti-comments"></i>消息
                 </a>
+                <c:if test="${sessionScope.user.isadmin == 1}">
+                    <a href="/admin" class="list-group-item">
+                        <span class="badge-danger">&nbsp;&nbsp;</span>
+                        <i class="ti ti-comments"></i>后台管理
+                    </a>
+                </c:if>
             </div>
         </div>
         <div class="clearfix"></div>

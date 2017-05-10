@@ -59,9 +59,6 @@
             <if test="password != null">
                 password = #{password},
             </if>
-            <if test="money >= 0">
-                money = #{money}
-            </if>
         </set>
         WHERE id = #{id}
     </update>

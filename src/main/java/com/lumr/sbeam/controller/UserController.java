@@ -1,13 +1,16 @@
 package com.lumr.sbeam.controller;
 
 import com.lumr.sbeam.dao.HeaderDao;
+import com.lumr.sbeam.dao.LibraryDao;
 import com.lumr.sbeam.dao.UserDao;
 import com.lumr.sbeam.exception.LoginException;
+import com.lumr.sbeam.vo.Game;
 import com.lumr.sbeam.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,13 +31,12 @@ public class UserController {
     private UserDao userDao;
     @Autowired
     private HeaderDao headerDao;
+    @Autowired
+    private LibraryDao libraryDao;
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)
     public String details(HttpSession session) {
-        User user = getUser(session);
-        User newUser = userDao.getUser(user);
-        newUser.setMessages(user.getMessages());
-        session.setAttribute("user", newUser);
+        updateUser(session);
         return "user/details";
     }
 
@@ -92,6 +94,33 @@ public class UserController {
         return "/user/details";
     }
 
+    @RequestMapping(value = "/library",method = RequestMethod.GET)
+    public String library(Model model,HttpSession session){
+        User user = getUser(session);
+        model.addAttribute("gameLibrary", user.getGames());
+        return "user/library";
+    }
+    @RequestMapping(value = "/library/{id}/delete",method = RequestMethod.GET)
+    public String deleteGame(@PathVariable String id, HttpSession session,Model model){
+        User user = getUser(session);
+        Integer gameId;
+        try {
+            gameId = Integer.parseInt(id);
+        }catch (NumberFormatException e){
+            user.getMessages().addFirst("游戏ID错误，无法删除"+new Date());
+            return "redirect:/user/library";
+        }
+        int result = libraryDao.delete(user, new Game(gameId));
+        if (result>0){
+            user.getMessages().addFirst("删除游戏成功。"+new Date());
+            user.getMessages().size();
+            updateUser(session);
+        }else {
+            user.getMessages().addFirst("删除失败，没有该游戏"+ new Date());
+        }
+        return "redirect:/user/library";
+    }
+
     @ExceptionHandler(LoginException.class)
     public String handlerException(LoginException e, Model model) {
         model.addAttribute("message", e.getMessage());
@@ -103,5 +132,12 @@ public class UserController {
         if (user == null)
             throw new LoginException("你还没登陆，没有权限。");
         return user;
+    }
+
+    private void updateUser(HttpSession session){
+        User user = getUser(session);
+        User newUser = userDao.getUser(user);
+        newUser.setMessages(user.getMessages());
+        session.setAttribute("user", newUser);
     }
 }

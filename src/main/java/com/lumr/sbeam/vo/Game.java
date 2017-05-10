@@ -19,6 +19,10 @@ public class Game {
     public Game() {
     }
 
+    public Game(Integer id) {
+        this.id = id;
+    }
+
     public Game(String name, int categoryId, int platformId, double price, String description) {
         this.name = name;
         this.categoryId = categoryId;

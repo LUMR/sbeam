@@ -45,7 +45,7 @@
                                 <li class="active"><a href="/">首页</a></li>
                                 <li><a href="about.html">关于</a></li>
                                 <li class="dropdown">
-                                    <a href="#" class="scroll dropdown-toggle" data-toggle="dropdown">评论<b class="caret"></b></a>
+                                    <a href="/user/library" class="scroll dropdown-toggle" data-toggle="dropdown">我的游戏库<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="review.html">Review 1</a></li>
                                         <li><a href="review.html">Review 2</a></li>
