@@ -33,8 +33,8 @@ public class LoginCheck {
     /**
      * 管理员权限检测
      */
-    @Before("execution(public String com.lumr.sbeam.controller.AdminController.*(..)) " +
-            "&& !execution(public String com.lumr.sbeam.controller.AdminController.*Exception(..))")
+    @Before("execution(public String com.lumr.sbeam.controller.Admin*.*(..)) " +
+            "&& !execution(public String com.lumr.sbeam.controller.Admin*.*Exception(..))")
     public void checkAdmin() {
         User user = (User) session.getAttribute("user");
         if (user == null || user.getIsadmin() != 1) {

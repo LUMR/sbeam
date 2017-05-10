@@ -4,9 +4,7 @@ import com.lumr.sbeam.dao.CategoryDao;
 import com.lumr.sbeam.dao.GameDao;
 import com.lumr.sbeam.dao.LibraryDao;
 import com.lumr.sbeam.dao.PlatformDao;
-import com.lumr.sbeam.vo.Category;
 import com.lumr.sbeam.vo.Game;
-import com.lumr.sbeam.vo.Platform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,32 +30,32 @@ public class LibraryController {
     private LibraryDao libraryDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String libraryView(String cid,String pid,Model model) {
-        List<Game> games = gameDao.getGames(new Game(parseInt(cid),parseInt(pid)));
-        model.addAttribute("games",games);
+    public String libraryView(String cid, String pid, Model model) {
+        List<Game> games = gameDao.getGames(new Game(parseInt(cid), parseInt(pid)));
+        model.addAttribute("games", games);
         return "/library/games";
     }
 
     @RequestMapping(value = "/game/{id}")
-    public String gameDetails(@PathVariable String id,Model model){
+    public String gameDetails(@PathVariable String id, Model model) {
         Integer gid = parseInt(id);
         Game game = gameDao.getGame(new Game(gid));
-        if (game ==null){
+        if (game == null) {
             model.addAttribute("message", "没有该游戏.");
-        }else {
-            model.addAttribute("game",game);
+        } else {
+            model.addAttribute("game", game);
             model.addAttribute("sales", libraryDao.getSales(game));
         }
         return "/library/game";
     }
 
-    private Integer parseInt(String str){
+    private Integer parseInt(String str) {
         Integer i;
         if (str == null)
             return 0;
-        try{
+        try {
             i = Integer.parseInt(str);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return 0;
         }
         return i;
