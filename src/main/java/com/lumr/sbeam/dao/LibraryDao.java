@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface LibraryDao {
+    int getSales(Game game);
+
     Library check(@Param("user") User user,@Param("game") Game game);
 
     int add(@Param("user") User user,@Param("game") Game game);

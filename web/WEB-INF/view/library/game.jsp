@@ -51,11 +51,11 @@
                 </tr>
                 <tr>
                     <td>上架时间</td>
-                    <td>${sessionScope.user.registerDate}</td>
+                    <td>${game.pubdate}</td>
                 </tr>
                 <tr>
                     <td>销量</td>
-                    <td></td>
+                    <td>${sales}</td>
                 </tr>
                 </tbody>
             </table>
@@ -70,7 +70,7 @@
                     <i class="ti ti-email"></i>加入购物车
                 </a>
                 <a href="/library/game/${game.id}/reviews" class="list-group-item">
-                    <span class="badge badge-warning">${sessionScope.user.games.size()}</span>
+                    <span class="badge badge-warning">${game.reviews.size()}</span>
                     <i class="ti ti-eye"></i> 游戏评论数
                 </a>
                 <a href="#" class="list-group-item">

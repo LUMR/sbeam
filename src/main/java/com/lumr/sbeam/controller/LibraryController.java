@@ -2,6 +2,7 @@ package com.lumr.sbeam.controller;
 
 import com.lumr.sbeam.dao.CategoryDao;
 import com.lumr.sbeam.dao.GameDao;
+import com.lumr.sbeam.dao.LibraryDao;
 import com.lumr.sbeam.dao.PlatformDao;
 import com.lumr.sbeam.vo.Category;
 import com.lumr.sbeam.vo.Game;
@@ -27,6 +28,8 @@ public class LibraryController {
     private PlatformDao platformDao;
     @Autowired
     private GameDao gameDao;
+    @Autowired
+    private LibraryDao libraryDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String libraryView(String cid,String pid,Model model) {
@@ -43,6 +46,7 @@ public class LibraryController {
             model.addAttribute("message", "没有该游戏.");
         }else {
             model.addAttribute("game",game);
+            model.addAttribute("sales", libraryDao.getSales(game));
         }
         return "/library/game";
     }

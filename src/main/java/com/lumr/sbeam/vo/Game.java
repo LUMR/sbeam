@@ -1,5 +1,6 @@
 package com.lumr.sbeam.vo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ public class Game {
     private Integer categoryId;//游戏分类
     private Integer platformId;//游戏平台
     private Double price;//游戏价格
+    private Date pubdate;
     private String description;//游戏描述
     private Category category;
     private Platform platform;
@@ -74,7 +76,7 @@ public class Game {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -100,6 +102,14 @@ public class Game {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Date getPubdate() {
+        return pubdate;
+    }
+
+    public void setPubdate(Date pubdate) {
+        this.pubdate = pubdate;
     }
 
     public Platform getPlatform() {

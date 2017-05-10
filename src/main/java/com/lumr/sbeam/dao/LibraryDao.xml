@@ -23,6 +23,10 @@
         <result column="game_id" property="gameId"/>
     </resultMap>
 
+    <select id="getSales" resultType="int">
+        SELECT count(*) FROM library WHERE game_id = #{id}
+    </select>
+
     <!--auto generated Code-->
     <sql id="all_column">
         `id`,
