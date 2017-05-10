@@ -56,7 +56,7 @@ public class Game {
         this.name = name;
     }
 
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
@@ -64,7 +64,7 @@ public class Game {
         this.categoryId = categoryId;
     }
 
-    public int getPlatformId() {
+    public Integer getPlatformId() {
         return platformId;
     }
 

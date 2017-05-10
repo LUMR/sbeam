@@ -21,38 +21,39 @@
 
     <div class="container">
         <%--信息--%>
-        <div class="col-lg-3 content-left" role="alert">
+        <div class="col-md-3 content-left" role="alert">
             <span class="label label-success">${sessionScope.user.messages[0]}</span>
         </div>
         <div class="clearfix"></div>
         <%--游戏信息--%>
         <div class="col-md-4 content-left">
+            <h2>按类型分类</h2>
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
-                <a href="/library/game/${game.id}/buy" class="list-group-item">
-                    <span class="badge badge-success">$&nbsp;${game.price}</span>
-                    <i class="ti ti-eye"></i> 增加游戏
-                </a>
-                <a href="/library/game/${game.id}/add" class="list-group-item">
-                    <span class="badge badge-primary">&nbsp;&nbsp;</span>
-                    <i class="ti ti-email"></i>加入购物车
-                </a>
-                <a href="/library/game/${game.id}/reviews" class="list-group-item">
-                    <span class="badge badge-warning">${game.reviews.size()}</span>
-                    <i class="ti ti-eye"></i> 游戏评论数
-                </a>
-                <a href="#" class="list-group-item">
-                    <span class="badge">${sessionScope.user.messages.size()}</span>
-                    <i class="ti ti-comments"></i>消息
-                </a>
+                <c:forEach items="${categories}" var="category">
+                    <a href="/admin/game?cid=${category.id}" class="list-group-item">
+                        <span class="badge badge-success"></span>
+                        <i class="ti ti-eye"></i> ${category.name}
+                    </a>
+                </c:forEach>
+            </div>
+            <div class="clearfix"></div>
+            <h2>按平台分类</h2>
+            <div class="list-group list-group-alternate" style="margin: 20px auto;">
+                <c:forEach items="${platforms}" var="platform">
+                    <a href="/admin/game?pid=${platform.id}" class="list-group-item">
+                        <span class="badge badge-success"></span>
+                        <i class="ti ti-eye"></i> ${platform.name}
+                    </a>
+                </c:forEach>
             </div>
         </div>
 
         <div class="col-md-8 colcontent-right">
             <c:forEach items="${games}" var="game" varStatus="status">
                 <c:if test="${status.count%4==0}"><div class="gallery-1"></c:if>
-                <div class="col-md-3 gallery-grid">
-                    <a class="example-image-link" href="images/g2.jpg" data-lightbox="example-set">
-                        <img class="example-image" src="images/g2.jpg" alt=""/>
+                <div class="col-md-4 gallery-grid">
+                    <a class="example-image-link" href="/images/g2.jpg" data-lightbox="example-set">
+                        <img class="example-image" src="/images/g2.jpg" alt=""/>
                     </a>
                     <a href="/library/game/${game.id}" class="list-group-item">
                         <span class="badge badge-primary">${game.category.name}</span>
@@ -65,7 +66,6 @@
                     <div class="clearfix"></div>
                     </div>
                 </c:if>
-
             </c:forEach>
             <div class="clearfix"></div>
         </div>

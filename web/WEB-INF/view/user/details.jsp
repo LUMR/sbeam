@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td>钱包</td>
-                    <td>$:${sessionScope.user.money}</td>
+                    <td>$${sessionScope.user.money}</td>
                 </tr>
                 <tr>
                     <td>注册日期</td>
