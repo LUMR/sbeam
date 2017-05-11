@@ -7,9 +7,13 @@ import com.lumr.sbeam.dao.PlatformDao;
 import com.lumr.sbeam.vo.Game;
 import com.lumr.sbeam.vo.Picture;
 import com.lumr.sbeam.vo.User;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by fsweb on 17-5-10.
@@ -54,8 +59,18 @@ public class AdminGameController extends AdminController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addGame(Game game, MultipartFile[] files, Model model, HttpSession session) {
+    public String addGame(Game game, BindingResult bindingResult, MultipartFile[] files, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        if (bindingResult.hasErrors()){
+            String message = (new Date()+"添加失败，游戏数据错误。错误区域：");
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error:errors){
+                message += error.getField();
+            }
+            user.getMessages().addFirst(message);
+            return "/user/details";
+        }
+
         if (gameDao.getGame(game) != null) {
             user.getMessages().addFirst("添加失败，游戏名已存在。");
             return "/admin/addGame";
@@ -81,6 +96,15 @@ public class AdminGameController extends AdminController {
         } else
             user.getMessages().addFirst("时间：" + new Date() + "游戏添加失败。");
         return "/admin/gameManager";
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public String addTest(@RequestParam("test") String[] test) {
+        for (String str :
+                test) {
+            System.out.println(str);
+        }
+        return "/admin/addGame";
     }
 
     private Integer parseInt(String str) {

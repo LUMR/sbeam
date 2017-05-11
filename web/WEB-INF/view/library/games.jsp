@@ -21,7 +21,8 @@
         <h2>游戏库</h2>
         <div class="gallery-bottom">
             <c:forEach items="${games}" var="game" varStatus="status">
-                <c:if test="${status.count%4==0}"><div class="gallery-1"></c:if>
+                <c:if test="${status.count%4==1}"><div class="gallery-1"></c:if>
+
                 <div class="col-md-3 gallery-grid">
                     <a class="example-image-link" href="images/g2.jpg" data-lightbox="example-set">
                         <img class="example-image" src="images/g2.jpg" alt=""/>
@@ -33,6 +34,7 @@
                         <i class="ti ti-headphone-alt"></i>${game.name}
                     </a>
                 </div>
+
                 <c:if test="${status.count%4==0}">
                     <div class="clearfix"></div>
                     </div>

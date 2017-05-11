@@ -1,5 +1,8 @@
 package com.lumr.sbeam.vo;
 
+import com.lumr.sbeam.utils.Utils;
+
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -95,8 +98,8 @@ public class Game {
         return pubdate;
     }
 
-    public void setPubdate(Date pubdate) {
-        this.pubdate = pubdate;
+    public void setPubdate(String pubdate) throws ParseException{
+        this.pubdate = Utils.parseDate(pubdate);
     }
 
     public String getDescription() {

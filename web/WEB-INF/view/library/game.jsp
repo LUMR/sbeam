@@ -63,10 +63,10 @@
             <div class="clearfix"></div>
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
                 <c:if test="${sessionScope.user.isadmin == 1}">
-                <a href="/library/game/${game.id}/buy" class="list-group-item">
-                    <span class="badge badge-danger"></span>
-                    <i class="ti ti-eye"></i> 修改游戏
-                </a>
+                    <a href="/library/game/${game.id}/buy" class="list-group-item">
+                        <span class="badge badge-danger"></span>
+                        <i class="ti ti-eye"></i> 修改游戏
+                    </a>
                 </c:if>
                 <a href="/library/game/${game.id}/buy" class="list-group-item">
                     <span class="badge badge-success">$&nbsp;${game.price}</span>
@@ -84,31 +84,25 @@
                     <span class="badge">${sessionScope.user.messages.size()}</span>
                     <i class="ti ti-comments"></i>消息
                 </a>
+                <a class="list-group-item" onclick="window.history.back();">
+                    <span class="badge"></span>
+                    <i class="ti ti-comments"></i>返回
+                </a>
             </div>
         </div>
 
-        <div class="col-md-8 colcontent-right">
+        <div class="col-lg-8 colcontent-right">
             <table class="table table-responsive">
                 <thead>
                 <tr>
                     <th>游戏截图</th>
                 </tr>
                 </thead>
-                <tr>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                </tr>
-                <tr>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                </tr>
-                <tr>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                    <td><img src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                </tr>
+                <c:forEach items="${game.pictures}" var="picture" varStatus="status">
+                    <tr>
+                    <td><img src="${picture.src}" class="img-thumbnail"/></td>
+                    </tr>
+                </c:forEach>
             </table>
             <div class="clearfix"></div>
         </div>

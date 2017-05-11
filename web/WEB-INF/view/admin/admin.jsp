@@ -70,7 +70,7 @@
                     <span class="badge badge-danger"></span>
                     <i class="ti ti-headphone-alt"></i>精彩瞬间
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/user/messages" class="list-group-item">
                     <span class="badge">${sessionScope.user.messages.size()}</span>
                     <i class="ti ti-comments"></i>消息
                 </a>

@@ -57,7 +57,7 @@
         <%--游戏列表--%>
         <div class="col-md-8 colcontent-right">
             <c:forEach items="${games}" var="game" varStatus="status">
-                <%--<c:if test="${status.count%4==0}"><div class="gallery-1"></c:if>--%>
+                <c:if test="${status.count%3==1}"><div class="gallery-1"></c:if>
                 <div class="col-md-4 gallery-grid">
                     <a class="example-image-link" href="/images/g2.jpg" data-lightbox="example-set">
                         <img class="example-image" src="/images/g2.jpg" alt=""/>
@@ -69,9 +69,9 @@
                         <i class="ti ti-headphone-alt"></i>${game.name}
                     </a>
                 </div>
-                <c:if test="${status.count%4==0}">
+                <c:if test="${status.count%3==0}">
                     <div class="clearfix"></div>
-                    <%--</div>--%>
+                    </div>
                 </c:if>
             </c:forEach>
             <div class="clearfix"></div>

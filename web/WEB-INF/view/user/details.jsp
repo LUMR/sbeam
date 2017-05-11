@@ -69,6 +69,12 @@
         </div>
         <div class="col-lg-4 content-right">
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
+                <c:if test="${sessionScope.user.isadmin == 1}">
+                    <a href="/admin" class="list-group-item">
+                        <span class="badge-danger">&nbsp;&nbsp;</span>
+                        <i class="ti ti-comments"></i>后台管理
+                    </a>
+                </c:if>
                 <a href="/user/recharge" class="list-group-item">
                     <span class="badge badge-success">$&nbsp;${sessionScope.user.money}</span>
                     <i class="ti ti-eye"></i> 充值
@@ -81,16 +87,10 @@
                     <span class="badge badge-warning">${sessionScope.user.games.size()}</span>
                     <i class="ti ti-eye"></i> 游戏库
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/user/messages" class="list-group-item">
                     <span class="badge">${sessionScope.user.messages.size()}</span>
                     <i class="ti ti-comments"></i>消息
                 </a>
-                <c:if test="${sessionScope.user.isadmin == 1}">
-                    <a href="/admin" class="list-group-item">
-                        <span class="badge-danger">&nbsp;&nbsp;</span>
-                        <i class="ti ti-comments"></i>后台管理
-                    </a>
-                </c:if>
             </div>
         </div>
         <div class="clearfix"></div>

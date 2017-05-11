@@ -121,6 +121,11 @@ public class UserController {
         return "redirect:/user/library";
     }
 
+    @RequestMapping(value = "/messages")
+    public String getMessages(){
+        return "/user/messages";
+    }
+
     @ExceptionHandler(LoginException.class)
     public String handlerException(LoginException e, Model model) {
         model.addAttribute("message", e.getMessage());
