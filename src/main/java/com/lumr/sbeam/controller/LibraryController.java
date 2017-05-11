@@ -30,8 +30,10 @@ public class LibraryController {
     private LibraryDao libraryDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String libraryView(String cid, String pid, Model model) {
-        List<Game> games = gameDao.getGames(new Game(parseInt(cid), parseInt(pid)));
+    public String libraryView(String cid, String pid, String gameName, Model model) {
+        if (gameName != null)
+            gameName = "%" + gameName + "%";
+        List<Game> games = gameDao.getGames(new Game(gameName, parseInt(cid), parseInt(pid)));
         model.addAttribute("games", games);
         model.addAttribute("categories", categoryDao.getAllCategories());
         model.addAttribute("platforms", platformDao.getAllPlatforms());

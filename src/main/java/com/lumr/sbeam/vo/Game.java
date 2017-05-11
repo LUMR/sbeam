@@ -35,6 +35,12 @@ public class Game {
         this.platformId = platformId;
     }
 
+    public Game(String name, Integer categoryId, Integer platformId) {
+        this.name = name;
+        this.categoryId = categoryId;
+        this.platformId = platformId;
+    }
+
     public Game(String name, Integer categoryId, Integer platformId, Double price, Date pubdate, String description) {
         this.name = name;
         this.categoryId = categoryId;

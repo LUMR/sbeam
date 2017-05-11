@@ -13,6 +13,12 @@ import java.util.List;
 @Mapper
 @Repository
 public interface GameDao {
+    List<Game> getBuy();
+
+    List<Game> getHot();
+
+    List<Game> getNew();
+
     Game getGame(Game game);
 
     List<Game> getGames(Game game);

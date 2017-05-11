@@ -12,8 +12,8 @@
             <div class="col-md-6 news-ltr">
                 <h4>Newsletter</h4>
                 <p>Aenean sagittis est eget elit pulvinar cursus. Lorem ipsum consectetur adipiscing elit. Phasellus non purus at risus consequat finibus.</p>
-                <form>
-                    <input type="text" class="text" value="输入要搜索的游戏名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '输入要搜索的游戏名';}">
+                <form action="/library" method="get">
+                    <input type="text" name="gameName" class="text" value="" placeholder="输入要搜索的游戏名">
                     <input type="submit" value="搜索">
                     <div class="clearfix"></div>
                 </form>

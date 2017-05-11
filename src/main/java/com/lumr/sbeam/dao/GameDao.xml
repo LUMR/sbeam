@@ -35,6 +35,7 @@
         WHERE id = #{platform_id}
     </select>
 
+    <!--获取游戏所有信息-->
     <select id="getGame" resultMap="gameMap">
         select *
         from game
@@ -48,10 +49,12 @@
         </where>
     </select>
 
+    <!--获取游戏简要信息-->
     <select id="getGames" resultMap="simpleGameMap">
         SELECT * FROM game
         <where>
-            <if test="categoryId != null and categoryId != 0">category_id = #{categoryId}</if>
+            <if test="name != null">name like #{name} </if>
+            <if test="categoryId != null and categoryId != 0">and category_id = #{categoryId}</if>
             <if test="platformId != null and platformId != 0">and platform_id = #{platformId}</if>
         </where>
     </select>
@@ -60,6 +63,32 @@
         DELETE FROM game
         WHERE id = #{id}
     </delete>
+
+    <!--查找最热门的5个游戏-->
+    <select id="getHot" resultMap="simpleGameMap">
+        SELECT
+            t1.*,
+            count(t2.id) AS sales
+        FROM game AS t1 LEFT JOIN library AS t2 ON t2.game_id = t1.id
+        GROUP BY t1.id
+        ORDER BY sales DESC
+        LIMIT 0, 8
+    </select>
+
+    <!--新上传的游戏-->
+    <select id="getNew" resultMap="simpleGameMap">
+        SELECT *
+        FROM game
+        ORDER BY pubdate DESC
+        LIMIT 0, 5;
+    </select>
+
+    <select id="getBuy" resultMap="simpleGameMap">
+        SELECT t1.*
+        FROM game AS t1 RIGHT JOIN library AS t2 ON t2.game_id = t1.id
+        ORDER BY t2.id
+        LIMIT 0, 5
+    </select>
 
     <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Game">
