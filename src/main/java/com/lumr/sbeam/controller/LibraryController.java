@@ -33,8 +33,11 @@ public class LibraryController {
     public String libraryView(String cid, String pid, Model model) {
         List<Game> games = gameDao.getGames(new Game(parseInt(cid), parseInt(pid)));
         model.addAttribute("games", games);
+        model.addAttribute("categories", categoryDao.getAllCategories());
+        model.addAttribute("platforms", platformDao.getAllPlatforms());
         return "/library/games";
     }
+
 
     @RequestMapping(value = "/game/{id}")
     public String gameDetails(@PathVariable String id, Model model) {

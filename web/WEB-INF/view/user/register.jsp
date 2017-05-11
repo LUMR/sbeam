@@ -5,12 +5,15 @@
   Time: 下午3:49
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>注册</title>
     <%@include file="/WEB-INF/view/model/js.jsp" %>
+    <script src="/js/ajax.js">
+        var NameNotExist = false;
+    </script>
 </head>
 <body>
 <%--header--%>
@@ -20,11 +23,14 @@
     <div class="container">
         <h2> 注 册 </h2>
         <div style="width: 50%;margin: 0 auto;">
+            <div class="alert alert-warning" role="alert">
+                <strong id="message">${message}</strong>
+            </div>
             <h4>用 户 信 息 ：</h4>
-            <sf:form action="/user/register" modelAttribute="user">
+            <sf:form action="/user/register" modelAttribute="user" onsubmit="return NameNotExist">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon" id="sizing-addon1">用户名</span>
-                    <input type="text" name="name" class="form-control" placeholder="Username" required="required" aria-describedby="sizing-addon1">
+                    <input type="text" name="name" class="form-control" placeholder="Username" onchange="checkName(this)" required aria-describedby="sizing-addon1">
                     <span class="label label-warning"><sf:errors path="name"/></span>
                 </div>
                 <div class="input-group input-group-lg">

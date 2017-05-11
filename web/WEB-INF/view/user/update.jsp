@@ -11,6 +11,10 @@
 <head>
     <title>修改分类</title>
     <%@include file="/WEB-INF/view/model/js.jsp" %>
+    <script type="text/javascript" src="/js/ajax.js"></script>
+    <script>
+        var NameNotExist = false;
+    </script>
 </head>
 <body>
 <%--header--%>
@@ -22,7 +26,7 @@
     <div class="container">
         <%--分类管理--%>
         <div>
-            <sf:form modelAttribute="user" action="/user/details/update" enctype="multipart/form-data" method="post" cssClass="news-ltr">
+            <sf:form modelAttribute="user" action="/user/details/update" enctype="multipart/form-data" method="post" cssClass="news-ltr" onsubmit="return NameNotExist" >
                 <div class="col-md-5 content-left">
                     <table class="table table-hover">
                         <thead>
@@ -34,12 +38,15 @@
                     <div class="input-group input-group-lg">
                         <input type="number" name="id" value="${user.id}" hidden/>
                         <span class="input-group-addon" id="sizing-addon1">名字</span>
-                        <input type="text" name="name" value="${user.name}" class="form-control" placeholder="Username"
+                        <input type="text" name="name" id="name" value="${user.name}" onchange="checkName(this)" class="form-control" placeholder="Username"
                                aria-describedby="sizing-addon1">
                     </div>
                     <button type="submit" class="btn1 btn-1 btn-1b">保存</button>
                     <button class="btn1 btn-1 btn-1b">上传头像</button>
                     <div class="clearfix"></div>
+                    <div class="alert alert-warning" role="alert">
+                        <strong id="message">${message}</strong>
+                    </div>
                 </div>
                 <div class="col-md-6 content-right">
                     <table class="table table-responsive">
@@ -58,11 +65,6 @@
 
             </sf:form>
             <div class="clearfix"></div>
-        </div>
-            <div class="alert alert-warning" role="alert">
-                <strong>${message}</strong>
-            </div>
-        </div>
         <div class="clearfix"></div>
 </div>
 <%--footer--%>

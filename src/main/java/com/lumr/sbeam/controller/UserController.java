@@ -1,12 +1,11 @@
 package com.lumr.sbeam.controller;
 
+import com.lumr.sbeam.dao.GameDao;
 import com.lumr.sbeam.dao.HeaderDao;
 import com.lumr.sbeam.dao.LibraryDao;
 import com.lumr.sbeam.dao.UserDao;
 import com.lumr.sbeam.exception.LoginException;
-import com.lumr.sbeam.vo.Game;
-import com.lumr.sbeam.vo.Picture;
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户管理
@@ -31,6 +32,8 @@ public class UserController {
     private HeaderDao headerDao;
     @Autowired
     private LibraryDao libraryDao;
+    @Autowired
+    private GameDao gameDao;
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)
     public String details(HttpSession session) {
@@ -55,6 +58,97 @@ public class UserController {
         userDao.recharge(user, money);
         user.getMessages().addFirst("时间：" + new Date() + "充值成功！");
         return "redirect:/user/details";
+    }
+
+    @RequestMapping(value = "/game/{gameId}/buy")
+    public String buyGame(@PathVariable String gameId, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        int id;
+        Game game;
+        Library library;
+        try {
+            id = Integer.parseInt(gameId);
+            game = gameDao.getGame(new Game(id));
+            library = libraryDao.check(user, game);
+        } catch (Exception e) {
+            user.getMessages().addFirst("购买失败，不存在该游戏");
+            return "redirect:/user/details";
+        }
+        if (library == null) {
+            if (user.getMoney()<game.getPrice()){
+                user.getMessages().addFirst("你的余额不足，请去充值。");
+                return "redirect:/user/details";
+            }
+            libraryDao.add(user, game);
+            user.getGames().add(game);
+            user.getMessages().addFirst("时间：" + new Date() + "购买游戏:" + game.getName());
+        } else {
+            user.getMessages().addFirst("你已拥有该游戏 ");
+        }
+        return "redirect:/user/library";
+    }
+
+    @RequestMapping(value = "/game/{gameId}/add", method = RequestMethod.GET)
+    @ResponseBody
+    public int addGame(@PathVariable("gameId") String gameId, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
+        int id;
+        Game game;
+        Library library;
+        try {
+            id = Integer.parseInt(gameId);
+            game = gameDao.getGame(new Game(id));
+            library = libraryDao.check(user, game);
+            if (library == null) {
+                return buyCar.addGame(game);
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @RequestMapping(value = "/buyCar")
+    public String seeBuyCar(Model model, HttpSession session) {
+        BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
+        model.addAttribute(buyCar);
+        return "/user/buyCar";
+    }
+
+    @RequestMapping(value = "/buyCar/sum")
+    public String sumBuyCar(Model model, HttpSession session) {
+        BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
+        User user = (User) session.getAttribute("user");
+        if (user.getMoney() < buyCar.getTotal()) {
+            user.getMessages().addFirst("RMB不足，结算失败，请先充值。");
+            return "redirect:/user/buyCar";
+        }
+        List<Library> libraryList = new ArrayList<>();
+        for (Game game : buyCar.getGames()) {
+            libraryList.add(new Library(user.getId(), game.getId()));
+        }
+        libraryDao.insertList(libraryList);
+
+        user.getMessages().addFirst(new Date() + "结算完成，你购买了" + buyCar.getGames().size() + "个游戏，谢谢惠顾！");
+        buyCar.getGames().clear();
+        updateUser(session);
+        return "redirect:/user/library";
+    }
+
+    @RequestMapping(value = "/game/{gameId}/delete", method = RequestMethod.GET)
+    public String deleteGame(@PathVariable("gameId") String gameId, Model model, HttpSession session) {
+        BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
+        User user = (User) session.getAttribute("user");
+        try {
+            buyCar.deleteGame(Integer.parseInt(gameId));
+        } catch (Exception e) {
+            user.getMessages().addFirst("购物车没有该游戏，删除失败。");
+            return "redirect:/user/buyCar";
+        }
+        user.getMessages().addFirst("删除游戏成功.");
+        return "redirect:/user/buyCar";
     }
 
     @RequestMapping(value = "/details/update", method = RequestMethod.GET)
@@ -89,44 +183,46 @@ public class UserController {
             }
             realUser.getMessages().addFirst("上传成功:" + file.getName());
         }
-        return "/user/details";
+        return "redirect:/user/details";
     }
 
-    @RequestMapping(value = "/library",method = RequestMethod.GET)
-    public String library(Model model,HttpSession session){
+    @RequestMapping(value = "/library", method = RequestMethod.GET)
+    public String library(Model model, HttpSession session) {
         User user = getUser(session);
         model.addAttribute("gameLibrary", user.getGames());
         return "user/library";
     }
-    @RequestMapping(value = "/library/{id}/delete",method = RequestMethod.GET)
-    public String deleteGame(@PathVariable String id, HttpSession session,Model model){
+
+    @RequestMapping(value = "/library/{id}/delete", method = RequestMethod.GET)
+    public String deleteGame(@PathVariable String id, HttpSession session, Model model) {
         User user = getUser(session);
         Integer gameId;
         try {
             gameId = Integer.parseInt(id);
-        }catch (NumberFormatException e){
-            user.getMessages().addFirst("游戏ID错误，无法删除"+new Date());
+        } catch (NumberFormatException e) {
+            user.getMessages().addFirst("游戏ID错误，无法删除" + new Date());
             return "redirect:/user/library";
         }
         int result = libraryDao.delete(user, new Game(gameId));
-        if (result>0){
-            user.getMessages().addFirst("删除游戏成功。"+new Date());
+        if (result > 0) {
+            user.getMessages().addFirst("删除游戏成功。" + new Date());
             user.getMessages().size();
             updateUser(session);
-        }else {
-            user.getMessages().addFirst("删除失败，没有该游戏"+ new Date());
+        } else {
+            user.getMessages().addFirst("删除失败，没有该游戏" + new Date());
         }
         return "redirect:/user/library";
     }
 
     @RequestMapping(value = "/messages")
-    public String getMessages(){
+    public String getMessages() {
         return "/user/messages";
     }
 
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
-    public @ResponseBody Picture getFiles(MultipartFile file,HttpSession session) {
-        if (file.isEmpty()){
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public @ResponseBody
+    Picture getFiles(MultipartFile file, HttpSession session) {
+        if (file.isEmpty()) {
             return null;
         }
         String filePath = session.getServletContext().getRealPath("/pictures/");
@@ -136,7 +232,7 @@ public class UserController {
         } catch (IOException e) {
             return null;
         }
-        return new Picture(1,1,newFile.getName(),"/pictures/"+newFile.getName());
+        return new Picture(1, 1, newFile.getName(), "/pictures/" + newFile.getName());
     }
 
     @ExceptionHandler(LoginException.class)
@@ -152,7 +248,7 @@ public class UserController {
         return user;
     }
 
-    private void updateUser(HttpSession session){
+    private void updateUser(HttpSession session) {
         User user = getUser(session);
         User newUser = userDao.getUser(user);
         newUser.setMessages(user.getMessages());

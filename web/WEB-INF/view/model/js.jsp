@@ -13,5 +13,5 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Titillium+Web:400,600,700,300' rel='stylesheet' type='text/css'>
 <!-- Custom Theme files -->
 <!-- jQuery (necessary JavaScript plugins) -->
-<script type='text/javascript' src="/js/jquery-1.11.1.min.js"></script>
+<script type='text/javascript' src="/js/jquery-3.2.1.min.js"></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>

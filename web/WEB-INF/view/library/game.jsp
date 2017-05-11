@@ -11,6 +11,7 @@
 <head>
     <title>${game.name}</title>
     <%@include file="/WEB-INF/view/model/js.jsp" %>
+    <script src="/js/ajax.js"></script>
 </head>
 <body>
 <%--header--%>
@@ -68,17 +69,20 @@
                         <i class="ti ti-eye"></i> 修改游戏
                     </a>
                 </c:if>
-                <a href="/library/game/${game.id}/buy" class="list-group-item">
+                <a class="list-group-item" onclick="
+                        if(confirm('确定购买吗？')){
+                        window.location='/user/game/${game.id}/buy';
+                        }">
                     <span class="badge badge-success">$&nbsp;${game.price}</span>
                     <i class="ti ti-eye"></i> 买买买
                 </a>
-                <a href="/library/game/${game.id}/add" class="list-group-item">
-                    <span class="badge badge-primary">&nbsp;&nbsp;</span>
+                <a class="list-group-item" onclick="addGame('/user/game/${game.id}/add')">
+                    <span id="gameNum" class="badge badge-primary">${sessionScope.buyCar.games.size()}</span>
                     <i class="ti ti-email"></i>加入购物车
                 </a>
-                <a href="/library/game/${game.id}/reviews" class="list-group-item">
-                    <span class="badge badge-warning">${game.reviews.size()}</span>
-                    <i class="ti ti-eye"></i> 游戏评论数
+                <a href="/user/buyCar" class="list-group-item">
+                    <span class="badge badge-warning">${sessionScope.buyCar.games.size()}</span>
+                    <i class="ti ti-eye"></i> 查看购物车
                 </a>
                 <a href="#" class="list-group-item">
                     <span class="badge">${sessionScope.user.messages.size()}</span>
@@ -100,7 +104,7 @@
                 </thead>
                 <c:forEach items="${game.pictures}" var="picture" varStatus="status">
                     <tr>
-                    <td><img src="${picture.src}" class="img-thumbnail"/></td>
+                        <td><img src="${picture.src}" class="img-thumbnail"/></td>
                     </tr>
                 </c:forEach>
             </table>

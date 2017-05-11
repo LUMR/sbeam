@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface UserDao {
+    User checkUserName(User user);
+
     User getUser(User user);
 
     int insertUser(User user);

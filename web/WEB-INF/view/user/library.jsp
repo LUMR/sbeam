@@ -29,14 +29,10 @@
         <div class="content-left col-md-6">
             <div class="list-group list-group-alternate">
                 <c:forEach items="${gameLibrary}" var="game">
-                    <a href="/library/${game.id}" class="list-group-item"><span
+                    <a href="/library/game/${game.id}" class="list-group-item"><span
                             class="badge"></span>
-                        <i class="ti ti-email"></i>
-                            ${game.name} </a><button class="btn1 btn-1 btn-1b" onclick="
-                              if (confirm('确定删除吗？')){
-                                  window.location='/user/library/${game.id}/delete';
-                              };
-                            ">删除</button>
+                        <i class="ti ti-email"></i>${game.name}
+                    </a>
                 </c:forEach>
             </div>
             <div class="clearfix"></div>
