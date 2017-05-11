@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lumr.sbeam.dao.PictureDao">
+
+    <select id="getPictureNum" parameterType="Game" resultType="int">
+        SELECT count(*) FROM picture WHERE game_id = #{id}
+    </select>
+
     <!--auto generated Code-->
     <resultMap id="AllColumnMap" type="com.lumr.sbeam.vo.Picture">
         <result column="id" property="id"/>

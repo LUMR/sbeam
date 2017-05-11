@@ -19,6 +19,13 @@ public class Picture {
         this.src = src;
     }
 
+    public Picture(Integer id, Integer gameId, String fileName, String src) {
+        this.id = id;
+        this.gameId = gameId;
+        this.fileName = fileName;
+        this.src = src;
+    }
+
     public int getId() {
         return id;
     }
@@ -50,4 +57,5 @@ public class Picture {
     public void setSrc(String src) {
         this.src = src;
     }
+
 }

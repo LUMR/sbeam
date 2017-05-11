@@ -22,9 +22,6 @@
         <%--信息--%>
         <div class="col-lg-3 content-left" role="alert">
             <span class="label label-success">${sessionScope.user.messages[0]}</span>
-            <span class="label label-success">${sessionScope.user.messages[1]}</span>
-            <span class="label label-success">${sessionScope.user.messages[2]}</span>
-            <span class="label label-success">${sessionScope.user.messages[3]}</span>
         </div>
         <div class="clearfix"></div>
         <%--用户信息--%>

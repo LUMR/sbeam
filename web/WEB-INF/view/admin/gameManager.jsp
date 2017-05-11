@@ -59,7 +59,7 @@
             <c:forEach items="${games}" var="game" varStatus="status">
                 <c:if test="${status.count%3==1}"><div class="gallery-1"></c:if>
                 <div class="col-md-4 gallery-grid">
-                    <a class="example-image-link" href="/images/g2.jpg" data-lightbox="example-set">
+                    <a class="example-image-link" href="/library/game/${game.id}" data-lightbox="example-set">
                         <img class="example-image" src="/images/g2.jpg" alt=""/>
                     </a>
                     <a href="/library/game/${game.id}" class="list-group-item">

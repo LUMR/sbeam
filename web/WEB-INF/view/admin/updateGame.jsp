@@ -1,17 +1,18 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
-  User: fsweb
-  Date: 17-5-10
-  Time: 下午2:14
+  User: lumr
+  Date: 2017/5/11
+  Time: 下午2:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>${game.name}</title>
     <%@include file="/WEB-INF/view/model/js.jsp" %>
-    <script type="text/javascript" src="/js/ajax.js" />
+    <script type="text/javascript" src="/js/ajax.js"></script>
 </head>
 <body>
 <%--header--%>
@@ -26,7 +27,7 @@
         </div>
         <div class="clearfix"></div>
         <%--游戏信息--%>
-        <sf:form modelAttribute="game" action="/admin/game/add" method="post" enctype="multipart/form-data">
+        <sf:form modelAttribute="game" action="/admin/game/${game.id}/update" method="post" enctype="multipart/form-data">
             <div class="col-lg-3 content-left">
 
                 <table class="table table-hover">
@@ -38,15 +39,13 @@
                     <tbody>
                     <tr>
                         <td>游戏名称:</td>
-                        <td><input name="name" required/></td>
+                        <td><input name="name" value="${game.name}" required/></td>
                     </tr>
                     <tr>
                         <td>游戏类型</td>
                         <td>
                             <sf:select path="categoryId">
-                                <c:forEach items="${categories}" var="category">
-                                    <sf:option value="${category.id}">${category.name}</sf:option>
-                                </c:forEach>
+                                    <sf:option value="${game.category.id}">${game.category.name}</sf:option>
                             </sf:select>
                         </td>
                     </tr>
@@ -54,19 +53,17 @@
                         <td>游戏所在平台</td>
                         <td>
                             <sf:select path="platformId">
-                                <c:forEach items="${platforms}" var="platform">
-                                    <sf:option value="${platform.id}">${platform.name}</sf:option>
-                                </c:forEach>
+                                    <sf:option value="${game.platform.id}">${game.platform.name}</sf:option>
                             </sf:select>
                         </td>
                     </tr>
                     <tr>
                         <td>游戏售价</td>
-                        <td><input type="text" name="price" required/></td>
+                        <td><input type="text" name="price" value="${game.price}" required/></td>
                     </tr>
                     <tr>
                         <td>上架时间</td>
-                        <td><input type="date" name="pubdate" required/></td>
+                        <td><input type="datetime" name="pubdate" value="${game.pubdate.toLocaleString()}" required/></td>
                     </tr>
                     <tr>
                         <td>游戏描述</td>
@@ -109,26 +106,26 @@
                     </tr>
                     </thead>
                     <tr>
-                        <td><img id="picture_1" src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                        <td><img id="picture_2" src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                        <td><img id="picture_3" src="${sessionScope.user.header.src}" class="img-thumbnail"/></td>
-                    </tr>
-                    <tr>
                         <td><input type="file" class="input-group-sm" name="files" id="picture1" required/></td>
                         <td><input type="file" class="input-group-sm" name="files" id="picture2" required/></td>
                         <td><input type="file" class="input-group-sm" name="files" id="picture3" required/></td>
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" onclick="uploadFile('#picture1','#picture_1')" class="btn1 btn-1 btn-1b">上传图片</button>
+                            <button type="button" class="btn1 btn-1 btn-1b">上传图片</button>
                         </td>
                         <td>
-                            <button type="button" onclick="uploadFile('#picture2','#picture_2')" class="btn1 btn-1 btn-1b">上传图片</button>
+                            <button type="button" class="btn1 btn-1 btn-1b">上传图片</button>
                         </td>
                         <td>
-                            <button type="button" onclick="uploadFile('#picture3','#picture_3')" class="btn1 btn-1 btn-1b">上传图片</button>
+                            <button type="button" class="btn1 btn-1 btn-1b">上传图片</button>
                         </td>
                     </tr>
+                    <c:forEach items="${game.pictures}" varStatus="status" var="picture">
+                        <c:if test="${status.count%3==1}"><tr></c:if>
+                        <td><img src="${picture.src}" class="img-thumbnail"/></td>
+                        <c:if test="${status.count%3==0}"></tr></c:if>
+                    </c:forEach>
                 </table>
                 <div class="clearfix"></div>
             </div>

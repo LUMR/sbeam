@@ -1,5 +1,6 @@
 package com.lumr.sbeam.dao;
 
+import com.lumr.sbeam.vo.Game;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface PictureDao {
+    int getPictureNum(Game game);
+
     int insert(@Param("pojo") Picture pojo);
 
     int insertSelective(@Param("pojo") Picture pojo);

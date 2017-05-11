@@ -5,14 +5,12 @@ import com.lumr.sbeam.dao.LibraryDao;
 import com.lumr.sbeam.dao.UserDao;
 import com.lumr.sbeam.exception.LoginException;
 import com.lumr.sbeam.vo.Game;
+import com.lumr.sbeam.vo.Picture;
 import com.lumr.sbeam.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -124,6 +122,21 @@ public class UserController {
     @RequestMapping(value = "/messages")
     public String getMessages(){
         return "/user/messages";
+    }
+
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public @ResponseBody Picture getFiles(MultipartFile file,HttpSession session) {
+        if (file.isEmpty()){
+            return null;
+        }
+        String filePath = session.getServletContext().getRealPath("/pictures/");
+        File newFile = new File(filePath, file.getOriginalFilename());
+        try {
+            file.transferTo(newFile);
+        } catch (IOException e) {
+            return null;
+        }
+        return new Picture(1,1,newFile.getName(),"/pictures/"+newFile.getName());
     }
 
     @ExceptionHandler(LoginException.class)

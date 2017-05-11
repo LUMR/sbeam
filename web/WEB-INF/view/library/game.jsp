@@ -63,7 +63,7 @@
             <div class="clearfix"></div>
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
                 <c:if test="${sessionScope.user.isadmin == 1}">
-                    <a href="/library/game/${game.id}/buy" class="list-group-item">
+                    <a href="/admin/game/${game.id}/update" class="list-group-item">
                         <span class="badge badge-danger"></span>
                         <i class="ti ti-eye"></i> 修改游戏
                     </a>

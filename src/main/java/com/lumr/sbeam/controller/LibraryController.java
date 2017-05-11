@@ -31,8 +31,6 @@ public class LibraryController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String libraryView(String cid, String pid, Model model) {
-        System.out.println(cid);
-        System.out.println(pid);
         List<Game> games = gameDao.getGames(new Game(parseInt(cid), parseInt(pid)));
         model.addAttribute("games", games);
         return "/library/games";
