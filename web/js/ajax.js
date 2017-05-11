@@ -15,7 +15,7 @@ function uploadFile(input,picture) {
         contentType: false,//不添加请求头
         //成功后的操作
         success:function(response){
-            alert(response);
+
             $(picture).attr("src",response.src);
         }
     });

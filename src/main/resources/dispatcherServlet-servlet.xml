@@ -8,12 +8,7 @@
     <!--自动扫描bean-->
     <context:component-scan base-package="com.lumr.sbeam.controller"/>
     <!--开启注解方式-->
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
+    <mvc:annotation-driven />
 
     <aop:aspectj-autoproxy/>
     <!--开启默认servlet静态文件 handler-->
