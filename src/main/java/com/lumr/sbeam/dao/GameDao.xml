@@ -117,13 +117,15 @@
             `category_id`,
             `platform_id`,
             `price`,
-            `description`
+            `description`,
+            pubdate
         ) VALUES (
             #{pojo.name},
             #{pojo.categoryId},
             #{pojo.platformId},
             #{pojo.price},
-            #{pojo.description}
+            #{pojo.description},
+            #{pojo.pubdate}
         )
     </insert>
 
@@ -161,7 +163,8 @@
             #{pojo.categoryId},
             #{pojo.platformId},
             #{pojo.price},
-            #{pojo.description}
+            #{pojo.description},
+            #{pojo.pubdate}
             )
         </foreach>
     </insert>
@@ -174,6 +177,7 @@
             <if test="pojo.categoryId != null">`category_id` = #{pojo.categoryId},</if>
             <if test="pojo.platformId != null">`platform_id` = #{pojo.platformId},</if>
             <if test="pojo.price != null">`price` = #{pojo.price},</if>
+            <if test="pojo.pubdate != null">`pubdate` = #{pojo.pubdate},</if>
             <if test="pojo.description != null">`description` = #{pojo.description}</if>
         </set>
         WHERE id = #{pojo.id}

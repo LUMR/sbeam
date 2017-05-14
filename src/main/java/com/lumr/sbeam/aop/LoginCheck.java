@@ -37,7 +37,7 @@ public class LoginCheck {
             "&& !execution(public String com.lumr.sbeam.controller.Admin*.*Exception(..))")
     public void checkAdmin() {
         User user = (User) session.getAttribute("user");
-        if (user == null || user.getIsadmin() != 1) {
+        if (user == null || user.getIsAdmin() != 1) {
             throw new LoginException("你不是管理员，没有修改权限。");
         }
     }

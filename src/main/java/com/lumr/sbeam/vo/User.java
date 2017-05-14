@@ -15,7 +15,7 @@ public class User {
     private Header header;//头像
     private Double money;//拥有的金钱
     private Date registerDate;//注册日期
-    private Integer isadmin;
+    private Integer isAdmin;
     private List<Game> games;//拥有的游戏
     private List<Review> reviews;//写的评论
     private LinkedList<String> messages = new LinkedList<>();//用户消息，不保存在数据库中
@@ -96,12 +96,12 @@ public class User {
         this.reviews = reviews;
     }
 
-    public Integer getIsadmin() {
-        return isadmin;
+    public Integer getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setIsadmin(Integer isadmin) {
-        this.isadmin = isadmin;
+    public void setIsAdmin(Integer isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public LinkedList<String> getMessages() {

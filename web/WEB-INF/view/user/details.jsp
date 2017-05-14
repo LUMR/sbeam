@@ -69,7 +69,7 @@
         </div>
         <div class="col-lg-4 content-right">
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
-                <c:if test="${sessionScope.user.isadmin == 1}">
+                <c:if test="${sessionScope.user.isAdmin == 1}">
                     <a href="/admin" class="list-group-item">
                         <span class="badge-danger">&nbsp;&nbsp;</span>
                         <i class="ti ti-comments"></i>后台管理

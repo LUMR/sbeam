@@ -8,8 +8,8 @@
         <result property="name" column="name"/>
         <result property="password" column="password"/>
         <result property="money" column="money"/>
-        <result property="registerDate" column="registerdate"/>
-        <result property="isadmin" column="isadmin"/>
+        <result property="registerDate" column="register_date"/>
+        <result property="isAdmin" column="is_admin"/>
         <association property="header" column="id" javaType="Header" select="selectHeader"/>
         <collection property="games" column="id" ofType="Game" select="selectGames"/>
         <collection property="reviews" column="id" ofType="Review" select="selectReviews"/>
@@ -51,7 +51,7 @@
     </select>
 
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (name, password, registerdate)
+        INSERT INTO user (name, password, register_date)
         VALUES (
             #{name}, #{password}, #{registerDate}
         )

@@ -13,7 +13,7 @@
     <%@include file="/WEB-INF/view/model/js.jsp" %>
     <script type="text/javascript" src="/js/ajax.js"></script>
     <script>
-        var NameNotExist = false;
+        var NameNotExist = true;
     </script>
 </head>
 <body>
