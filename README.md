@@ -18,9 +18,9 @@ IDE: IntelliJ IDEA
 ### 界面截图：
 #### 首页：
 
-![image](https://github.com/LUMR/sbeam/blob/master/screenshot/index0.png)
-
 ![image](https://github.com/LUMR/sbeam/blob/master/screenshot/index1.png)
+
+![image](https://github.com/LUMR/sbeam/blob/master/screenshot/index0.png)
 
 ![image](https://github.com/LUMR/sbeam/blob/master/screenshot/index2.png)
 
