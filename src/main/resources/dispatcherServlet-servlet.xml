@@ -9,7 +9,7 @@
     <context:component-scan base-package="com.lumr.sbeam.controller"/>
     <!--开启注解方式-->
     <mvc:annotation-driven />
-
+    <!--开启自动注册AOP-->
     <aop:aspectj-autoproxy/>
     <!--开启默认servlet静态文件 handler-->
     <mvc:default-servlet-handler/>

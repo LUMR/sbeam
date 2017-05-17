@@ -60,6 +60,13 @@ public class UserController {
         return "redirect:/user/details";
     }
 
+    /**
+     * 买游戏结算
+     * @param gameId
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/game/{gameId}/buy")
     public String buyGame(@PathVariable String gameId, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -79,7 +86,9 @@ public class UserController {
                 user.getMessages().addFirst("你的余额不足，请去充值。");
                 return "redirect:/user/details";
             }
+            //结算
             libraryDao.add(user, game);
+            userDao.pay(user, game.getPrice());
             user.getGames().add(game);
             user.getMessages().addFirst("时间：" + new Date() + "购买游戏:" + game.getName());
         } else {
@@ -117,6 +126,12 @@ public class UserController {
         return "/user/buyCar";
     }
 
+    /**
+     * 购物车结算
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/buyCar/sum")
     public String sumBuyCar(Model model, HttpSession session) {
         BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
@@ -129,8 +144,9 @@ public class UserController {
         for (Game game : buyCar.getGames()) {
             libraryList.add(new Library(user.getId(), game.getId()));
         }
+        //结算
         libraryDao.insertList(libraryList);
-
+        userDao.pay(user, buyCar.getTotal());
         user.getMessages().addFirst(new Date() + "结算完成，你购买了" + buyCar.getGames().size() + "个游戏，谢谢惠顾！");
         buyCar.getGames().clear();
         updateUser(session);

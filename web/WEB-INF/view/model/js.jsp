@@ -10,7 +10,7 @@
 <link href="/css/style.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" href="/css/lightbox.css">
 <!-- Custom Theme files -->
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Titillium+Web:400,600,700,300' rel='stylesheet' type='text/css'>
+<%--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Titillium+Web:400,600,700,300' rel='stylesheet' type='text/css'>--%>
 <!-- Custom Theme files -->
 <!-- jQuery (necessary JavaScript plugins) -->
 <script type='text/javascript' src="/js/jquery-3.2.1.min.js"></script>

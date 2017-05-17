@@ -77,7 +77,12 @@
 
     <update id="recharge">
         UPDATE user
-        SET money = money + #{rmb}
+        SET money = money + #{money}
+        WHERE id = #{user.id}
+    </update>
+
+    <update id="pay">
+        UPDATE user SET money = money - #{money}
         WHERE id = #{user.id}
     </update>
 </mapper>

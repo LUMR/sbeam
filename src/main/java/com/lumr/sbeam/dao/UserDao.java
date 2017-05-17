@@ -22,6 +22,8 @@ public interface UserDao {
 
     int deleteUser(User user);
 
-    int recharge(@Param("user") User user,@Param("rmb") double rmb);
+    int recharge(@Param("user") User user,@Param("money") double rmb);
+
+    int pay(@Param("user") User user, @Param("money") double rmb);
 
 }
