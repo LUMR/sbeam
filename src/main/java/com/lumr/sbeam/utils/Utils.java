@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by fsweb on 17-5-8.
  */
 public class Utils {
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:MM:ss");
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:MM:ss");
 
     /**
      * 加密字符串

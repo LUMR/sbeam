@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * 登陆检查
  * Created by lumr on 2017/5/9.
  */
-@Aspect
+//@Aspect
 public class LoginCheck {
     @Autowired
     private HttpSession session;
