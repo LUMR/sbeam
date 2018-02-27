@@ -10,7 +10,8 @@ target/
 .springBeans
 
 ### IntelliJ IDEA ###
-.idea/
+.idea/libraries
+.idea/dataSources
 *.iws
 *.iml
 *.ipr
