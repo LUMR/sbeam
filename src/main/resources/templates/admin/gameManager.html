@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('游戏管理')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="content" style="margin-top: 20px;">
+    <div class="container">
+        <!--信息-->
+        <div class="col-md-3 content-left" role="alert">
+            <span class="label label-success" th:text="${session.user.messages.peekFirst()}"></span>
+        </div>
+        <div class="clearfix"></div>
+        <!--游戏信息-->
+        <div class="col-md-4 content-left">
+            <a href="/admin/game/add">
+                <button class="btn1 btn-1 btn-1b">新增游戏</button>
+            </a>
+            <a href="/admin/">
+                <button class="btn1 btn-1 btn-1b">返回主管理界面</button>
+            </a>
+
+            <h2 class="h2">按类型分类</h2>
+            <div class="list-group list-group-alternate" style="margin: 20px auto;">
+                <a href="" class="list-group-item" th:each="category:${categories}"
+                   th:href="/admin/game?cid=${category.id}" th:text="${category.name}">
+                    <span class="badge badge-success"></span>
+                    <i class="ti ti-eye"></i>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <h2 class="h2">按平台分类</h2>
+            <div class="list-group list-group-alternate" style="margin: 20px auto;">
+                <a href="" class="list-group-item" th:each="platform:${platforms}"
+                   th:href="'/admin/game?pid='+${platform.id}" th:text="${platform.name}">
+                    <span class="badge badge-success"></span>
+                    <i class="ti ti-eye"></i>
+                </a>
+            </div>
+        </div>
+
+        <!--游戏列表-->
+        <div class="col-md-8 colcontent-right">
+            <th:block th:each="game,i:${games}">
+                <!--<div class="gallery-1" th:if="${i.count%3==1}">-->
+                <div class="col-md-4 gallery-grid">
+                    <a class="example-image-link" href="" th:href="'/library/game/'+${game.id}"
+                       data-lightbox="example-set">
+                        <img class="example-image" src="/public/images/g2.jpg" alt=""/>
+                    </a>
+                    <a href="/library/game/${game.id}" class="list-group-item" th:text="${game.name}">
+                        <span class="badge badge-primary" th:text="${game.category.name}"></span>
+                        <span class="badge badge-warning" th:text="${game.platform.name}"></span>
+                        <span class="badge badge-success" th:text="'$'+${game.price}"></span>
+                        <i class="ti ti-headphone-alt"></i>
+                    </a>
+                </div>
+                <div class="clearfix" th:if="${i.count%3==0}"></div>
+                <!--</div>-->
+            </th:block>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>
