@@ -74,7 +74,7 @@
                     <div class="grid4">
                         <h5 class="arc"><a href="" th:href="'/library/game/'+${hotGames[3].id}"
                                            th:text="${hotGames[3].category.name}"></a></h5>
-                        <a href="" th:href="/library/game/__${hotGames[3].id}__"><img src="/public/images/c4.jpg"
+                        <a href="" th:href="@{/library/game/__${hotGames[3].id}__}"><img src="/public/images/c4.jpg"
                                                                                       class="img-responsive" alt=""/></a>
                         <div class="grid1-info">
                             <h4><a href="" th:href="@{/library/game/__${hotGames[3].id}__}"
