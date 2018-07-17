@@ -2,11 +2,9 @@ package com.lumr.sbeam.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -22,13 +20,10 @@ import java.sql.SQLException;
  * @author lumr
  */
 @Configuration
-@EnableTransactionManagement
-@EnableAspectJAutoProxy
-@ComponentScan(basePackages = "com.lumr.sbeam.dao")
-@PropertySource(value = "classpath:db.properties")
+@MapperScan(basePackages = "com.lumr.sbeam.dao")
 public class RootConfig {
 
-    @Bean
+    //    @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/view/");
@@ -37,19 +32,21 @@ public class RootConfig {
         return viewResolver;
     }
 
-    @Bean
-    public DataSource dataSource(@Value("${url}") String url, @Value("${username}") String userName, @Value("${password}") String password) throws SQLException {
+
+    //    @Bean
+    public DataSource dataSource() throws SQLException {
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(url);
-        dataSource.setUsername(userName);
-        dataSource.setPassword(password);
+//        dataSource.setUrl(url);
+//        dataSource.setUsername(username);
+//        dataSource.setPassword(password);
         dataSource.setMaxActive(10);
         dataSource.setInitialSize(1);
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.init();
         return dataSource;
     }
 
-    @Bean
+    //    @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer configurer = new MapperScannerConfigurer();
         configurer.setBasePackage("com.lumr.sbeam.dao");
@@ -57,7 +54,7 @@ public class RootConfig {
         return configurer;
     }
 
-    @Bean
+    //    @Bean
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource, org.apache.ibatis.session.Configuration configuration) {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
@@ -66,20 +63,16 @@ public class RootConfig {
         return bean;
     }
 
-    @Bean
+    //    @Bean
     public org.apache.ibatis.session.Configuration configuration() {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.getTypeAliasRegistry().registerAliases("com.lumr.sbeam.vo");
         return configuration;
     }
 
-    @Bean
-    public DataSourceTransactionManager transactionManager(DataSource dataSource){
-        return new DataSourceTransactionManager(dataSource);
-    }
 
-    @Bean
-    public CommonsMultipartResolver multipartResolver(ServletContext servletContext){
+    //    @Bean
+    public CommonsMultipartResolver multipartResolver(ServletContext servletContext) {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver(servletContext);
         resolver.setMaxUploadSize(5000000L);
         return resolver;

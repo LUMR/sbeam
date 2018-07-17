@@ -1,13 +1,9 @@
 package com.lumr.sbeam.config;
 
 import com.lumr.sbeam.interceptor.AuthInterceptor;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Created by work on 2018/2/24.
@@ -15,9 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @author lumr
  */
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "com.lumr.sbeam.controller")
-public class SbeamMvcConfigurerAdapter extends WebMvcConfigurerAdapter{
+public class SbeamMvcConfigurerAdapter implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -25,8 +19,4 @@ public class SbeamMvcConfigurerAdapter extends WebMvcConfigurerAdapter{
                 .addPathPatterns("/admin/**","/user/**").excludePathPatterns("/user/login");
     }
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
 }

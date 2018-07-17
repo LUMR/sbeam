@@ -2,11 +2,8 @@ package com.lumr.sbeam.aop;
 
 import com.lumr.sbeam.exception.LoginException;
 import com.lumr.sbeam.vo.User;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +12,7 @@ import javax.servlet.http.HttpSession;
  * Created by lumr on 2017/5/9.
  */
 //@Aspect
+@Deprecated
 public class LoginCheck {
     @Autowired
     private HttpSession session;
