@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="sbeam@localhost" uuid="48836931-cf12-4eeb-b1c3-7d345e6703bc">
+    <data-source source="LOCAL" name="sbeam@192.168.56.102" uuid="be92dd6c-5ff4-4a80-b537-fe20e2d1c23e">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/sbeam</jdbc-url>
+      <jdbc-url>jdbc:mysql://192.168.56.102:3306/sbeam</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

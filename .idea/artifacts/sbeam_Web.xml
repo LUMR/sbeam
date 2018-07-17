@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="sbeam:Web">
-    <output-path>$PROJECT_DIR$/target/artifacts/sbeam_Web</output-path>
-    <root id="archive" name="sbeam_Web.war">
-      <element id="artifact" artifact-name="sbeam:Web exploded" />
-    </root>
-  </artifact>
-</component>
