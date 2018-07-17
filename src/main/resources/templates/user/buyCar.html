@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('购物车')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+<div class="content">
+    <div class="container">
+        <div class="col-md-5 content-left">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th colspan="2">用户信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>用户名</td>
+                    <td th:text="${session.user.name}"></td>
+                </tr>
+                <tr>
+                    <td>钱包</td>
+                    <td th:text="'$' + ${session.user.money}"></td>
+                </tr>
+                <tr>
+                    <td>总费用</td>
+                    <td th:text="'$' + ${session.buyCar.total}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" class="btn1 btn-1 btn-1b" onclick="if(confirm('确定结算吗？')){
+                            window.location='/user/buyCar/sum';
+                    }">结算
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+        <!--信息-->
+        <div class="col-lg-3 content-left" role="alert">
+            <span class="label label-success" th:text="${session.user.messages.peekFirst()}"></span>
+        </div>
+        <div class="clearfix"></div>
+        <!--游戏管理-->
+        <h2 class="h2">购物车</h2>
+        <div class="content-left col-md-6">
+            <div class="list-group list-group-alternate">
+                <div class="list-group-item" th:each="game:${session.buyCar.games}">
+                    <a href="/library/game/${game.id}" class="list-group-item"
+                       th:href="'/library/game/' + ${game.id}" th:text="${game.name}"><span
+                            class="badge"></span>
+                        <i class="ti ti-email"></i>
+                    </a>
+                    <button class="btn1 btn-1 btn-1b"
+                            th:onclick="'if (confirm(\'确定删除吗？\')){window.location=\'/user/game/'+${game.id}+'/delete\';}'">
+                        删除
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>

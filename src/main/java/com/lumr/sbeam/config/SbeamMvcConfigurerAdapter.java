@@ -16,7 +16,7 @@ public class SbeamMvcConfigurerAdapter implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthInterceptor())
-                .addPathPatterns("/admin/**","/user/**").excludePathPatterns("/user/login");
+                .addPathPatterns("/admin/**", "/user/**").excludePathPatterns("/user/login", "/user/register", "/user/checkName");
     }
 
 }

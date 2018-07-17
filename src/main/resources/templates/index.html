@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('Sbeam')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+<div th:replace="model/welcome :: welcome"></div>
+
+<!--content-->
+<div class="content">
+    <div class="container">
+        <div class="col-md-8 content-left">
+            <div class="information">
+                <h4>最新消息</h4>
+                <div class="information_grids">
+                    <div class="info">
+                        <p>温州皮革厂倒闭啦，老板带着小姨子跑路啦，所以有游戏5折大甩卖，你没听错，5折！买不了吃亏，买不了上当！</p>
+                        <a href="about.html">Read more</a>
+                    </div>
+                    <div class="info-pic">
+                        <img src="/public/images/ps.png" class="img-responsive" alt=""/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="games-grids">
+                <div class="game-grid-left">
+                    <div class="grid1">
+                        <h5 class="act"><a th:href="'/library/game/'+${hotGames[0].id}"
+                                           th:text="${hotGames[0].category.name}"></a></h5>
+                        <a href="" th:href="'/library/game/'+${hotGames[0].id}"><img src="/public/images/c1.jpg"
+                                                                       class="img-responsive" alt=""/></a>
+                        <div class="grid1-info">
+                            <h4><a href="" th:href="'/library/game/'+${hotGames[0].id}"
+                                   th:text="${hotGames[0].name}"></a></h4>
+                            <p th:text="${hotGames[0].description}"></p>
+                        </div>
+                        <div class="more">
+                            <a href="/library/game/${hotGames[0].id}" th:href="'/library/game/'+${hotGames[0].id}">Read
+                                more</a>
+                        </div>
+                    </div>
+                    <div class="grid2">
+                        <h5 class="race"><a href="/library/game/${hotGames[1].id}"
+                                            th:text="${hotGames[1].category.name}"></a></h5>
+                        <a href="" th:href="'/library/game/'+${hotGames[1].id}"><img src="/public/images/c2.jpg"
+                                                                                     class="img-responsive" alt=""/></a>
+                        <div class="grid1-info">
+                            <h4><a href="" th:href="'/library/game/'+${hotGames[1].id}"
+                                   th:text="${hotGames[1].name}"></a></h4>
+                            <p th:text="${hotGames[1].description}"></p>
+                        </div>
+                        <div class="more">
+                            <a href="" th:href="'/library/game/'+${hotGames[1].id}">Read more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-grid-right">
+                    <div class="grid3">
+                        <h5 class="sport"><a href="" th:href="'/library/game/'+${hotGames[2].id}"
+                                             th:text="${hotGames[2].category.name}"></a>
+                        </h5>
+                        <a th:href="'/library/game/'+${hotGames[2].id}"><img src="/public/images/c3.jpg"
+                                                                             class="img-responsive" alt=""/></a>
+                        <div class="grid1-info">
+                            <h4><a th:href="'/library/game/'+${hotGames[2].id}" th:text="${hotGames[2].name}"></a></h4>
+                            <p th:text="${hotGames[2].description}"></p>
+                        </div>
+                        <div class="more">
+                            <a href="" th:href="'/library/game/'+${hotGames[2].id}">Read more</a>
+                        </div>
+                    </div>
+                    <div class="grid4">
+                        <h5 class="arc"><a href="" th:href="'/library/game/'+${hotGames[3].id}"
+                                           th:text="${hotGames[3].category.name}"></a></h5>
+                        <a href="" th:href="/library/game/__${hotGames[3].id}__"><img src="/public/images/c4.jpg"
+                                                                                      class="img-responsive" alt=""/></a>
+                        <div class="grid1-info">
+                            <h4><a href="" th:href="@{/library/game/__${hotGames[3].id}__}"
+                                   th:text="${hotGames[3].name}"></a></h4>
+                            <p th:text="${hotGames[3].description}"></p>
+                        </div>
+                        <div class="more">
+                            <a href="" th:href="'/library/game/'+${hotGames[3].id}">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">企业网站模板</a></div>
+        <div class="col-md-4 content-right">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav2" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                          data-toggle="tab">最近购买</a></li>
+                <li role="presentation">
+                    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">最近上架</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active re-pad2" id="home" th:each="buyGame:${buyGames}">
+                    <div class="game1">
+                        <div class="col-md-3 tab-pic">
+                            <a href="" th:href="@{/library/game/__${buyGame.id}__}"><img src="/public/images/tr1.jpg"
+                                                                                         alt="/" class="img-responsive"></a>
+                        </div>
+                        <div class="col-md-9 tab-pic-info">
+                            <h4><a href="" th:href="@{/library/game/__${buyGame.id}__}" th:text="${buyGame.name}"></a>
+                            </h4>
+                            <p th:text="${buyGame.description}"></p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane re-pad2" id="profile" th:each="newGame:${newGames}">
+                    <div class="game-post">
+                        <div class="col-md-3 tab-pic">
+                            <a href="" th:href="@{/library/game/__${newGame.id}__}"><img src="/public/images/tr4.jpg"
+                                                                                         alt="/"
+                                                                                         class="img-responsive"></a>
+                        </div>
+                        <div class="col-md-9 tab-post-info">
+                            <h4><a href="" th:href="@{/library/game/__${newGame.id}__}" th:text="${newGame.name}"></a>
+                            </h4>
+                            <p>Posted By <a href="#">Admin</a> &nbsp;on&nbsp;<span
+                                    th:text="${#dates.format(newGame.pubdate,'yyyy-MM-dd')}"></span>&nbsp;&nbsp;
+                                <a href="#"
+                                   th:text="'评论(' + ${newGame.reviews == null ? 0 : newGame.reviews.size()}+')'"></a>
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!---->
+            <div class="category blog-ctgry">
+                <h4>热门游戏</h4>
+                <div class="list-group">
+                    <a class="list-group-item" th:each="hotGame:${hotGames}" th:href="'/library/game/'+${hotGame.id}"
+                       th:text="${hotGame.name}"></a>
+                </div>
+            </div>
+            <div class="photo-gallery">
+                <h4>Photo Gallery</h4>
+                <div class="gallery-1">
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p2.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p2.jpg" alt=""/></a>
+                    </div>
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p1.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p1.jpg" alt=""/></a>
+                    </div>
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p3.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p3.jpg" alt=""/></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="gallery-1">
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p4.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p4.jpg" alt=""/></a>
+                    </div>
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p5.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p5.jpg" alt=""/></a>
+                    </div>
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p6.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p6.jpg" alt=""/></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="gallery-1">
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p1.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p1.jpg" alt=""/></a>
+                    </div>
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p3.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p3.jpg" alt=""/></a>
+                    </div>
+                    <div class="col-md-4 gallery-grid-pic">
+                        <a class="example-image-link" href="/public/images/p4.jpg" data-lightbox="example-set"><img
+                                class="example-image" src="/public/images/p4.jpg" alt=""/></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div th:replace="model/js :: commonJs"></div>
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>

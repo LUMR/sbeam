@@ -21,7 +21,7 @@ function uploadFile(input, picture) {
 }
 function checkName(name) {
     $.post("/user/checkName", {"name": name.value}, function (data) {
-        if (data == "true") {
+        if (data == 'true') {
             $("#message").text("用户名已存在，不能使用");
             NameNotExist = false;
         } else {

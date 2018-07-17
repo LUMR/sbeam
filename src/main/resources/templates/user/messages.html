@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('消息中心')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="content">
+
+    <div class="container">
+        <a href="/user/details">
+            <button class="btn1 btn-1 btn-1b">返回主管理页面</button>
+        </a>
+        <!--分类管理-->
+        <h2 class="h2">消息列表</h2>
+        <div class="content-left col-md-6">
+            <div class="list-group list-group-alternate">
+                <a href="" class="list-group-item" th:each="msg:${session.user.messages}" th:text="${msg}"><span
+                        class="badge"></span>
+                    <i class="ti ti-email"></i>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>

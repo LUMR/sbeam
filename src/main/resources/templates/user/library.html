@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('个人游戏库')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="content">
+    <div class="container">
+        <!--信息-->
+        <div class="col-lg-3 content-left" role="alert">
+            <span class="label label-success" th:text="${session.user.messages.peekFirst()}"></span>
+        </div>
+        <div class="clearfix"></div>
+        <!--游戏管理-->
+        <h2 class="h2">拥有的游戏</h2>
+        <div class="content-left col-md-6">
+            <div class="list-group list-group-alternate">
+                <a href="/library/game/${game.id}" th:each="game:${gameLibrary}" th:text="${game.name}"
+                   th:href="'/library/game/' + ${game.id}"
+                   class="list-group-item"><span
+                        class="badge"></span>
+                    <i class="ti ti-email"></i>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>
