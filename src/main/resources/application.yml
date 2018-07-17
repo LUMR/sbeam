@@ -9,7 +9,7 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
   resources:
-    static-locations: classpath:/public
+    static-locations: file:${web.upload-path},classpath:/public
   mvc:
     static-path-pattern: /public/**
 mybatis:
