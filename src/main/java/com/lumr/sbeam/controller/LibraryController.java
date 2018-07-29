@@ -8,9 +8,9 @@ import com.lumr.sbeam.vo.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class LibraryController {
     @Autowired
     private LibraryDao libraryDao;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @GetMapping(value = "")
     public String libraryView(String cid, String pid, String gameName, Model model) {
         if (gameName != null)
             gameName = "%" + gameName + "%";
@@ -37,11 +37,11 @@ public class LibraryController {
         model.addAttribute("games", games);
         model.addAttribute("categories", categoryDao.getAllCategories());
         model.addAttribute("platforms", platformDao.getAllPlatforms());
-        return "/library/games";
+        return "library/games";
     }
 
 
-    @RequestMapping(value = "/game/{id}")
+    @GetMapping(value = "/game/{id}")
     public String gameDetails(@PathVariable String id, Model model) {
         Integer gid = parseInt(id);
         Game game = gameDao.getGame(new Game(gid));
@@ -51,7 +51,7 @@ public class LibraryController {
             model.addAttribute("game", game);
             model.addAttribute("sales", libraryDao.getSales(game));
         }
-        return "/library/game";
+        return "library/game";
     }
 
     private Integer parseInt(String str) {

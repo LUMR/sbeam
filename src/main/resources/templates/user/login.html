@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('登陆')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="contact">
+    <div class="container">
+        <h2>用 户 信 息 ：</h2>
+        <div style="width: 50%;margin: 20px auto;">
+            <form action="/user/login" method="post" th:object="${user}">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1">用户名</span>
+                    <input type="text" name="name" class="form-control" placeholder="Username" required="required"
+                           th:field="*{name}"
+                           aria-describedby="sizing-addon1">
+                    <span class="label label-warning" th:if="${#fields.hasErrors('name')}"
+                          th:errors="${#fields.errors('name')}"></span>
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon2">密 码</span>
+                    <input type="password" name="password" class="form-control" placeholder="Password"
+                           required="required" th:field="*{password}"
+                           aria-describedby="sizing-addon2">
+                    <span class="label label-warning" th:if="${#fields.hasErrors('password')}"
+                          th:errors="${#fields.errors('password')}"></span>
+                </div>
+                <button type="submit" class="btn1 btn-1 btn-1b">登陆</button>
+            </form>
+            <div class="alert alert-warning" role="alert" th:if="${message != null}">
+                <strong th:text="${message}"></strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>

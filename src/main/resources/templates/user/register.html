@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('注册')">
+</head>
+<body>
+<div th:replace="model/js :: commonJs"></div>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="contact">
+    <div class="container">
+        <h2> 注 册 </h2>
+        <div style="width: 50%;margin: 0 auto;">
+            <div class="alert alert-warning" role="alert">
+                <strong id="message" th:text="${message}"></strong>
+            </div>
+            <h4>用 户 信 息 ：</h4>
+            <form action="/user/register" th:object="${user}" onsubmit="return NameNotExist" method="post">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon1">用户名</span>
+                    <input type="text" name="name" class="form-control" placeholder="Username"
+                           onchange="checkName(this)" required aria-describedby="sizing-addon1">
+                    <span class="label label-warning" th:if="${#fields.hasErrors('name')}"
+                          th:errors="${${#fields.errors('name')}}"></span>
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon2">密 码</span>
+                    <input type="password" name="password" class="form-control" placeholder="Password"
+                           required="required" aria-describedby="sizing-addon2">
+                    <span class="label label-warning" th:if="${#fields.hasErrors('password')}"
+                          th:errors="${${#fields.errors('password')}}"></span>
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon" id="sizing-addon3">密 码</span>
+                    <input type="password" required="required" class="form-control" placeholder="Password Again"
+                           aria-describedby="sizing-addon3">
+                </div>
+                <button type="submit" class="btn1 btn-1 btn-1b">注册</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>

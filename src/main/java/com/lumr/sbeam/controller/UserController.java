@@ -7,6 +7,7 @@ import com.lumr.sbeam.dao.UserDao;
 import com.lumr.sbeam.exception.LoginException;
 import com.lumr.sbeam.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,8 @@ public class UserController {
     private LibraryDao libraryDao;
     @Autowired
     private GameDao gameDao;
+    @Value("${web.upload-path}")
+    private String uploadPath;
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)
     public String details(HttpSession session) {
@@ -123,7 +126,7 @@ public class UserController {
     public String seeBuyCar(Model model, HttpSession session) {
         BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
         model.addAttribute(buyCar);
-        return "/user/buyCar";
+        return "user/buyCar";
     }
 
     /**
@@ -183,18 +186,17 @@ public class UserController {
             realUser.getMessages().addFirst("信息更新失败");
         //设定上传路径
         if (!headerFile.isEmpty()) {
-            String uploadFilePath = session.getServletContext().getRealPath("/header/");
             String fileName = headerFile.getOriginalFilename();
             String fileType = fileName.substring(fileName.lastIndexOf("."));
-            System.out.println(fileType);
 
-            File file = new File(uploadFilePath, realUser.getName() + fileType);
+            File file = new File(uploadPath.concat("/header"), realUser.getName() + fileType);
             try {
                 headerFile.transferTo(file);
-                realUser.getHeader().setSrc("/header/" + file.getName());
+                realUser.getHeader().setSrc("/public/header/" + file.getName());
                 headerDao.update(realUser.getHeader());
             } catch (IOException e) {
                 model.addAttribute("message", "文件上传失败");
+                e.printStackTrace();
                 return "redirect:/user/details";
             }
             realUser.getMessages().addFirst("上传成功:" + file.getName());
@@ -254,7 +256,7 @@ public class UserController {
     @ExceptionHandler(LoginException.class)
     public String handlerException(LoginException e, Model model) {
         model.addAttribute("message", e.getMessage());
-        return "user/login";
+        return "/user/login";
     }
 
     private User getUser(HttpSession session) {

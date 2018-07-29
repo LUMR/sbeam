@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('管理界面')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="content">
+
+    <div class="container">
+        <!--信息-->
+        <div class="col-lg-3 content-left" role="alert">
+            <span class="label label-success" th:text="${session.user.messages.peekFirst()}"></span>
+        </div>
+        <div class="clearfix"></div>
+        <!--用户信息-->
+        <div class="col-md-4 content-left">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th colspan="2">用户信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>用户ID</td>
+                    <td th:text="${session.user.id}"></td>
+                </tr>
+                <tr>
+                    <td>用户名</td>
+                    <td th:text="${session.user.name}"></td>
+                </tr>
+                <tr>
+                    <td>注册日期</td>
+                    <td th:text="${session.user.registerDate}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-lg-8 content-right">
+            <div class="list-group list-group-alternate" style="margin: 20px auto;">
+                <a href="/admin/category/" class="list-group-item">
+                    <span class="badge badge-success"></span>
+                    <i class="ti ti-eye"></i> 管理分类
+                </a>
+                <a href="/admin/platform/" class="list-group-item">
+                    <span class="badge badge-primary"></span>
+                    <i class="ti ti-email"></i>管理平台
+                </a>
+                <a href="/admin/game/" class="list-group-item">
+                    <span class="badge badge-warning"></span>
+                    <i class="ti ti-eye"></i> 管理游戏
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="badge badge-danger"></span>
+                    <i class="ti ti-headphone-alt"></i>精彩瞬间
+                </a>
+                <a href="/user/messages" class="list-group-item">
+                    <span class="badge" th:text="${session.user.messages.size()}"></span>
+                    <i class="ti ti-comments"></i>消息
+                </a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>

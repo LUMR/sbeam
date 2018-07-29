@@ -36,6 +36,7 @@
             <if test="id != null and id != 0">id = #{id}</if>
             <if test="name != null">and name = #{name}</if>
         </where>
+        limit 0,1
     </select>
 
     <select id="getUser" parameterType="User" resultMap="UserMap">

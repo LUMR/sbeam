@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('游戏信息'+${game.name})">
+</head>
+<body>
+<div th:replace="model/js :: commonJs"></div>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="content">
+
+    <div class="container">
+        <!--信息-->
+        <div class="col-lg-3 content-left" role="alert">
+            <span class="label label-success" th:text="${message}"></span>
+        </div>
+        <div class="clearfix"></div>
+        <!--游戏信息-->
+        <div class="col-md-4 content-left">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th colspan="2">游戏信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>游戏名称:</td>
+                    <td th:text="${game.name}"></td>
+                </tr>
+                <tr>
+                    <td>游戏类型</td>
+                    <td th:text="${game.category.name}"></td>
+                </tr>
+                <tr>
+                    <td>游戏所在平台</td>
+                    <td th:text="${game.platform.name}"></td>
+                </tr>
+                <tr>
+                    <td>游戏售价</td>
+                    <td th:text="'$'+${game.price}"></td>
+                </tr>
+                <tr>
+                    <td>上架时间</td>
+                    <td th:text="${game.pubdate.toLocaleString()}"></td>
+                </tr>
+                <tr>
+                    <td>销量</td>
+                    <td th:text="${sales}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="clearfix"></div>
+            <div class="list-group list-group-alternate" style="margin: 20px auto;" th:with="buyCar=${session.buyCar}">
+
+                <a href="" th:if="${session.user}?*{session.user.isAdmin}" th:href="@{/admin/game/__${game.id}__/update}"
+                   class="list-group-item">
+                    <span class="badge badge-danger"></span>
+                    <i class="ti ti-eye"></i> 修改游戏
+                </a>
+
+                <a class="list-group-item"
+                   th:onclick="'if(confirm(\'确定购买吗?\')){window.location=\'/user/game/'+${game.id}+'/buy\';}'"
+                >
+                    <span class="badge badge-success" th:text="'$ '+${game.price}"></span>
+                    <i class="ti ti-eye"></i> 买买买
+                </a>
+                <a class="list-group-item"
+                   th:onclick="'addGame(\'/user/game/'+${game.id}+'/add\')'"
+                >
+                    <span id="gameNum" th:text="${buyCar != null?buyCar.games.size():0}" class="badge badge-primary"></span>
+                    <i class="ti ti-email"></i>加入购物车
+                </a>
+                <a href="/user/buyCar" class="list-group-item">
+                    <span class="badge badge-warning" th:text="${buyCar != null?buyCar.games.size():0}"></span>
+                    <i class="ti ti-eye"></i> 查看购物车
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="badge" th:with="messages=${session.user}?*{messages}"
+                          th:text="${messages}?${messages.size()}:0"></span>
+                    <i class="ti ti-comments"></i>消息
+                </a>
+                <a class="list-group-item" onclick="window.history.back();">
+                    <span class="badge"></span>
+                    <i class="ti ti-comments"></i>返回
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-8 colcontent-right">
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>游戏截图</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td><img th:each="picture:${game.pictures}" src="" th:src="${picture.src}" class="img-thumbnail"/>
+                    </td>
+                </tr>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>
