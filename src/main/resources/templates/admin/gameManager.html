@@ -24,7 +24,7 @@
             <h2 class="h2">按类型分类</h2>
             <div class="list-group list-group-alternate" style="margin: 20px auto;">
                 <a href="" class="list-group-item" th:each="category:${categories}"
-                   th:href="/admin/game?cid=${category.id}" th:text="${category.name}">
+                   th:href="@{/admin/game(cid=__${category.id}__)}" th:text="${category.name}">
                     <span class="badge badge-success"></span>
                     <i class="ti ti-eye"></i>
                 </a>

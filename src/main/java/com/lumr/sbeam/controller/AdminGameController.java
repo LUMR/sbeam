@@ -46,7 +46,7 @@ public class AdminGameController extends AdminController {
         model.addAttribute("categories", categoryDao.getAllCategories());
         model.addAttribute("platforms", platformDao.getAllPlatforms());
         model.addAttribute("games", gameDao.getGames(game));
-        return "/admin/gameManager";
+        return "admin/gameManager";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class AdminGameController extends AdminController {
         model.addAttribute("game", new Game());
         model.addAttribute("categories", categoryDao.getAllCategories());
         model.addAttribute("platforms", platformDao.getAllPlatforms());
-        return "/admin/addGame";
+        return "admin/addGame";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -67,12 +67,12 @@ public class AdminGameController extends AdminController {
                 message += error.getField();
             }
             user.getMessages().addFirst(message);
-            return "/user/details";
+            return "user/details";
         }
 
         if (gameDao.getGame(game) != null) {
             user.getMessages().addFirst("添加失败，游戏名已存在。");
-            return "/admin/addGame";
+            return "admin/addGame";
         }
         int result = gameDao.insert(game);
         if (result > 0) {
@@ -90,7 +90,7 @@ public class AdminGameController extends AdminController {
     public String updateGame(@PathVariable("id") String id, Model model) {
         Game game = gameDao.getGame(new Game(parseInt(id)));
         model.addAttribute("game", game);
-        return "/admin/updateGame";
+        return "admin/updateGame";
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
@@ -111,7 +111,7 @@ public class AdminGameController extends AdminController {
         int result = gameDao.update(game);
         if (result <= 0) {
             user.getMessages().addFirst(new Date() + "游戏修改失败");
-            return "/admin/updateGame";
+            return "admin/updateGame";
         } else {
             //保存图片
             savePicture(user, game, session, files);
@@ -155,7 +155,6 @@ public class AdminGameController extends AdminController {
 
     //获取文件后缀名
     private String getFileType(String str) {
-        String fileType = str.substring(str.lastIndexOf("."));
-        return fileType;
+        return str.substring(str.lastIndexOf("."));
     }
 }
