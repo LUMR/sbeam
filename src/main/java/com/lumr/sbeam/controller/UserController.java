@@ -234,7 +234,7 @@ public class UserController {
 
     @RequestMapping(value = "/messages")
     public String getMessages() {
-        return "/user/messages";
+        return "user/messages";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -256,7 +256,7 @@ public class UserController {
     @ExceptionHandler(LoginException.class)
     public String handlerException(LoginException e, Model model) {
         model.addAttribute("message", e.getMessage());
-        return "/user/login";
+        return "user/login";
     }
 
     private User getUser(HttpSession session) {
