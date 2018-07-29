@@ -37,7 +37,7 @@ public class LibraryController {
         model.addAttribute("games", games);
         model.addAttribute("categories", categoryDao.getAllCategories());
         model.addAttribute("platforms", platformDao.getAllPlatforms());
-        return "/library/games";
+        return "library/games";
     }
 
 
@@ -51,7 +51,7 @@ public class LibraryController {
             model.addAttribute("game", game);
             model.addAttribute("sales", libraryDao.getSales(game));
         }
-        return "/library/game";
+        return "library/game";
     }
 
     private Integer parseInt(String str) {

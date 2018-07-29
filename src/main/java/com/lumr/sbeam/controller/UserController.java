@@ -126,7 +126,7 @@ public class UserController {
     public String seeBuyCar(Model model, HttpSession session) {
         BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
         model.addAttribute(buyCar);
-        return "/user/buyCar";
+        return "user/buyCar";
     }
 
     /**
@@ -256,7 +256,7 @@ public class UserController {
     @ExceptionHandler(LoginException.class)
     public String handlerException(LoginException e, Model model) {
         model.addAttribute("message", e.getMessage());
-        return "user/login";
+        return "/user/login";
     }
 
     private User getUser(HttpSession session) {
