@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ch">
-<head th:replace="model/head :: commonHead('上架游戏')">
+<head th:replace="model/head :: commonHead('修改游戏')">
 </head>
 <body>
 <div th:replace="model/banner :: banner"></div>
@@ -13,7 +13,7 @@
         </div>
         <div class="clearfix"></div>
         <!--游戏信息-->
-        <form th:object="${game}" action="/admin/game/add" method="post" enctype="multipart/form-data">
+        <form th:object="${game}" th:action="@{/admin/game/__${game.id}__/update}" method="post" enctype="multipart/form-data">
             <div class="col-lg-3 content-left">
 
                 <table class="table table-hover">
@@ -25,31 +25,31 @@
                     <tbody>
                     <tr>
                         <td>游戏名称:</td>
-                        <td><input name="name" required/></td>
+                        <td><input name="name" th:value="${game.name}" required/></td>
                     </tr>
                     <tr>
                         <td>游戏类型</td>
                         <td>
-                            <select path="categoryId" title="categoryId">
-                                <option th:each="category:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                            <select path="categoryId">
+                                <option th:value="${game.category.id}" th:text="${game.category.name}"></option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>游戏所在平台</td>
                         <td>
-                            <select path="platformId" title="platformId">
-                                <option th:each="platform:${platforms}" th:value="${platform.id}" th:text="${platform.name}"></option>
+                            <select path="platformId">
+                                <option th:value="${game.platform.id}" th:text="${game.platform.name}"></option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>游戏售价</td>
-                        <td><input type="text" name="price" required/></td>
+                        <td><input type="text" name="price" th:value="${game.price}" required/></td>
                     </tr>
                     <tr>
                         <td>上架时间</td>
-                        <td><input type="date" name="pubdate" required/></td>
+                        <td><input type="datetime" name="pubdate" th:value="${game.pubdate.toLocaleString()}" required/></td>
                     </tr>
                     <tr>
                         <td>游戏描述</td>
@@ -92,31 +92,23 @@
                     </tr>
                     </thead>
                     <tr>
-                        <td><img id="picture_1" th:src="${session.user.header.src}" class="img-thumbnail"/></td>
-                        <td><img id="picture_2" th:src="${session.user.header.src}" class="img-thumbnail"/></td>
-                        <td><img id="picture_3" th:src="${session.user.header.src}" class="img-thumbnail"/></td>
-                    </tr>
-                    <tr>
                         <td><input type="file" class="input-group-sm" name="files" id="picture1" required/></td>
                         <td><input type="file" class="input-group-sm" name="files" id="picture2" required/></td>
                         <td><input type="file" class="input-group-sm" name="files" id="picture3" required/></td>
                     </tr>
                     <tr>
                         <td>
-                            <button type="button" onclick="uploadFile('#picture1','#picture_1')"
-                                    class="btn1 btn-1 btn-1b">上传图片
-                            </button>
+                            <button type="button" class="btn1 btn-1 btn-1b">上传图片</button>
                         </td>
                         <td>
-                            <button type="button" onclick="uploadFile('#picture2','#picture_2')"
-                                    class="btn1 btn-1 btn-1b">上传图片
-                            </button>
+                            <button type="button" class="btn1 btn-1 btn-1b">上传图片</button>
                         </td>
                         <td>
-                            <button type="button" onclick="uploadFile('#picture3','#picture_3')"
-                                    class="btn1 btn-1 btn-1b">上传图片
-                            </button>
+                            <button type="button" class="btn1 btn-1 btn-1b">上传图片</button>
                         </td>
+                    </tr>
+                    <tr>
+                        <td th:each="picture,count:${game.pictures}"><img th:src="${picture.src}" class="img-thumbnail" src="" /></td>
                     </tr>
                 </table>
                 <div class="clearfix"></div>

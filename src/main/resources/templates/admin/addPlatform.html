@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('新增平台')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="content">
+
+    <div class="container">
+        <!--分类管理-->
+        <h2 class="h2">平台信息</h2>
+        <div class="list-group list-group-alternate">
+            <form th:object="${platform}" action="/admin/platform/add" method="post" cssClass="news-ltr">
+                <div class="input-group input-group-lg">
+                    <input type="number" value="" hidden />
+                    <span class="input-group-addon" id="sizing-addon1">名字</span>
+                    <input type="text" name="name" th:value="${platform.name}" class="form-control" placeholder="平台名字" aria-describedby="sizing-addon1">
+                </div>
+                <button type="submit" class="btn1 btn-1 btn-1b">提交</button>
+            </form>
+            <div class="alert alert-warning" role="alert">
+                <strong th:text="${message}"></strong>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>
