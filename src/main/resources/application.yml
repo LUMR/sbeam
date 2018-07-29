@@ -16,6 +16,6 @@ mybatis:
   type-aliases-package: com.lumr.sbeam.vo
 logging:
   path: ./
-  file: ${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/sbeam.log
+  file: ${LOG_PATH}/sbeam.log
 
 

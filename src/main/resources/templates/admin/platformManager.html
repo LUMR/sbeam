@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ch">
+<head th:replace="model/head :: commonHead('分类列表')">
+</head>
+<body>
+<div th:replace="model/banner :: banner"></div>
+
+<div class="content">
+
+    <div class="container">
+        <!--分类管理-->
+        <h2 class="h2">平台列表</h2>
+        <div class="content-left col-md-6">
+            <div class="list-group list-group-alternate">
+
+                <a th:each="platform:${platforms}" th:href="@{/admin/platform/__${platform.id}__}"
+                   th:text="${platform.name}" class="list-group-item">
+                        <span th:text="${platform.games.size()}"
+                              class="badge">&nbsp;&nbsp;</span>
+                    <i class="ti ti-email"></i>
+                </a>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <a href="/admin/platform/add">
+            <button class="btn1 btn-1 btn-1b">增加新的平台</button>
+        </a>
+        <a href="/admin/">
+            <button class="btn1 btn-1 btn-1b">返回主管理页面</button>
+        </a>
+    </div>
+</div>
+
+<div th:replace="model/footer :: footer"></div>
+</body>
+</html>

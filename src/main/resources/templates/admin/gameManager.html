@@ -45,11 +45,11 @@
             <th:block th:each="game,i:${games}">
                 <!--<div class="gallery-1" th:if="${i.count%3==1}">-->
                 <div class="col-md-4 gallery-grid">
-                    <a class="example-image-link" href="" th:href="'/library/game/'+${game.id}"
+                    <a class="example-image-link" href="" th:href="@{/library/game/__${game.id}__}"
                        data-lightbox="example-set">
                         <img class="example-image" src="/public/images/g2.jpg" alt=""/>
                     </a>
-                    <a href="/library/game/${game.id}" class="list-group-item" th:text="${game.name}">
+                    <a th:href="@{/library/game/__${game.id}__}" class="list-group-item" th:text="${game.name}">
                         <span class="badge badge-primary" th:text="${game.category.name}"></span>
                         <span class="badge badge-warning" th:text="${game.platform.name}"></span>
                         <span class="badge badge-success" th:text="'$'+${game.price}"></span>

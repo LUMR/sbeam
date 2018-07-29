@@ -52,7 +52,7 @@
             <div class="clearfix"></div>
             <div class="list-group list-group-alternate" style="margin: 20px auto;" th:with="buyCar=${session.buyCar}">
 
-                <a href="" th:if="${session.user}?*{isAdmin}" th:href="'/admin/game/'+${game.id}+'/update'"
+                <a href="" th:if="${session.user}?*{session.user.isAdmin}" th:href="@{/admin/game/__${game.id}__/update}"
                    class="list-group-item">
                     <span class="badge badge-danger"></span>
                     <i class="ti ti-eye"></i> 修改游戏

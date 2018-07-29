@@ -8,7 +8,7 @@
 <div class="content" style="margin-top: 20px;">
     <div class="container">
         <!--信息-->
-        <div class="col-md-3 content-left" role="alert">
+        <div class="col-md-3 content-left" role="alert" th:if="${session.user}">
             <span class="label label-success" th:text="${session.user.messages.peekFirst()}"></span>
         </div>
         <div class="clearfix"></div>
