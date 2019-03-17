@@ -1,4 +1,4 @@
-package com.lumr.sbeam.test;
+package com.lumr.test;
 
 import com.lumr.sbeam.dao.GameDao;
 import com.lumr.sbeam.dao.UserDao;

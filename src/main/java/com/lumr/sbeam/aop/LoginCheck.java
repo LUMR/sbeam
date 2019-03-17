@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 /**
  * 登陆检查
  * Created by lumr on 2017/5/9.
+ * @deprecated 已废弃，改用拦截器
  */
 //@Aspect
 @Deprecated

@@ -25,7 +25,7 @@ public class BuyCar {
 
     private boolean checkGame(Game game){
         for (Game game1:games){
-            if (game1.getId() == game.getId())
+            if (game1.getId().equals(game.getId()))
                 return true;
         }
         return false;

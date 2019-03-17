@@ -37,7 +37,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
         return true;
     }
 
-
+    @Deprecated
     private void responseErr(HttpServletResponse response) throws IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("text/html;charset=UTF-8");
