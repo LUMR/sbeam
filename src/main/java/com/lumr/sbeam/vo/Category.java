@@ -1,11 +1,14 @@
 package com.lumr.sbeam.vo;
 
+import org.apache.ibatis.type.Alias;
+
 import java.util.List;
 
 /**
  * 游戏分类
  * Created by fsweb on 17-5-8.
  */
+@Alias("Category")
 public class Category {
     private Integer id;
     private String name;//分类名

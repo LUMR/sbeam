@@ -12,10 +12,8 @@ spring:
     static-locations: file:${web.upload-path},classpath:/public
   mvc:
     static-path-pattern: /public/**
-mybatis:
-  type-aliases-package: com.lumr.sbeam.vo
 logging:
   path: ./
   file: ${logging.path}/sbeam.log
-
-
+mybatis-plus:
+  type-aliases-package: com.lumr.sbeam.vo

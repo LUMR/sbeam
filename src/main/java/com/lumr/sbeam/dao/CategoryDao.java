@@ -1,11 +1,11 @@
 package com.lumr.sbeam.dao;
 
+import com.lumr.sbeam.vo.Category;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import com.lumr.sbeam.vo.Category;
-import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository

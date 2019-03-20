@@ -11,7 +11,6 @@ import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
-import java.sql.SQLException;
 
 /**
  * Created by work on 2018/2/24.
@@ -19,7 +18,7 @@ import java.sql.SQLException;
  * @author lumr
  */
 @Configuration
-@MapperScan(basePackages = "com.lumr.sbeam.dao")
+@MapperScan(basePackages = {"com.lumr.sbeam.dao", "com.lumr.sbeam.mapper"})
 public class RootConfig {
 
     //    @Bean
