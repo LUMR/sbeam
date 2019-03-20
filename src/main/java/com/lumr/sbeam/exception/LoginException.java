@@ -4,6 +4,8 @@ package com.lumr.sbeam.exception;
  * Created by lumr on 2017/5/9.
  */
 public class LoginException extends RuntimeException {
+    private static final long serialVersionUID = -3167917798774184988L;
+
     public LoginException() {
         super();
     }

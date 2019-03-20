@@ -7,6 +7,8 @@ package com.lumr.sbeam.exception;
  * @author lumr
  */
 public class JsonFormatException extends RuntimeException{
+    private static final long serialVersionUID = 4750380651437339760L;
+
     public JsonFormatException() {
         super();
     }

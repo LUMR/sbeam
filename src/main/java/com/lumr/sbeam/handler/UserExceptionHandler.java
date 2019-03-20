@@ -1,12 +1,9 @@
 package com.lumr.sbeam.handler;
 
 import com.lumr.sbeam.exception.LoginException;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 异常解决类

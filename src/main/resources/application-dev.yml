@@ -1,7 +1,0 @@
-spring:
-  datasource:
-    url:
-    password:
-    username:
-web:
-    upload-path:

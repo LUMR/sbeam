@@ -2,7 +2,6 @@ package com.lumr.sbeam.vo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by lumr on 2017/5/11.
