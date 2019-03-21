@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sbeam
+  servlet:
+    multipart:
+      max-file-size: 5MB
+  thymeleaf:
+    prefix: classpath:/templates/
+  resources:
+    static-locations: classpath:/public
+  mvc:
+    static-path-pattern: /public/**
+mybatis:
+  type-aliases-package: com.lumr.sbeam.vo
+
+
+
