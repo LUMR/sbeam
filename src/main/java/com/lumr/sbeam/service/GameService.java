@@ -12,4 +12,10 @@ import java.util.List;
 public interface GameService {
 
     List<Game> queryGames(GameDto dto);
+
+    boolean addGame(GameDto dto);
+
+    boolean updateGame(GameDto dto);
+
+    boolean deleteGame(String id);
 }

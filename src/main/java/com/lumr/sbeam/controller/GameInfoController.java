@@ -27,17 +27,17 @@ public class GameInfoController {
     @PostMapping("add")
     public Boolean addGame(@RequestBody GameDto dto){
         dto.setId(null);
-        return null;
+        return gameService.addGame(dto);
     }
 
     @PutMapping("{id}/update")
     public Boolean updateGame(@PathVariable String id,@RequestBody GameDto dto){
         dto.setId(Integer.valueOf(id));
-        return null;
+        return gameService.updateGame(dto);
     }
 
     @DeleteMapping("{id}/delete")
     public Boolean deleteGame(@PathVariable String id){
-        return null;
+        return gameService.deleteGame(id);
     }
 }
