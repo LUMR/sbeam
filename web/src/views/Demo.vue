@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import instance from '@/api'
 
 export default {
   data () {
@@ -147,10 +147,17 @@ export default {
         }
       })
       this.$data.tableData = findData
+      instance.get('/game/list').then(response => {
+        this.$data.tableData = new Array(response.data.size)
+        response.data.forEach((a, index) => {
+          let { name, description: p1, pubdate: date } = a
+          this.$data.tableData[index] = ({ name, p1, date })
+        })
+      })
       setTimeout(() => {
         let data = this.$data
         data.loading = false
-      }, 2000)
+      }, 1000)
     },
     handleClick (row) {
       let str = JSON.stringify(row)
