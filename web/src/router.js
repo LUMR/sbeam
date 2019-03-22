@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Banner from '@/components/Banner'
 
 Vue.use(Router)
 
@@ -11,7 +12,15 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      props: {
+        session: {
+          user: 'lumr'
+        }
+      },
+      components: {
+        default: Home,
+        a: Banner
+      }
     },
     {
       path: '/about',

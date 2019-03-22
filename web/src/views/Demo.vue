@@ -134,7 +134,7 @@ export default {
   methods: {
     onQuery () {
       this.$data.loading = true
-      let { name, city:description} = this.$data.formInline
+      let { name, city: description } = this.$data.formInline
       instance.get('/game/list', {
         params: { name, description }
       }).then(response => {

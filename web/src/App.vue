@@ -1,15 +1,17 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>
-        <div id="nav">
+      <el-header height="500px">
+        <Banner v-bind:session="ps"/>
+      </el-header>
+      <el-container>
+        <el-aside width="200px">
+          <div id="i-nav">
           <router-link to="/">Home</router-link> |
           <router-link to="/about">About</router-link> |
           <router-link to="/demo">Demo!</router-link>
-        </div>
-      </el-header>
-      <el-container>
-        <el-aside width="200px">Aside</el-aside>
+          </div>
+        </el-aside>
         <el-main><router-view/></el-main>
       </el-container>
     </el-container>
@@ -24,7 +26,7 @@
   text-align: center;
   color: #2c3e50;
 }
-#nav {
+#i-nav {
   padding: 30px;
   a {
     font-weight: bold;
@@ -35,3 +37,21 @@
   }
 }
 </style>
+
+<script>
+import Banner from '@/components/Banner'
+
+export default {
+  components: { Banner },
+  data () {
+    return {
+      ps: {
+        user: {
+          name: 'lumr',
+          city: '佛山'
+        }
+      }
+    }
+  }
+}
+</script>
