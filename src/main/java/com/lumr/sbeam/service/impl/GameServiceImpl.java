@@ -1,5 +1,6 @@
 package com.lumr.sbeam.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lumr.sbeam.dto.GameDto;
 import com.lumr.sbeam.entity.Game;
 import com.lumr.sbeam.mapper.GameMapper;
@@ -22,7 +23,8 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<Game> queryGames(GameDto dto) {
-        return gameMapper.selectList(null);
+        QueryWrapper<Game> wrapper = new QueryWrapper<>(dto);
+        return gameMapper.selectList(wrapper);
     }
 
     @Override

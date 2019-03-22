@@ -7,8 +7,8 @@
       <el-form-item label="姓名">
         <el-input v-model="formInline.name" placeholder="姓名"></el-input>
       </el-form-item>
-      <el-form-item label="活动区域">
-        <el-select v-model="formInline.city" placeholder="活动区域">
+      <el-form-item label="系列">
+        <el-select v-model="formInline.city" placeholder="系列">
           <el-option v-for="opt in formInline.options" v-bind:key="opt" v-bind:label="opt" v-bind:value="opt"></el-option>
         </el-select>
       </el-form-item>
@@ -42,13 +42,13 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog title="新增信息" :visible.sync="dialogFormVisible" >
+    <el-dialog title="新增信息" :visible.sync="dialogFormVisible" :show-close="false">
       <el-form :model="dialogform">
         <el-form-item label="姓名">
           <el-input v-model="dialogform.name" autocomplete="off" placeholder="请输入姓名"></el-input>
         </el-form-item>
         <el-form-item label="省份" >
-          <el-select v-model="dialogform.province" placeholder="请选择活动区域">
+          <el-select v-model="dialogform.p1" placeholder="请选择活动区域">
             <el-option v-for="opt in formInline.options" v-bind:key="opt" v-bind:label="opt" v-bind:value="opt"></el-option>
           </el-select>
         </el-form-item>
@@ -71,9 +71,9 @@ export default {
       loading: true,
       dialogform: {},
       formInline: {
-        name: '',
-        city: '',
-        options: [ '广东省', '广西省', '湖南省' ]
+        name: undefined,
+        city: undefined,
+        options: []
       },
       tableData: [],
       cloumnConfig: [
@@ -116,48 +116,36 @@ export default {
     }
   },
   created: function () {
-    setTimeout(() => {
-      let data = this.$data
-      data.tableData = [
-        {
-          date: Date(),
-          name: '李雷',
-          province: '广东省',
-          city: '佛山市',
-          p1: '超级平台',
-          p2: '神秘组织'
-        }, {
-          date: Date(),
-          name: '赵信',
-          province: '广东省',
-          city: '佛山市',
-          p1: '超级平台',
-          p2: '神秘组织'
-        }]
-      data.loading = false
-    }, 1500)
+    this.$data.loading = true
+    instance.get('/game/list').then(res => {
+      this.$data.tableData = new Array(res.data.size)
+      this.$data.formInline.options = []
+      let options = this.$data.formInline.options
+      res.data.forEach((a, index) => {
+        let { name, description: p1, pubdate: date } = a
+        this.$data.tableData[index] = ({ name, p1, date })
+        if (options.indexOf(p1) < 0) {
+          options.push(p1)
+        }
+      })
+    })
+    this.$data.loading = false
   },
   methods: {
     onQuery () {
       this.$data.loading = true
-      let findData = []
-      this.$data.tableData.forEach(element => {
-        if (element.name === this.$data.formInline.name) {
-          findData.push(element)
-        }
-      })
-      this.$data.tableData = findData
-      instance.get('/game/list').then(response => {
+      let { name, city:description} = this.$data.formInline
+      instance.get('/game/list', {
+        params: { name, description }
+      }).then(response => {
         this.$data.tableData = new Array(response.data.size)
         response.data.forEach((a, index) => {
           let { name, description: p1, pubdate: date } = a
           this.$data.tableData[index] = ({ name, p1, date })
         })
+      }).then(() => {
+        this.$data.loading = false
       })
-      setTimeout(() => {
-        let data = this.$data
-        data.loading = false
-      }, 1000)
     },
     handleClick (row) {
       let str = JSON.stringify(row)
@@ -195,8 +183,8 @@ export default {
       if (this.$data.dialogform.mode !== 'edit') {
         this.addData()
       } else {
-        let { name, province, row } = this.$data.dialogform
-        Object.assign(row, { name, province })
+        let { name, p1, row } = this.$data.dialogform
+        Object.assign(row, { name, p1 })
         this.$data.dialogform = {}
         this.$data.dialogFormVisible = false
       }
@@ -208,8 +196,8 @@ export default {
     },
     edit (row) {
       let data = this.$data
-      let { name, province } = row
-      data.dialogform = { name, province, row, mode: 'edit' }
+      let { name, p1 } = row
+      data.dialogform = { name, p1, row, mode: 'edit' }
       data.dialogFormVisible = true
     }
   }
