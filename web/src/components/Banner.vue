@@ -59,21 +59,11 @@
               <!--/navbar header-->
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  <li>
-                    <a href="/">首页</a>
-                  </li>
-                  <li>
-                    <a href="/library/">游戏商城</a>
-                  </li>
-                  <li>
-                    <a href="/user/library">我的游戏库</a>
-                  </li>
-                  <li>
-                    <a href="/user/details">我的信息</a>
-                  </li>
-                  <li>
-                    <a href="/user/recharge">充值</a>
-                  </li>
+                  <li><router-link to="/">首页</router-link></li>
+                  <li><router-link to="/library/">游戏商城</router-link></li>
+                  <li><router-link to="/user/library">我的游戏库</router-link></li>
+                  <li><router-link to="/user/details">我的信息</router-link></li>
+                  <li><router-link to="/user/recharge">充值</router-link></li>
                 </ul>
               </div>
               <!--/navbar collapse-->
