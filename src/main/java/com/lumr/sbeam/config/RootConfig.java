@@ -1,16 +1,21 @@
 package com.lumr.sbeam.config;
 
+import javax.servlet.ServletContext;
+import javax.sql.DataSource;
+
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.lumr.sbeam.interceptor.MybatisInterceptor;
+
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
-import javax.servlet.ServletContext;
-import javax.sql.DataSource;
 
 /**
  * Created by work on 2018/2/24.
@@ -20,6 +25,22 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = {"com.lumr.sbeam.dao", "com.lumr.sbeam.mapper"})
 public class RootConfig {
+
+    /**
+     * 分页拦截器
+     */
+    @Bean
+    public Interceptor pageInterceptor(){
+        return new PaginationInterceptor();
+    }
+
+    /**
+     * 查询sql拦截器
+     */
+    @Bean
+    public Interceptor logInterceptor(){
+        return new MybatisInterceptor();
+    }
 
     //    @Bean
     public ViewResolver viewResolver() {

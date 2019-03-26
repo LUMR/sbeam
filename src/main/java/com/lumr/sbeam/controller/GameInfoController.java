@@ -1,12 +1,11 @@
 package com.lumr.sbeam.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.lumr.sbeam.dto.GameDto;
 import com.lumr.sbeam.entity.Game;
 import com.lumr.sbeam.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author lumr frlumr777@sina.com
@@ -20,8 +19,8 @@ public class GameInfoController {
     private GameService gameService;
 
     @GetMapping("list")
-    public List<Game> queryGames(GameDto dto) {
-        return gameService.queryGames(dto);
+    public IPage<Game> queryGames(GameDto dto) {
+        return gameService.pageQueryGames(dto);
     }
 
     @PostMapping("add")

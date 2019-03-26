@@ -1,10 +1,13 @@
 package com.lumr.sbeam.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lumr.sbeam.dto.GameDto;
 import com.lumr.sbeam.entity.Game;
 import com.lumr.sbeam.mapper.GameMapper;
 import com.lumr.sbeam.service.GameService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +31,17 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public IPage<Game> pageQueryGames(GameDto dto) {
+        QueryWrapper<Game> wrapper = new QueryWrapper<>(dto);
+        IPage<Game> result = new Page<Game>(dto.getCurrent(), dto.getSize()).setAsc("id");
+        gameMapper.selectPage(result, wrapper);
+        return result;
+    }
+
+    @Override
     public boolean addGame(GameDto dto) {
         Game game = new Game();
-        BeanUtils.copyProperties(dto,game);
+        BeanUtils.copyProperties(dto, game);
         return gameMapper.insert(game) > 0;
     }
 

@@ -8,14 +8,11 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
 import java.util.Properties;
 
 @Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}),
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class,
                 ResultHandler.class})})
-@Component
 public class MybatisInterceptor implements Interceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MybatisInterceptor.class);

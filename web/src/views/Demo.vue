@@ -76,6 +76,10 @@ export default {
         options: []
       },
       tableData: [],
+      pageInfo: {
+        current: 0,
+        size: 10
+      },
       cloumnConfig: [
         {
           prop: 'name',
@@ -116,32 +120,24 @@ export default {
     }
   },
   created: function () {
-    this.$data.loading = true
-    instance.get('/game/list').then(res => {
-      this.$data.tableData = new Array(res.data.size)
-      this.$data.formInline.options = []
-      let options = this.$data.formInline.options
-      res.data.forEach((a, index) => {
-        let { name, description: p1, pubdate: date } = a
-        this.$data.tableData[index] = ({ name, p1, date })
-        if (options.indexOf(p1) < 0) {
-          options.push(p1)
-        }
-      })
-    })
-    this.$data.loading = false
+    this.onQuery()
   },
   methods: {
     onQuery () {
       this.$data.loading = true
       let { name, city: description } = this.$data.formInline
+      let { current, size } = this.$data.pageInfo
       instance.get('/game/list', {
-        params: { name, description }
+        params: { name, description, current, size }
       }).then(response => {
         this.$data.tableData = new Array(response.data.size)
-        response.data.forEach((a, index) => {
+        let options = this.$data.formInline.options
+        response.data.records.forEach((a, index) => {
           let { name, description: p1, pubdate: date } = a
           this.$data.tableData[index] = ({ name, p1, date })
+          if (options.indexOf(p1) < 0) {
+            options.push(p1)
+          }
         })
       }).then(() => {
         this.$data.loading = false
