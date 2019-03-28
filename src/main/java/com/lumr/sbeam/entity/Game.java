@@ -1,5 +1,8 @@
 package com.lumr.sbeam.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.util.Date;
 
 /**
@@ -7,6 +10,7 @@ import java.util.Date;
  * @since 2019-03-20
  **/
 public class Game {
+    @TableId(type = IdType.AUTO)
     private Integer id;
     private String name;//游戏名
     private Integer categoryId;//游戏分类
@@ -14,6 +18,7 @@ public class Game {
     private Double price;//游戏价格
     private Date pubdate;
     private String description;//游戏描述
+
 
     public Integer getId() {
         return id;
