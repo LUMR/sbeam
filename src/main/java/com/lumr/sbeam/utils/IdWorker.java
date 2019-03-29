@@ -1,7 +1,5 @@
 package com.lumr.sbeam.utils;
 
-import java.util.Date;
-
 /**
  * id生成器
  *

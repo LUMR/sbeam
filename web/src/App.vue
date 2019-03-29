@@ -7,9 +7,7 @@
       <el-container>
         <el-aside width="200px">
           <div id="i-nav">
-          <router-link to="/">Home</router-link> |
-          <router-link to="/about">About</router-link> |
-          <router-link to="/demo">Demo!</router-link>
+
           </div>
         </el-aside>
         <el-main><router-view/></el-main>

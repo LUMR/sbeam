@@ -64,6 +64,8 @@
                   <li><router-link to="/user/library">我的游戏库</router-link></li>
                   <li><router-link to="/user/details">我的信息</router-link></li>
                   <li><router-link to="/user/recharge">充值</router-link></li>
+                  <li><router-link to="/demo">游戏信息查询</router-link></li>
+                  <li><router-link to="/admin/console">控制台</router-link></li>
                 </ul>
               </div>
               <!--/navbar collapse-->
@@ -77,36 +79,6 @@
       <div class="banner-info">
         <h3>欢迎来到Sbeam游戏商城</h3>
         <h2>Make By LUMR</h2>
-      </div>
-      <div class="social">
-        <ul>
-          <li>
-            <a href="#">
-              <span class="fa"></span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="tw"></span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="g"></span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="in"></span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="pin"></span>
-            </a>
-          </li>
-        </ul>
-        <div class="clearfix"></div>
       </div>
     </div>
   </div>
