@@ -71,20 +71,6 @@ public class LoginController {
     public String login(User user, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors())
             return "user/login";
-        String password = Utils.sha1(user.getPassword());
-        user.setPassword(password);
-        User realUser = dao.getUser(user);
-        if (realUser == null) {
-            model.addAttribute("message", "没有该用户名。");
-            return "user/login";
-        }
-        if (realUser.getPassword().equals(user.getPassword())) {
-            session.setAttribute("user", realUser);
-            session.setAttribute("buyCar",new BuyCar(realUser));
-            return "redirect:details";
-        } else {
-            model.addAttribute("message", "密码错误");
-            return "user/login";
-        }
+        return null;
     }
 }

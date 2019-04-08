@@ -16,23 +16,23 @@ public class BuyCar {
         this.games = new ArrayList<>();
     }
 
-    private void sum(){
+    private void sum() {
         total = 0;
         for (Game game : games) {
             total += game.getPrice();
         }
     }
 
-    private boolean checkGame(Game game){
-        for (Game game1:games){
+    private boolean checkGame(Game game) {
+        for (Game game1 : games) {
             if (game1.getId().equals(game.getId()))
                 return true;
         }
         return false;
     }
 
-    public int addGame(Game game){
-        if (!checkGame(game)){
+    public int addGame(Game game) {
+        if (!checkGame(game)) {
             games.add(game);
             sum();
             return games.size();
@@ -40,9 +40,9 @@ public class BuyCar {
         return 0;
     }
 
-    public int deleteGame(int id){
+    public int deleteGame(int id) {
         for (int i = 0; i < games.size(); i++) {
-            if (games.get(i).getId() == id){
+            if (games.get(i).getId() == id) {
                 games.remove(i);
                 sum();
                 return 1;
