@@ -10,7 +10,7 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author lumr freedomyes@sina.com
@@ -34,7 +34,7 @@ public class UserAuthenticationFilter extends FormAuthenticationFilter {
         Session session = subject.getSession();
         subject.getSession().setAttribute("user",user1);
         session.setAttribute("buyCar",new BuyCar(user1));
-
+        ((HttpServletResponse)response).setHeader("Access-Control-Allow-Origin","*");
         return super.onLoginSuccess(token, subject, request, response);
     }
 }

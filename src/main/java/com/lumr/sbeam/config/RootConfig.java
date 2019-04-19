@@ -59,6 +59,8 @@ public class RootConfig {
         shiro.setSuccessUrl("/index");
         Map<String,String> chainMap = new LinkedHashMap<>();
         chainMap.put("/public/**","anon");
+        chainMap.put("/game/**", "anon");
+        chainMap.put("/health", "anon");
         chainMap.put("/user/logout", "logout");
         chainMap.put("/**", "authc");
         shiro.setFilterChainDefinitionMap(chainMap);
