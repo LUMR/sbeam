@@ -13,7 +13,7 @@ public class JavaClassExecuter {
         HotSwapClassLoader loader = new HotSwapClassLoader();
         Class clazz = loader.loadByte(modiBytes);
         try {
-            Method method = clazz.getMethod("main",new Class[] {String[].class});
+            Method method = clazz.getMethod("main", String[].class);
             method.invoke(null,new String[] {null});
         }catch (Throwable e){
             e.printStackTrace();
