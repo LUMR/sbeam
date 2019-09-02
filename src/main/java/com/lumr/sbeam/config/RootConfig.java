@@ -4,9 +4,14 @@ import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.lumr.sbeam.filter.UserAuthenticationFilter;
 import com.lumr.sbeam.interceptor.MybatisInterceptor;
 
 import org.apache.ibatis.plugin.Interceptor;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.Realm;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -16,6 +21,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by work on 2018/2/24.
@@ -40,6 +48,29 @@ public class RootConfig {
     @Bean
     public Interceptor logInterceptor(){
         return new MybatisInterceptor();
+    }
+
+    @Bean
+    public ShiroFilterFactoryBean shirofilter(SecurityManager securityManager){
+        ShiroFilterFactoryBean shiro = new ShiroFilterFactoryBean();
+        shiro.setSecurityManager(securityManager);
+        shiro.setLoginUrl("/user/login");
+        shiro.setUnauthorizedUrl("/403");
+        shiro.setSuccessUrl("/index");
+        Map<String,String> chainMap = new LinkedHashMap<>();
+        chainMap.put("/public/**","anon");
+        chainMap.put("/game/**", "anon");
+        chainMap.put("/health", "anon");
+        chainMap.put("/user/logout", "logout");
+        chainMap.put("/**", "authc");
+        shiro.setFilterChainDefinitionMap(chainMap);
+        shiro.getFilters().put("authc",new UserAuthenticationFilter());
+        return shiro;
+    }
+
+    @Bean
+    public SecurityManager getSecurityManager(Realm realm){
+        return new DefaultWebSecurityManager(realm);
     }
 
     //    @Bean

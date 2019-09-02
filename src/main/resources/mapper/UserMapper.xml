@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lumr.sbeam.mapper.UserMapper">
+
+  <resultMap id="userAuthorizationInfoMap" type="com.lumr.sbeam.entity.User">
+      <id column="user_id" property="id"/>
+      <result column="user_name" property="name"/>
+      <collection property="roles" ofType="com.lumr.sbeam.entity.Role">
+          <id column="role_id" property="id"/>
+          <result column="role" property="role"/>
+          <result column="description" property="description"/>
+      </collection>
+      <collection property="permissions" ofType="com.lumr.sbeam.entity.Permission">
+          <id column="per_id" property="id"/>
+          <result column="resource_type" property="resourceType"/>
+          <result column="per_name" property="name"/>
+          <result column="permission" property="permission"/>
+      </collection>
+  </resultMap>
+  <select id="getUserAuthorizationInfo" resultMap="userAuthorizationInfoMap">
+      SELECT
+             u.id user_id,
+             u.name user_name,
+             r.id role_id,
+             r.role,
+             r.description,
+             p.id per_id,
+             p.resource_type,
+             p.name per_name,
+             p.permission
+      FROM user u
+          LEFT JOIN user_role ur ON u.id = ur.user_id
+          LEFT JOIN sys_role r ON r.id = ur.role_id AND r.available = '1'
+          LEFT JOIN sys_role_permission rp ON rp.role_id = r.id
+          LEFT JOIN sys_permission p ON rp.permission_id = p.id AND p.available = '1'
+      WHERE u.name = #{name}
+  </select>
+</mapper>
+

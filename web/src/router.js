@@ -21,6 +21,10 @@ export default new Router({
         default: Home,
         a: Banner
       }
+    }, {
+      path: '/login',
+      name: '登陆页面',
+      component: () => import('@/views/Login.vue')
     },
     {
       path: '/about',
@@ -34,6 +38,16 @@ export default new Router({
       path: '/demo',
       name: 'demo',
       component: () => import('@/views/Demo.vue')
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('@/views/admin'),
+      children: [{
+        path: 'console',
+        name: 'console',
+        component: () => import('@/views/admin/console.vue')
+      }]
     }
   ]
 })

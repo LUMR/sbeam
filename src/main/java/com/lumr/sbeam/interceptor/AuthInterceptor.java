@@ -28,12 +28,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        User user = (User) request.getSession().getAttribute("user");
+        /*User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             request.setAttribute("message","尚未登录");
             request.getRequestDispatcher("/user/login").forward(request,response);
             return false;
-        }
+        }*/
         return true;
     }
 

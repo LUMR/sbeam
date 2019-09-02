@@ -276,3 +276,40 @@ SET character_set_client = @saved_cs_client;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2017-05-17 11:50:09
+
+CREATE TABLE sys_role (
+  id          INT AUTO_INCREMENT,
+  role        VARCHAR(10) NOT NULL COMMENT '角色名称',
+  description VARCHAR(24) NULL COMMENT '角色描述',
+  available   TINYINT     NULL COMMENT '是否可用:1可用 0不可用',
+  CONSTRAINT sys_role_id_pk
+    PRIMARY KEY (id)
+)
+  COMMENT '用户角色';
+
+CREATE UNIQUE INDEX sys_role_role_uindex
+  ON sys_role(role);
+
+
+CREATE TABLE sys_permission (
+  id           INT AUTO_INCREMENT PRIMARY KEY,
+  name         VARCHAR(10) COMMENT '',
+  permission   VARCHAR(24) COMMENT '',
+  resource_type VARCHAR(12) COMMENT '',
+  available    TINYINT NULL COMMENT '是否可用:1可用 0不可用'
+)
+  COMMENT '权限表';
+
+CREATE TABLE sys_role_permission (
+  role_id       INT COMMENT '角色id',
+  permission_id INT COMMENT '权限id'
+) COMMENT '角色权限关联表';
+
+CREATE UNIQUE INDEX sys_role_permission_uindex ON sys_role_permission(role_id, permission_id);
+
+CREATE TABLE user_role(
+  user_id INT,
+  role_id INT
+) COMMENT '用户角色关联表';
+
+CREATE UNIQUE INDEX user_role_uindex ON user_role(user_id,role_id);

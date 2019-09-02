@@ -17,3 +17,4 @@ logging:
   file: ${logging.path}/sbeam.log
 mybatis-plus:
   type-aliases-package: com.lumr.sbeam.vo
+  mapper-locations: classpath:/mapper/*Mapper.xml,classpath:/mapper/*Dao.xml
