@@ -11,7 +11,10 @@
               </a>
             </li>
             <li>
-              <a href="/user/logout">
+              <a href="/login">登陆</a>
+            </li>
+            <li>
+              <a href="/logout">
                 <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>注销
               </a>
             </li>

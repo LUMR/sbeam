@@ -2,6 +2,7 @@ package com.lumr.sbeam.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -16,6 +17,7 @@ public class Game {
     private Integer categoryId;//游戏分类
     private Integer platformId;//游戏平台
     private Double price;//游戏价格
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date pubdate;
     private String description;//游戏描述
 

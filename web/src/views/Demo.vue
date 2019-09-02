@@ -133,8 +133,8 @@ export default {
         this.$data.tableData = new Array(response.data.size)
         let options = this.$data.formInline.options
         response.data.records.forEach((a, index) => {
-          let { name, description: p1, pubdate: date } = a
-          this.$data.tableData[index] = ({ name, p1, date })
+          let { name, description: p1, pubdate: date, id } = a
+          this.$data.tableData[index] = ({ name, p1, date, id })
           if (options.indexOf(p1) < 0) {
             options.push(p1)
           }
@@ -152,14 +152,16 @@ export default {
       })
     },
     handleDelete (row) {
-      let index = this.$data.tableData.indexOf(row)
-      if (index !== -1) {
-        this.$data.tableData.splice(index, 1)
-      }
-      this.$message({
-        message: '删除成功',
-        showClose: true,
-        type: 'success'
+      instance.delete('/game/' + row.id + '/delete').then(res => {
+        if (res.data === true) {
+          this.$message({
+            message: '删除成功',
+            showClose: true,
+            type: 'success'
+          })
+        }
+      }).then(() => {
+        this.onQuery()
       })
     },
     addData () {
