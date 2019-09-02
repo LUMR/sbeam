@@ -62,6 +62,7 @@ public class RootConfig {
         chainMap.put("/game/**", "anon");
         chainMap.put("/health", "anon");
         chainMap.put("/user/logout", "logout");
+        chainMap.put("/","anon");
         chainMap.put("/**", "authc");
         shiro.setFilterChainDefinitionMap(chainMap);
         shiro.getFilters().put("authc",new UserAuthenticationFilter());

@@ -34,7 +34,6 @@ public class UserAuthenticationFilter extends FormAuthenticationFilter {
         Session session = subject.getSession();
         subject.getSession().setAttribute("user",user1);
         session.setAttribute("buyCar",new BuyCar(user1));
-        ((HttpServletResponse)response).setHeader("Access-Control-Allow-Origin","*");
         return super.onLoginSuccess(token, subject, request, response);
     }
 }

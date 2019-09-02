@@ -85,7 +85,7 @@
 
     <select id="getBuy" resultMap="simpleGameMap">
         SELECT t1.*
-        FROM game AS t1 RIGHT JOIN library AS t2 ON t2.game_id = t1.id
+        FROM game AS t1 INNER JOIN library AS t2 ON t2.game_id = t1.id
         ORDER BY t2.id
         LIMIT 0, 5
     </select>

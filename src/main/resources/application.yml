@@ -12,8 +12,12 @@ spring:
     static-locations: file:${web.upload-path},classpath:/public
   mvc:
     static-path-pattern: /public/**
+  datasource:
+    url: jdbc:mysql://localhost:3306/sbeam?characterEncoding=utf8&useSSL=false
+    username: web
+    password: www
 logging:
-  path: ./
+  path: ${HOME}/logs
   file: ${logging.path}/sbeam.log
 mybatis-plus:
   type-aliases-package: com.lumr.sbeam.vo

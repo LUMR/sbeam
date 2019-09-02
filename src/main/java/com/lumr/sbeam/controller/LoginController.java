@@ -71,6 +71,6 @@ public class LoginController {
     public String login(User user, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors())
             return "user/login";
-        return null;
+        return "redirect:/user/details";
     }
 }

@@ -62,7 +62,7 @@ public class AdminPlatformController extends AdminController{
     }
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public String updatePlatform(@PathVariable Integer id, Platform platform, HttpSession session, Model model) {
-        if (id != null && id == platform.getId()) {
+        if (id != null && id.equals(platform.getId())) {
             int result = platformDao.update(platform);
             User user = (User) session.getAttribute("user");
             if (result > 0) {

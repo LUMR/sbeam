@@ -256,7 +256,7 @@ public class UserController {
     @ExceptionHandler(LoginException.class)
     public String handlerException(LoginException e, Model model) {
         model.addAttribute("message", e.getMessage());
-        return "user/login";
+        return "redirect:/user/login";
     }
 
     private User getUser(HttpSession session) {

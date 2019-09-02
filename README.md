@@ -3,13 +3,19 @@
 ### 项目构成：
 IDE: IntelliJ IDEA
 
-项目框架：SpringBoot + Mybatis
+项目框架: 
+
+1. 前端(商城,前后端不分离)：thymeleaf
+2. 前端（管理台,前后端分离）：Vue
+3. 后台：SpringBoot + mybatis-plus + shiro
 
 项目管理：Maven
 
 数据库：MySQL
 
 数据库生成文件：mysql/sbeam.sql
+
+管理后台前端代码： ./web
 
 ### 具体功能截图图：
 
