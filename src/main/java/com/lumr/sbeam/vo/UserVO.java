@@ -8,7 +8,7 @@ import java.util.List;
  * 用户对象
  * Created by fsweb on 17-5-8.
  */
-public class User {
+public class UserVO {
     private Integer id;
     private String name;
     private String password;
@@ -20,14 +20,14 @@ public class User {
     private List<Review> reviews;//写的评论
     private LinkedList<String> messages = new LinkedList<>();//用户消息，不保存在数据库中
 
-    public User() {
+    public UserVO() {
     }
 
-    public User(int id) {
+    public UserVO(int id) {
         this.id = id;
     }
 
-    public User(String name, String password) {
+    public UserVO(String name, String password) {
         this.name = name;
         this.password = password;
     }

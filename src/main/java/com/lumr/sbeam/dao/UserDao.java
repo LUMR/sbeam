@@ -1,6 +1,6 @@
 package com.lumr.sbeam.dao;
 
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -12,18 +12,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface UserDao {
-    User checkUserName(User user);
+    UserVO checkUserName(UserVO user);
 
-    User getUser(User user);
+    UserVO getUser(UserVO user);
 
-    int insertUser(User user);
+    int insertUser(UserVO user);
 
-    int updateUser(User user);
+    int updateUser(UserVO user);
 
-    int deleteUser(User user);
+    int deleteUser(UserVO user);
 
-    int recharge(@Param("user") User user,@Param("money") double rmb);
+    int recharge(@Param("user") UserVO user, @Param("money") double rmb);
 
-    int pay(@Param("user") User user, @Param("money") double rmb);
+    int pay(@Param("user") UserVO user, @Param("money") double rmb);
 
 }

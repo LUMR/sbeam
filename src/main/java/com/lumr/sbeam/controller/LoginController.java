@@ -3,7 +3,7 @@ package com.lumr.sbeam.controller;
 import com.lumr.sbeam.dao.UserDao;
 import com.lumr.sbeam.utils.Utils;
 import com.lumr.sbeam.vo.BuyCar;
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,7 @@ public class LoginController {
     @RequestMapping(value = "/checkName", method = RequestMethod.POST)
     @ResponseBody
     public String checkName(String name, HttpSession session, HttpServletResponse response) {
-        User user = new User(name, "no");
+        UserVO user = new UserVO(name, "no");
         response.setCharacterEncoding("UTF-8");
         if (dao.checkUserName(user)!=null){
             return "true";
@@ -41,12 +41,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(@ModelAttribute("user") User user) {
+    public String register(@ModelAttribute("user") UserVO user) {
         return "user/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@Validated User user, BindingResult bindingResult, HttpSession session) {
+    public String register(@Validated UserVO user, BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors())
             return "user/register";
         String password = Utils.sha1(user.getPassword());
@@ -63,12 +63,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(@ModelAttribute("user") User user) {
+    public String login(@ModelAttribute("user") UserVO user) {
         return "user/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(User user, BindingResult bindingResult, Model model, HttpSession session) {
+    public String login(UserVO user, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors())
             return "user/login";
         return "redirect:/user/details";

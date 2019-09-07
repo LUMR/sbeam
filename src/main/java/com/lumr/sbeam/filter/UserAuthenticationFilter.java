@@ -2,6 +2,7 @@ package com.lumr.sbeam.filter;
 
 import com.lumr.sbeam.entity.User;
 import com.lumr.sbeam.vo.BuyCar;
+import com.lumr.sbeam.vo.UserVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
@@ -10,7 +11,6 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author lumr freedomyes@sina.com
@@ -29,11 +29,11 @@ public class UserAuthenticationFilter extends FormAuthenticationFilter {
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
         User user = (User) subject.getPrincipal();
 
-        com.lumr.sbeam.vo.User user1 = new com.lumr.sbeam.vo.User();
-        BeanUtils.copyProperties(user1,user);
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(userVO,user);
         Session session = subject.getSession();
-        subject.getSession().setAttribute("user",user1);
-        session.setAttribute("buyCar",new BuyCar(user1));
+        subject.getSession().setAttribute("user",userVO);
+        session.setAttribute("buyCar",new BuyCar(userVO));
         return super.onLoginSuccess(token, subject, request, response);
     }
 }

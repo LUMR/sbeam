@@ -3,7 +3,7 @@ package com.lumr.test;
 import com.lumr.sbeam.dao.GameDao;
 import com.lumr.sbeam.dao.UserDao;
 import com.lumr.sbeam.vo.Game;
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.UserVO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -46,7 +46,7 @@ public class Test {
 
     public static void userChange(){
         UserDao dao = (UserDao)getDao("userDao");
-        User user = dao.getUser(new User(2));
+        UserVO user = dao.getUser(new UserVO(2));
         if (user.getMoney()>9000)
             dao.recharge(user, 1000);
         System.out.println("当前用户余额："+user.getMoney());
@@ -59,7 +59,7 @@ public class Test {
         @Override
         public void run() {
             UserDao dao = (UserDao)getDao("userDao");
-            User user = dao.getUser(new User(2));
+            UserVO user = dao.getUser(new UserVO(2));
             if (user.getMoney()>9000)
                 dao.pay(user, 500);
             System.out.println("当前用户余额："+user.getMoney());

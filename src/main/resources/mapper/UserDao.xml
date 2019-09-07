@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lumr.sbeam.dao.UserDao">
-    <resultMap id="UserMap" type="User">
+    <resultMap id="UserMap" type="UserVO">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="password" column="password"/>
@@ -30,7 +30,7 @@
         WHERE user_id = #{id}
     </select>
 
-    <select id="checkUserName" parameterType="User" resultType="User">
+    <select id="checkUserName" parameterType="UserVO" resultType="UserVO">
         SELECT * FROM user
         <where>
             <if test="id != null and id != 0">id = #{id}</if>
@@ -39,7 +39,7 @@
         limit 0,1
     </select>
 
-    <select id="getUser" parameterType="User" resultMap="UserMap">
+    <select id="getUser" parameterType="UserVO" resultMap="UserMap">
         select * from user
         <where>
             <if test="id != null">
@@ -51,14 +51,14 @@
         </where>
     </select>
 
-    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertUser" parameterType="UserVO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user (name, password, register_date)
         VALUES (
             #{name}, #{password}, #{registerDate}
         )
     </insert>
 
-    <update id="updateUser" parameterType="User">
+    <update id="updateUser" parameterType="UserVO">
         UPDATE user
         <set>
             <if test="name != null">
@@ -71,7 +71,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="deleteUser" parameterType="User">
+    <delete id="deleteUser" parameterType="UserVO">
         DELETE FROM user
         WHERE id = #{id}
     </delete>

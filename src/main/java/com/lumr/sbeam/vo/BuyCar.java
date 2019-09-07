@@ -7,11 +7,11 @@ import java.util.List;
  * Created by lumr on 2017/5/11.
  */
 public class BuyCar {
-    private User user;
+    private UserVO user;
     private double total;
     private List<Game> games;
 
-    public BuyCar(User user) {
+    public BuyCar(UserVO user) {
         this.user = user;
         this.games = new ArrayList<>();
     }
@@ -59,11 +59,11 @@ public class BuyCar {
         this.total = total;
     }
 
-    public User getUser() {
+    public UserVO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserVO user) {
         this.user = user;
     }
 

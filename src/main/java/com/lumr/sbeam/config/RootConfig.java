@@ -3,6 +3,7 @@ package com.lumr.sbeam.config;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
+import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.lumr.sbeam.filter.UserAuthenticationFilter;
 import com.lumr.sbeam.interceptor.MybatisInterceptor;
@@ -46,7 +47,7 @@ public class RootConfig {
      * 查询sql拦截器
      */
     @Bean
-    public Interceptor logInterceptor(){
+    public Interceptor sqlInterceptor(){
         return new MybatisInterceptor();
     }
 

@@ -2,7 +2,7 @@ package com.lumr.sbeam.controller;
 
 import com.lumr.sbeam.dao.CategoryDao;
 import com.lumr.sbeam.vo.Category;
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +41,7 @@ public class AdminCategoryController extends AdminController{
         category.setId(null);
         if (categoryDao.getCategory(category) == null){
             int result = categoryDao.insert(category);
-            User user = (User) session.getAttribute("user");
+            UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",添加分类信息成功。");
                 return "redirect:/admin";
@@ -63,9 +63,9 @@ public class AdminCategoryController extends AdminController{
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public String updateCategory(@PathVariable Integer id, Category category, HttpSession session, Model model) {
-        if (id != null && id == category.getId()) {
+        if (id != null && id.equals(category.getId())) {
             int result = categoryDao.update(category);
-            User user = (User) session.getAttribute("user");
+            UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",修改分类信息成功。");
                 return "redirect:/admin";

@@ -1,7 +1,7 @@
 package com.lumr.sbeam.dao;
 
 import com.lumr.sbeam.vo.Game;
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Repository;
 public interface LibraryDao {
     int getSales(Game game);
 
-    Library check(@Param("user") User user,@Param("game") Game game);
+    Library check(@Param("user") UserVO user, @Param("game") Game game);
 
-    int add(@Param("user") User user,@Param("game") Game game);
+    int add(@Param("user") UserVO user, @Param("game") Game game);
 
-    int delete(@Param("user") User user,@Param("game") Game game);
+    int delete(@Param("user") UserVO user, @Param("game") Game game);
 
     int insert(@Param("pojo") Library pojo);
 

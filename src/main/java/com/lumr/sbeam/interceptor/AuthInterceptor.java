@@ -2,7 +2,6 @@ package com.lumr.sbeam.interceptor;
 
 import com.lumr.sbeam.utils.JsonUtil;
 import com.lumr.sbeam.vo.ResponseCode;
-import com.lumr.sbeam.vo.User;
 import com.lumr.sbeam.vo.resp.BaseResp;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,9 @@ import java.io.PrintWriter;
  * Created by work on 2018/2/24.
  *
  * @author lumr
+ * @deprecated 改用shiro，不需要了
  */
+@Deprecated
 public class AuthInterceptor extends HandlerInterceptorAdapter{
 
     private final BaseResp NO_LOGIN;

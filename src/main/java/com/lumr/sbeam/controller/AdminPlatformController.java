@@ -2,7 +2,7 @@ package com.lumr.sbeam.controller;
 
 import com.lumr.sbeam.dao.PlatformDao;
 import com.lumr.sbeam.vo.Platform;
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +41,7 @@ public class AdminPlatformController extends AdminController{
         platform.setId(null);
         if (platformDao.getPlatform(platform) == null){
             int result = platformDao.insert(platform);
-            User user = (User) session.getAttribute("user");
+            UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",添加平台信息成功。");
                 return "redirect:/admin";
@@ -64,7 +64,7 @@ public class AdminPlatformController extends AdminController{
     public String updatePlatform(@PathVariable Integer id, Platform platform, HttpSession session, Model model) {
         if (id != null && id.equals(platform.getId())) {
             int result = platformDao.update(platform);
-            User user = (User) session.getAttribute("user");
+            UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",修改平台信息成功。");
                 return "redirect:/admin";

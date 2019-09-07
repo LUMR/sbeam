@@ -6,6 +6,7 @@ import java.io.IOException;
 /**
  * Created by lumr on 2017/5/9.
  */
+@Deprecated
 public class LoginFilter implements Filter {
     public void destroy() {
     }

@@ -12,6 +12,8 @@ spring:
     static-locations: file:${web.upload-path},classpath:/public
   mvc:
     static-path-pattern: /public/**
+    favicon:
+      enabled: false
   datasource:
     url: jdbc:mysql://localhost:3306/sbeam?characterEncoding=utf8&useSSL=false
     username: web
@@ -22,3 +24,7 @@ logging:
 mybatis-plus:
   type-aliases-package: com.lumr.sbeam.vo
   mapper-locations: classpath:/mapper/*Mapper.xml,classpath:/mapper/*Dao.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: id_worker

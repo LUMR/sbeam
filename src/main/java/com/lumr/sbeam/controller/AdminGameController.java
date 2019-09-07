@@ -6,7 +6,7 @@ import com.lumr.sbeam.dao.PictureDao;
 import com.lumr.sbeam.dao.PlatformDao;
 import com.lumr.sbeam.vo.Game;
 import com.lumr.sbeam.vo.Picture;
-import com.lumr.sbeam.vo.User;
+import com.lumr.sbeam.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,7 +59,7 @@ public class AdminGameController extends AdminController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addGame(@Validated Game game, BindingResult bindingResult, MultipartFile[] files, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
+        UserVO user = (UserVO) session.getAttribute("user");
         if (bindingResult.hasErrors()) {
             String message = (new Date() + "添加失败，游戏数据错误。错误区域：");
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -95,7 +95,7 @@ public class AdminGameController extends AdminController {
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public String updateGame(@Validated Game game, BindingResult bindingResult, MultipartFile[] files, Model model, HttpSession session, @PathVariable("id") String id) {
-        User user = (User) session.getAttribute("user");
+        UserVO user = (UserVO) session.getAttribute("user");
         //检测game参数
         if (bindingResult.hasErrors()) {
             String message = (new Date() + "修改失败，游戏数据错误。错误区域：");
@@ -120,7 +120,7 @@ public class AdminGameController extends AdminController {
     }
 
     //保存图片
-    private void savePicture(User user, Game game, HttpSession session, MultipartFile[] files) {
+    private void savePicture(UserVO user, Game game, HttpSession session, MultipartFile[] files) {
         String filePath = session.getServletContext().getRealPath("/pictures/");
         for (MultipartFile multipartFile : files) {
             if (!multipartFile.isEmpty()) {

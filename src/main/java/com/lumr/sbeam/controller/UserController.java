@@ -57,7 +57,7 @@ public class UserController {
 
     @RequestMapping(value = "/recharge", method = RequestMethod.POST)
     public String recharge(double money, HttpSession session) {
-        User user = getUser(session);
+        UserVO user = getUser(session);
         userDao.recharge(user, money);
         user.getMessages().addFirst("时间：" + new Date() + "充值成功！");
         return "redirect:/user/details";
@@ -72,7 +72,7 @@ public class UserController {
      */
     @RequestMapping(value = "/game/{gameId}/buy")
     public String buyGame(@PathVariable String gameId, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
+        UserVO user = (UserVO) session.getAttribute("user");
         int id;
         Game game;
         Library library;
@@ -103,7 +103,7 @@ public class UserController {
     @RequestMapping(value = "/game/{gameId}/add", method = RequestMethod.GET)
     @ResponseBody
     public int addGame(@PathVariable("gameId") String gameId, HttpSession session) {
-        User user = (User) session.getAttribute("user");
+        UserVO user = (UserVO) session.getAttribute("user");
         BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
         int id;
         Game game;
@@ -138,7 +138,7 @@ public class UserController {
     @RequestMapping(value = "/buyCar/sum")
     public String sumBuyCar(Model model, HttpSession session) {
         BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
-        User user = (User) session.getAttribute("user");
+        UserVO user = (UserVO) session.getAttribute("user");
         if (user.getMoney() < buyCar.getTotal()) {
             user.getMessages().addFirst("RMB不足，结算失败，请先充值。");
             return "redirect:/user/buyCar";
@@ -159,7 +159,7 @@ public class UserController {
     @RequestMapping(value = "/game/{gameId}/delete", method = RequestMethod.GET)
     public String deleteGame(@PathVariable("gameId") String gameId, Model model, HttpSession session) {
         BuyCar buyCar = (BuyCar) session.getAttribute("buyCar");
-        User user = (User) session.getAttribute("user");
+        UserVO user = (UserVO) session.getAttribute("user");
         try {
             buyCar.deleteGame(Integer.parseInt(gameId));
         } catch (Exception e) {
@@ -177,8 +177,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/details/update", method = RequestMethod.POST)
-    public String update(User user, MultipartFile headerFile, HttpSession session, Model model) {
-        User realUser = (User) session.getAttribute("user");
+    public String update(UserVO user, MultipartFile headerFile, HttpSession session, Model model) {
+        UserVO realUser = (UserVO) session.getAttribute("user");
         int result = userDao.updateUser(user);
         if (result > 0)
             realUser.getMessages().addFirst("信息更新成功");
@@ -206,14 +206,14 @@ public class UserController {
 
     @RequestMapping(value = "/library", method = RequestMethod.GET)
     public String library(Model model, HttpSession session) {
-        User user = getUser(session);
+        UserVO user = getUser(session);
         model.addAttribute("gameLibrary", user.getGames());
         return "user/library";
     }
 
     @RequestMapping(value = "/library/{id}/delete", method = RequestMethod.GET)
     public String deleteGame(@PathVariable String id, HttpSession session, Model model) {
-        User user = getUser(session);
+        UserVO user = getUser(session);
         Integer gameId;
         try {
             gameId = Integer.parseInt(id);
@@ -259,16 +259,16 @@ public class UserController {
         return "redirect:/user/login";
     }
 
-    private User getUser(HttpSession session) {
-        User user = (User) session.getAttribute("user");
+    private UserVO getUser(HttpSession session) {
+        UserVO user = (UserVO) session.getAttribute("user");
         if (user == null)
             throw new LoginException("你还没登陆，没有权限。");
         return user;
     }
 
     private void updateUser(HttpSession session) {
-        User user = getUser(session);
-        User newUser = userDao.getUser(user);
+        UserVO user = getUser(session);
+        UserVO newUser = userDao.getUser(user);
         newUser.setMessages(user.getMessages());
         session.setAttribute("user", newUser);
     }
