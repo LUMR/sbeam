@@ -6,7 +6,7 @@
           <ul v-if="session.user != undefined">
             <li>
               <a href="/user/details">
-                {{ '你好，' + session.user.name + session.user.city }}
+                {{ '你好，' + session.user.name}}
                 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
               </a>
             </li>
