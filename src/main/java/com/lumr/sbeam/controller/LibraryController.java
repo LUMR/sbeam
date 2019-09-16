@@ -1,9 +1,9 @@
 package com.lumr.sbeam.controller;
 
-import com.lumr.sbeam.dao.CategoryDao;
-import com.lumr.sbeam.dao.GameDao;
-import com.lumr.sbeam.dao.LibraryDao;
-import com.lumr.sbeam.dao.PlatformDao;
+import com.lumr.sbeam.service.CategoryService;
+import com.lumr.sbeam.service.GameService;
+import com.lumr.sbeam.service.LibraryService;
+import com.lumr.sbeam.service.PlatformService;
 import com.lumr.sbeam.vo.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,23 +20,24 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/library")
 public class LibraryController {
+
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryService categoryService;
     @Autowired
-    private PlatformDao platformDao;
+    private PlatformService platformService;
     @Autowired
-    private GameDao gameDao;
+    private GameService gameService;
     @Autowired
-    private LibraryDao libraryDao;
+    private LibraryService libraryService;
 
     @GetMapping(value = "")
     public String libraryView(String cid, String pid, String gameName, Model model) {
         if (gameName != null)
             gameName = "%" + gameName + "%";
-        List<Game> games = gameDao.getGames(new Game(gameName, parseInt(cid), parseInt(pid)));
+        List<Game> games = gameService.getGames(new Game(gameName, parseInt(cid), parseInt(pid)));
         model.addAttribute("games", games);
-        model.addAttribute("categories", categoryDao.getAllCategories());
-        model.addAttribute("platforms", platformDao.getAllPlatforms());
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("platforms", platformService.getAllPlatforms());
         return "library/games";
     }
 
@@ -44,12 +45,12 @@ public class LibraryController {
     @GetMapping(value = "/game/{id}")
     public String gameDetails(@PathVariable String id, Model model) {
         Integer gid = parseInt(id);
-        Game game = gameDao.getGame(new Game(gid));
+        Game game = gameService.getGame(new Game(gid));
         if (game == null) {
             model.addAttribute("message", "没有该游戏.");
         } else {
             model.addAttribute("game", game);
-            model.addAttribute("sales", libraryDao.getSales(game));
+            model.addAttribute("sales", libraryService.getSales(game));
         }
         return "library/game";
     }

@@ -1,6 +1,6 @@
 package com.lumr.sbeam.controller;
 
-import com.lumr.sbeam.dao.CategoryDao;
+import com.lumr.sbeam.service.CategoryService;
 import com.lumr.sbeam.vo.Category;
 import com.lumr.sbeam.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,29 +18,30 @@ import java.util.Date;
  */
 @Controller
 @RequestMapping(value = "/admin/category")
-public class AdminCategoryController extends AdminController{
+public class AdminCategoryController extends AdminController {
+
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryService categoryService;
 
     //***********分类部分***********
 
     @RequestMapping(value = "")
     public String getCategory(Model model) {
-        model.addAttribute("categories", categoryDao.getAllCategories());
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "admin/categoryManager";
     }
 
-    @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public String addCategory(Model model){
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addCategory(Model model) {
         model.addAttribute("category", new Category());
         return "admin/addCategory";
     }
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public String addCategory(Category category, HttpSession session, Model model){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addCategory(Category category, HttpSession session, Model model) {
         category.setId(null);
-        if (categoryDao.getCategory(category) == null){
-            int result = categoryDao.insert(category);
+        if (categoryService.getCategory(category) == null) {
+            int result = categoryService.insert(category);
             UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",添加分类信息成功。");
@@ -56,7 +57,7 @@ public class AdminCategoryController extends AdminController{
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String updateCategory(@PathVariable int id, Model model) {
-        Category category = categoryDao.getCategory(new Category(id));
+        Category category = categoryService.getCategory(new Category(id));
         model.addAttribute("category", category);
         return "admin/updateCategory";
     }
@@ -64,7 +65,7 @@ public class AdminCategoryController extends AdminController{
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public String updateCategory(@PathVariable Integer id, Category category, HttpSession session, Model model) {
         if (id != null && id.equals(category.getId())) {
-            int result = categoryDao.update(category);
+            int result = categoryService.update(category);
             UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",修改分类信息成功。");

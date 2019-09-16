@@ -1,6 +1,6 @@
 package com.lumr.sbeam.controller;
 
-import com.lumr.sbeam.dao.PlatformDao;
+import com.lumr.sbeam.service.PlatformService;
 import com.lumr.sbeam.vo.Platform;
 import com.lumr.sbeam.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,15 @@ import java.util.Date;
 @Controller
 @RequestMapping(value = "/admin/platform")
 public class AdminPlatformController extends AdminController{
+
     @Autowired
-    private PlatformDao platformDao;
+    private PlatformService platformService;
 
     //***********平台部分***********
 
     @RequestMapping(value = "")
     public String getPlatform(Model model) {
-        model.addAttribute("platforms", platformDao.getAllPlatforms());
+        model.addAttribute("platforms", platformService.getAllPlatforms());
         return "admin/platformManager";
     }
 
@@ -39,8 +40,8 @@ public class AdminPlatformController extends AdminController{
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String addPlatform(Platform platform, HttpSession session, Model model){
         platform.setId(null);
-        if (platformDao.getPlatform(platform) == null){
-            int result = platformDao.insert(platform);
+        if (platformService.getPlatform(platform) == null){
+            int result = platformService.insert(platform);
             UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",添加平台信息成功。");
@@ -56,14 +57,14 @@ public class AdminPlatformController extends AdminController{
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String updatePlatform(@PathVariable int id, Model model) {
-        Platform platform = platformDao.getPlatform(new Platform(id));
+        Platform platform = platformService.getPlatform(new Platform(id));
         model.addAttribute("platform", platform);
         return "admin/updatePlatform";
     }
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public String updatePlatform(@PathVariable Integer id, Platform platform, HttpSession session, Model model) {
         if (id != null && id.equals(platform.getId())) {
-            int result = platformDao.update(platform);
+            int result = platformService.update(platform);
             UserVO user = (UserVO) session.getAttribute("user");
             if (result > 0) {
                 user.getMessages().addFirst("时间：" + new Date() + ",修改平台信息成功。");

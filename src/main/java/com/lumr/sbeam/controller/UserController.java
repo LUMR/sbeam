@@ -1,10 +1,10 @@
 package com.lumr.sbeam.controller;
 
-import com.lumr.sbeam.dao.GameDao;
 import com.lumr.sbeam.dao.HeaderDao;
-import com.lumr.sbeam.dao.LibraryDao;
-import com.lumr.sbeam.dao.UserDao;
 import com.lumr.sbeam.exception.LoginException;
+import com.lumr.sbeam.service.GameService;
+import com.lumr.sbeam.service.LibraryService;
+import com.lumr.sbeam.service.UserService;
 import com.lumr.sbeam.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,13 +28,12 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
+
     @Autowired
-    private HeaderDao headerDao;
+    private LibraryService libraryService;
     @Autowired
-    private LibraryDao libraryDao;
-    @Autowired
-    private GameDao gameDao;
+    private GameService gameService;
     @Value("${web.upload-path}")
     private String uploadPath;
 
@@ -58,7 +57,7 @@ public class UserController {
     @RequestMapping(value = "/recharge", method = RequestMethod.POST)
     public String recharge(double money, HttpSession session) {
         UserVO user = getUser(session);
-        userDao.recharge(user, money);
+        userService.recharge(user, money);
         user.getMessages().addFirst("时间：" + new Date() + "充值成功！");
         return "redirect:/user/details";
     }
@@ -78,8 +77,8 @@ public class UserController {
         Library library;
         try {
             id = Integer.parseInt(gameId);
-            game = gameDao.getGame(new Game(id));
-            library = libraryDao.check(user, game);
+            game = gameService.getGame(new Game(id));
+            library = libraryService.check(user, game);
         } catch (Exception e) {
             user.getMessages().addFirst("购买失败，不存在该游戏");
             return "redirect:/user/details";
@@ -90,8 +89,8 @@ public class UserController {
                 return "redirect:/user/details";
             }
             //结算
-            libraryDao.add(user, game);
-            userDao.pay(user, game.getPrice());
+            libraryService.add(user, game);
+            userService.pay(user, game.getPrice());
             user.getGames().add(game);
             user.getMessages().addFirst("时间：" + new Date() + "购买游戏:" + game.getName());
         } else {
@@ -110,8 +109,8 @@ public class UserController {
         Library library;
         try {
             id = Integer.parseInt(gameId);
-            game = gameDao.getGame(new Game(id));
-            library = libraryDao.check(user, game);
+            game = gameService.getGame(new Game(id));
+            library = libraryService.check(user, game);
             if (library == null) {
                 return buyCar.addGame(game);
             } else {
@@ -148,8 +147,8 @@ public class UserController {
             libraryList.add(new Library(user.getId(), game.getId()));
         }
         //结算
-        libraryDao.insertList(libraryList);
-        userDao.pay(user, buyCar.getTotal());
+        libraryService.insertList(libraryList);
+        userService.pay(user, buyCar.getTotal());
         user.getMessages().addFirst(new Date() + "结算完成，你购买了" + buyCar.getGames().size() + "个游戏，谢谢惠顾！");
         buyCar.getGames().clear();
         updateUser(session);
@@ -179,7 +178,7 @@ public class UserController {
     @RequestMapping(value = "/details/update", method = RequestMethod.POST)
     public String update(UserVO user, MultipartFile headerFile, HttpSession session, Model model) {
         UserVO realUser = (UserVO) session.getAttribute("user");
-        int result = userDao.updateUser(user);
+        int result = userService.updateUser(user);
         if (result > 0)
             realUser.getMessages().addFirst("信息更新成功");
         else
@@ -193,7 +192,7 @@ public class UserController {
             try {
                 headerFile.transferTo(file);
                 realUser.getHeader().setSrc("/public/header/" + file.getName());
-                headerDao.update(realUser.getHeader());
+                userService.update(realUser.getHeader());
             } catch (IOException e) {
                 model.addAttribute("message", "文件上传失败");
                 e.printStackTrace();
@@ -221,7 +220,7 @@ public class UserController {
             user.getMessages().addFirst("游戏ID错误，无法删除" + new Date());
             return "redirect:/user/library";
         }
-        int result = libraryDao.delete(user, new Game(gameId));
+        int result = libraryService.delete(user, new Game(gameId));
         if (result > 0) {
             user.getMessages().addFirst("删除游戏成功。" + new Date());
             user.getMessages().size();
@@ -268,7 +267,7 @@ public class UserController {
 
     private void updateUser(HttpSession session) {
         UserVO user = getUser(session);
-        UserVO newUser = userDao.getUser(user);
+        UserVO newUser = userService.getUser(user);
         newUser.setMessages(user.getMessages());
         session.setAttribute("user", newUser);
     }

@@ -1,6 +1,6 @@
 package com.lumr.sbeam.controller;
 
-import com.lumr.sbeam.dao.GameDao;
+import com.lumr.sbeam.service.GameService;
 import com.lumr.sbeam.vo.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +15,13 @@ import java.util.List;
 @Controller
 public class IndexController {
     @Autowired
-    private GameDao gameDao;
+    private GameService gameService;
 
     @RequestMapping(value = {"/index","/","","index.jsp"})
     public String index(Model model){
-        List<Game> hotGames = gameDao.getHot();
-        List<Game> newGames = gameDao.getNew();
-        List<Game> buyGames = gameDao.getBuy();
+        List<Game> hotGames = gameService.getHot();
+        List<Game> newGames = gameService.getNew();
+        List<Game> buyGames = gameService.getBuy();
 
         model.addAttribute("hotGames", hotGames);
         model.addAttribute("newGames", newGames);

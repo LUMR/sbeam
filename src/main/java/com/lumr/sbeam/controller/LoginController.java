@@ -1,6 +1,6 @@
 package com.lumr.sbeam.controller;
 
-import com.lumr.sbeam.dao.UserDao;
+import com.lumr.sbeam.service.UserService;
 import com.lumr.sbeam.utils.Utils;
 import com.lumr.sbeam.vo.BuyCar;
 import com.lumr.sbeam.vo.UserVO;
@@ -26,14 +26,14 @@ import java.util.Date;
 @RequestMapping(value = "/user")
 public class LoginController {
     @Autowired
-    private UserDao dao;
+    private UserService userService;
 
     @RequestMapping(value = "/checkName", method = RequestMethod.POST)
     @ResponseBody
     public String checkName(String name, HttpSession session, HttpServletResponse response) {
         UserVO user = new UserVO(name, "no");
         response.setCharacterEncoding("UTF-8");
-        if (dao.checkUserName(user)!=null){
+        if (userService.checkUserName(user)!=null){
             return "true";
         }else {
             return "false";
@@ -52,9 +52,9 @@ public class LoginController {
         String password = Utils.sha1(user.getPassword());
         user.setPassword(password);
         user.setRegisterDate(new Date());
-        int userId = dao.insertUser(user);
+        int userId = userService.insertUser(user);
         if (userId > 0) {
-            user = dao.getUser(user);
+            user = userService.getUser(user);
             session.setAttribute("user", user);
             session.setAttribute("buyCar",new BuyCar(user));
             return "redirect:details";
