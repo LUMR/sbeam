@@ -13,7 +13,7 @@ spring:
   mvc:
     static-path-pattern: /public/**
     favicon:
-      enabled: false
+      enabled: true
   datasource:
     url: jdbc:mysql://localhost:3306/sbeam?characterEncoding=utf8&useSSL=false
     username: web
@@ -28,3 +28,13 @@ mybatis-plus:
     banner: false
     db-config:
       id-type: id_worker
+shiro:
+    chain: #权限配置
+      - /favicon.ico=anon
+      - /public/**=anon
+      - /game/**=anon
+      - /health=anon
+      - /user/logout=logout
+      - /test/**=anon
+      - /=anon
+      - /**=authc

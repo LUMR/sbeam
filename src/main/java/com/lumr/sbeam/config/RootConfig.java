@@ -1,13 +1,8 @@
 package com.lumr.sbeam.config;
 
-import javax.servlet.ServletContext;
-import javax.sql.DataSource;
-
-import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.lumr.sbeam.filter.UserAuthenticationFilter;
 import com.lumr.sbeam.interceptor.MybatisInterceptor;
-
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
@@ -23,6 +18,8 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,7 +36,7 @@ public class RootConfig {
      * 分页拦截器
      */
     @Bean
-    public Interceptor pageInterceptor(){
+    public Interceptor pageInterceptor() {
         return new PaginationInterceptor();
     }
 
@@ -47,31 +44,29 @@ public class RootConfig {
      * 查询sql拦截器
      */
     @Bean
-    public Interceptor sqlInterceptor(){
+    public Interceptor sqlInterceptor() {
         return new MybatisInterceptor();
     }
 
     @Bean
-    public ShiroFilterFactoryBean shirofilter(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shirofilter(SecurityManager securityManager, ShiroConfigure shiroConfigure) {
         ShiroFilterFactoryBean shiro = new ShiroFilterFactoryBean();
         shiro.setSecurityManager(securityManager);
         shiro.setLoginUrl("/user/login");
         shiro.setUnauthorizedUrl("/403");
         shiro.setSuccessUrl("/index");
-        Map<String,String> chainMap = new LinkedHashMap<>();
-        chainMap.put("/public/**","anon");
-        chainMap.put("/game/**", "anon");
-        chainMap.put("/health", "anon");
-        chainMap.put("/user/logout", "logout");
-        chainMap.put("/","anon");
-        chainMap.put("/**", "authc");
+        Map<String, String> chainMap = new LinkedHashMap<>();
+        for (String chain : shiroConfigure.getChain()) {
+            String[] k_v = chain.split("=");
+            chainMap.put(k_v[0], k_v[1]);
+        }
         shiro.setFilterChainDefinitionMap(chainMap);
-        shiro.getFilters().put("authc",new UserAuthenticationFilter());
+        shiro.getFilters().put("authc", new UserAuthenticationFilter());
         return shiro;
     }
 
     @Bean
-    public SecurityManager getSecurityManager(Realm realm){
+    public SecurityManager getSecurityManager(Realm realm) {
         return new DefaultWebSecurityManager(realm);
     }
 
