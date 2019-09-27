@@ -14,6 +14,7 @@
         <mybatis-plus.version>3.1.0</mybatis-plus.version>
         <druid.version>1.1.4</druid.version>
         <shiro.version>1.4.0</shiro.version>
+        <protostuff.version>1.5.9</protostuff.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -84,6 +85,25 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+
+        <!-- rpc框架-->
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.12.0</version>
+        </dependency>
+        <!-- 高效序列化工具  -->
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.shiro</groupId>
