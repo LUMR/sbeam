@@ -3,6 +3,8 @@ package com.lumr.sbeam.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 用户角色
@@ -11,6 +13,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @since 2019-04-03
  **/
 @TableName("sys_role")
+@Getter
+@Setter
 public class Role {
 
     @TableId(type = IdType.AUTO)

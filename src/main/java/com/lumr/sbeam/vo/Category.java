@@ -1,5 +1,7 @@
 package com.lumr.sbeam.vo;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
  * Created by fsweb on 17-5-8.
  */
 @Alias("Category")
+@Getter
+@Setter
 public class Category {
     private Integer id;
     private String name;//分类名
@@ -26,27 +30,4 @@ public class Category {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Game> getGames() {
-        return games;
-    }
-
-    public void setGames(List<Game> games) {
-        this.games = games;
-    }
 }

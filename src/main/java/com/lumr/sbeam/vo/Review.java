@@ -1,10 +1,15 @@
 package com.lumr.sbeam.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 /**
  * Created by fsweb on 17-5-8.
  */
+@Getter
+@Setter
 public class Review {
     private Integer id;
     private Integer gameId;//对应的游戏
@@ -25,59 +30,4 @@ public class Review {
         this.pubDate = pubDate;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(Integer gameId) {
-        this.gameId = gameId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Date getPubDate() {
-        return pubDate;
-    }
-
-    public void setPubDate(Date pubDate) {
-        this.pubDate = pubDate;
-    }
-
-    public Date getUpDate() {
-        return upDate;
-    }
-
-    public void setUpDate(Date upDate) {
-        this.upDate = upDate;
-    }
 }

@@ -1,11 +1,16 @@
 package com.lumr.sbeam.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by lumr on 2017/5/11.
  */
+@Getter
+@Setter
 public class BuyCar {
     private UserVO user;
     private double total;
@@ -51,27 +56,4 @@ public class BuyCar {
         return 0;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public UserVO getUser() {
-        return user;
-    }
-
-    public void setUser(UserVO user) {
-        this.user = user;
-    }
-
-    public List<Game> getGames() {
-        return games;
-    }
-
-    public void setGames(List<Game> games) {
-        this.games = games;
-    }
 }

@@ -1,9 +1,14 @@
 package com.lumr.sbeam.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 用户头像
  * Created by fsweb on 17-5-8.
  */
+@Getter
+@Setter
 public class Header {
     private Integer id;
     private String fileName;//文件名
@@ -17,27 +22,4 @@ public class Header {
         this.src = src;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getSrc() {
-        return src;
-    }
-
-    public void setSrc(String src) {
-        this.src = src;
-    }
 }

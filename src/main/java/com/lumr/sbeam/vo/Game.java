@@ -1,6 +1,8 @@
 package com.lumr.sbeam.vo;
 
 import com.lumr.sbeam.utils.Utils;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -10,6 +12,8 @@ import java.util.List;
  * 游戏对象
  * Created by fsweb on 17-5-8.
  */
+@Getter
+@Setter
 public class Game {
     private Integer id;
     private String name;//游戏名
@@ -60,91 +64,4 @@ public class Game {
         this.description = description;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public Integer getPlatformId() {
-        return platformId;
-    }
-
-    public void setPlatformId(Integer platformId) {
-        this.platformId = platformId;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Date getPubdate() {
-        return pubdate;
-    }
-
-    public void setPubdate(String pubdate) throws ParseException{
-        this.pubdate = Utils.parseDate(pubdate);
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Platform getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
-
-    public List<Picture> getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List<Picture> pictures) {
-        this.pictures = pictures;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }
