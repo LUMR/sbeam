@@ -28,6 +28,8 @@ mybatis-plus:
     banner: false
     db-config:
       id-type: id_worker
+web:
+  upload-path: '${HOME}/tmp'
 shiro:
     chain: #权限配置
       - /favicon.ico=anon
