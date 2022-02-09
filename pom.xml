@@ -13,7 +13,7 @@
         <swagger2.version>2.7.0</swagger2.version>
         <mybatis-plus.version>3.1.0</mybatis-plus.version>
         <druid.version>1.1.4</druid.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.7.1</shiro.version>
         <protostuff.version>1.5.9</protostuff.version>
     </properties>
     <parent>
